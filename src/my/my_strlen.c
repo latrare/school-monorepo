@@ -10,7 +10,8 @@ my_strlen(char* s)
 	unsigned int slen;
 
 	if (s != NULL) {
-		for (slen = 0; *s != '\0'; slen++, s++);
+		for (slen = 0; *s != '\0'; slen++, s++)
+			;
 		return (slen);
 	}
 

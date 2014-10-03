@@ -1,7 +1,9 @@
-#include <stdlib.h>
-
 #include "my.h"
 
+/*
+ * pre: takes unsigned int size to be allocated
+ * post: returns pointer to newly assigned memory or NULL
+ */
 void *
 xmalloc(unsigned int n)
 {

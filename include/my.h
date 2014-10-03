@@ -1,9 +1,17 @@
+/*-
+ * Trevor Miranda
+ * 
+ * Project Description:
+ * An implementation of stdlibc functions.
+ */
+
 #ifndef _MY_H_
 #define _MY_H_
 #ifndef NULL
 #define NULL ((void *)0)
 #endif
 
+#include <stdlib.h>
 #include <unistd.h>
 
 /* The following functions all print their types to stdout using my_char */
@@ -74,24 +82,33 @@ int my_strncmp(char *, char *, unsigned int);
 char *my_strcpy(char *, char *);
 
 /* Same as my_strcpy, but only copy int bytes from source string */
-char *my_strncpy(char *, char *);
+char *my_strncpy(char *, char *, unsigned int);
+
+/*
+ * Create new string, concatenate the second string onto the source string in
+ * new string
+ */
+char *my_strcat(char *, char *);
 
 /* Concatenate the second string on to the first string if there's enough space */
 char *my_strconcat(char *, char *);
 
 /* Same as my_strcat, but only concatenate int bytes from the second string */
-char *my_strnconcat(char *, char *);
+char *my_strnconcat(char *, char *, unsigned int);
 
 /*
  * Return pointer to the first occurence of the given character in the given
  * string
  */
-char *my_strfind(char *, char *);
+char *my_strfind(char *, char);
 
 /* Same as my_strfind, but return a pointer to the last occurence instead */
-char *my_strrfind(char *, char *);
+char *my_strrfind(char *, char);
 
 /* Wrapped malloc */
 void *xmalloc(unsigned int);
+
+/* Convert vector to string */
+char *my_vect2str(char **);
 
 #endif

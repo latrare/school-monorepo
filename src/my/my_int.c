@@ -7,14 +7,13 @@
 void
 my_int(int n)
 {
-	long int in;
-	unsigned long int power;
+	unsigned int pwr, absi;
 
-	in = n; /* Move n into larger type */
-	my_char((n < 0) ? ('-') : ('\0'));
-	in = (n < 0) ? (in * -1) : (in);
-
-	for (power = 1; in / power >= 10; power *= 10);
-	for (; power > 0; power /= 10)
-		my_char('0' + ((in / power) % 10));
+	if (n < 0)
+		my_char('-');
+	absi = (n < 0) ? ((long int)n * -1) : ((long int)n);
+	for (pwr = 1; absi / pwr >= 10; pwr *= 10)
+		;
+	for (; pwr > 0; pwr /= 10)
+		my_char('0' + ((absi / pwr) % 10));
 }

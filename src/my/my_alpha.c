@@ -9,8 +9,6 @@ my_alpha()
 {
 	char i;
 
-	for (i = 'A'; i <= 'Z'; i++) {
+	for (i = 'A'; i <= 'Z'; i++)
 		my_char(i);
-		my_char(i + 32);
-	}
 }

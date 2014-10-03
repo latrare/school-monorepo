@@ -104,6 +104,14 @@ int main()
 	my_str("-->");
 	my_num_base(-3, "!");
 	my_str("<-- (-!!!)\n");
+	
+	my_str("-->");
+	my_num_base(~0U >> 1, "0123456789");
+	my_str("<-- (INT_MIN)\n");
+	
+	my_str("-->");
+	my_num_base((~0U >> 1) + 1, "0123456789");
+	my_str("<-- (INT_MAX)\n");
 
 	my_str("-->");
 	my_num_base(0, "!");

@@ -1,19 +1,22 @@
 #include "my.h"
 
+/*
+ * pre: takes a string
+ * post: returns new pointer to string with same content
+ */
 char *
 my_strdup(char* s)
 {
-	char *new;
+	int i;
+	char *ns;
 
-	new = NULL;
+	ns = NULL;
 	if (s != NULL) {
-		new = xmalloc(my_strlen(s) + 1);
-		do {
-			*new = *s;
-			new++;
-			s++;
-		} while (*s != '\0');
+		ns = xmalloc(my_strlen(s) + 1);
+		for (i = 0; s[i] != '\0'; i++)
+			ns[i] = s[i];
+		ns[i] = '\0';
 	}
 
-	return (new);
+	return (ns);
 }
