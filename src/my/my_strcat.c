@@ -8,17 +8,13 @@ char *
 my_strcat(char* s1, char* s2)
 {
 	int i;
-	char *ns;
-	
-	if (s1 != NULL && s2 != NULL) {
-		ns = (char *)xmalloc(my_strlen(s1) + my_strlen(s2) + 1);
-		for (i = 0; s1[i] != '\0'; i++)
-			ns[i] = s1[i];
-		ns[i] = '\0';
-	} else if (s1 != NULL && s2 == NULL)
-		return (s1);
-	else
-		return (NULL);
 
-	return (ns);
+	if (s1 != NULL && s2 != NULL) {
+		i = my_strlen(s1);
+		for (; *s2 != '\0'; s2++, i++)
+			s1[i] = *s2;
+		s1[i] = '\0';
+	}
+
+	return (s1);
 }
