@@ -46,6 +46,7 @@ main(int argc, char **argv)
 				write(fd[1], inbuff, 1000);
 				free(inbuff);
 			} else {
+				/* Child */
 				n = read(fd[0], inbuff, 1000);
 				if (n > 0) {
 					my_str("Child receiving: '");
