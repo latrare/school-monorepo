@@ -16,8 +16,8 @@ my_str2vect(char *s)
 		s = my_strdup(s); /* Needs to work on literal strings */
 		for (i = 0, j = 0, k = 0; s[k] != '\0'; k++) {
 			if ((k > 0 && (s[k - 1] != ' ' || s[k - 1] != '\t') &&
-				(s[k] == ' ' || s[k] == '\t') && j != 1) ||
-				(s[k + 1] == '\0' && (s[k] != ' ' || s[k] != '\t'))) {
+			    (s[k] == ' ' || s[k] == '\t') && j != 1) ||
+			    (s[k + 1] == '\0' && (s[k] != ' ' || s[k] != '\t'))) {
 				i++;
 				j = 1;
 				s[k++] = '\0';
