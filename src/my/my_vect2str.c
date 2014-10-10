@@ -1,5 +1,9 @@
 #include "my.h"
 
+/*
+ * pre: given vector (string array terminated by NULL element)
+ * post: return string representation (space delimited)
+ */
 char *
 my_vect2str(char **v)
 {
@@ -7,10 +11,10 @@ my_vect2str(char **v)
 	char *str;
 
 	str = NULL;
-	if (v != NULL && *v != NULL) {
+	if (v != NULL) {
 		for (vlen = 0, slen = 0; v[vlen] != NULL; vlen++)
 			slen += my_strlen(v[vlen]) + 1;
-		str = (char *)xmalloc(slen);
+		str = vlen > 0 ? (char *)xmalloc(slen) : NULL;
 		for (i = 0; i < vlen; i++) {
 			str = my_strcat(str, v[i]);
 			if (i < vlen - 1)

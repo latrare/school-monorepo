@@ -111,4 +111,10 @@ void *xmalloc(unsigned int);
 /* Convert vector to string */
 char *my_vect2str(char **);
 
+/* Convert string to vector (array of string pointers terminated by NULL) */
+char **my_str2vect(char *);
+
+/* Free vector */
+void my_freevect(char **);
+
 #endif
