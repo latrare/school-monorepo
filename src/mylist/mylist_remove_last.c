@@ -10,6 +10,7 @@ remove_last(t_node **h)
 	void *e;
 	t_node *post, *tmp;
 
+	e = NULL;
 	if (h != NULL && *h != NULL) {
 		if ((*h)->next != NULL) {
 			for (tmp = *h; tmp->next->next != NULL; tmp = tmp->next)
@@ -22,7 +23,7 @@ remove_last(t_node **h)
 			e = (*h)->elem;
 			free(*h);
 		}
-		return (e);
 	}
-	return (NULL);
+
+	return (e);
 }

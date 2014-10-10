@@ -9,10 +9,10 @@ count_nodes(t_node *h)
 {
 	int i;
 
-	if (h != NULL) {
-		for (i = 0; h != NULL; i++, h = h->next)
+	i = 0;
+	if (h != NULL)
+		for (; h != NULL; i++, h = h->next)
 			;
-		return (i);
-	} else
-		return (0);
+
+	return (i);
 }

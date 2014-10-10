@@ -10,6 +10,7 @@ my_revstr(char* s)
 	int slen, i;
 	char tmp;
 
+	slen = -1;
 	if (s != NULL) {
 		slen = my_strlen(s);
 		for (i = 0; i < slen / 2; i++) {
@@ -17,9 +18,7 @@ my_revstr(char* s)
 			s[i] = s[slen - i - 1];
 			s[slen - i - 1] = tmp;
 		}
-
-		return (slen);
 	}
 
-	return (-1);
+	return (slen);
 }

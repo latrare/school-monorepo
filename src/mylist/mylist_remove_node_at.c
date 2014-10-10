@@ -9,7 +9,8 @@ remove_node_at(t_node **h, unsigned int n)
 {
 	void *e;
 	t_node *tmp, *prev, *swp;
-	
+
+	e = NULL;	
 	if (h != NULL && *h != NULL) {
 		if (n > 0) {
 			for (tmp = (*h)->next, prev = *h; n > 1 && tmp->next != NULL; tmp = tmp->next, prev = prev->next, n--)
@@ -19,10 +20,9 @@ remove_node_at(t_node **h, unsigned int n)
 			tmp = tmp->next;
 			prev->next = tmp;
 			free(swp);
-	
-			return (e);
 		} else
 			return (remove_node(h));
-	} else
-		return (NULL);
+	}
+	
+	return (e);
 }

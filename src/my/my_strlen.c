@@ -9,11 +9,10 @@ my_strlen(char* s)
 {
 	unsigned int slen;
 
-	if (s != NULL) {
+	slen = -1;
+	if (s != NULL)
 		for (slen = 0; *s != '\0'; slen++, s++)
 			;
-		return (slen);
-	}
 
-	return (-1);
+	return (slen);
 }

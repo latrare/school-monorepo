@@ -9,12 +9,12 @@ new_node(void *e, t_node *n)
 {
 	t_node *tmp;
 
+	tmp = NULL;
 	if (e != NULL) {
 		tmp = (t_node *)xmalloc(sizeof(t_node));
 		tmp->elem = e;
 		tmp->next = n;
+	}
 
-		return (tmp);
-	} else
-		return (NULL);
+	return (tmp);
 }
