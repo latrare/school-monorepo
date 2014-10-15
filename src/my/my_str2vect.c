@@ -14,25 +14,35 @@ my_str2vect(char *s)
 	nv = NULL;
 	if (s != NULL) {
 		s = my_strdup(s); /* Needs to work on literal strings */
-		for (i = 0, j = 0, k = 0; s[k] != '\0'; k++) {
-			if ((k > 0 && (s[k - 1] != ' ' || s[k - 1] != '\t') &&
-			    (s[k] == ' ' || s[k] == '\t') && j != 1) ||
-			    (s[k + 1] == '\0' && (s[k] != ' ' || s[k] != '\t'))) {
-				i++;
+		for (i = 0, j = 0; s[i] != '\0'; i++) {
+			if (s[i] != ' ' && s[i] != '\t' && s[i] != '\n') {
 				j = 1;
-				s[k++] = '\0';
-			} else if (s[k] != ' ' || s[k] != '\t')
-				j = 0;
-		}
-		nv = (char **)xmalloc(++i * sizeof(char *));
-		for (k = i, i = 0, j = 0; i < k - 1; ) {
-			if (s[j] != ' ' && s[j] != '\0') {
-				nv[i++] = my_strdup(s + j);
-				j += my_strlen(s + j);
+				break;
 			}
-			j++;
 		}
-		nv[i] = NULL;
+		if (j != 0) {
+			for (j = 0; s[i] != '\0'; i++) {
+				if (i > 0 && (s[i] == ' ' || s[i] == '\t' || s[i] == '\n') && (s[i - 1] != ' ' && s[i - 1] != '\t' && s[i - 1] != '\n')) {
+					s[i++] = '\0';
+					j++;
+				}
+			}
+			if (i > 0 && s[i] == '\0' && (s[i - 1] != ' ' && s[i - 1] != '\t' && s[i - 1] != '\n'))
+				j++;
+			if (i > 1 && s[i - 1] == '\n' && (s[i - 2] != ' ' && s[i - 2] != '\t' && s[i - 2] != '\n'))
+				j++;
+			my_int(j);
+			my_char('\n');
+			nv = (char **)xmalloc(j * sizeof(char *));
+			for (k = j, i = 0, j = 0; i < k - 1;) {
+				if (s[j] != '\0' && s[j] != ' ' && s[j] != '\t' && s[j] != '\n') {
+					nv[i++] = my_strdup(s + j);
+					j += my_strlen(s + j);
+				}
+				j++;
+			}
+			nv[i] = NULL;
+		}
 		free(s);
 	}
 
