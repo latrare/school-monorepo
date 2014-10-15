@@ -31,8 +31,6 @@ my_str2vect(char *s)
 				j++;
 			if (i > 1 && s[i - 1] == '\n' && (s[i - 2] != ' ' && s[i - 2] != '\t' && s[i - 2] != '\n'))
 				j++;
-			my_int(j);
-			my_char('\n');
 			nv = (char **)xmalloc(j * sizeof(char *));
 			for (k = j, i = 0, j = 0; i < k - 1;) {
 				if (s[j] != '\0' && s[j] != ' ' && s[j] != '\t' && s[j] != '\n') {
