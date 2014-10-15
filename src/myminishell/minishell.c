@@ -43,7 +43,7 @@ main()
 				exit(1);
 			}
 			if (pid > 0)
-				wait();
+				wait(NULL);
 			else {
 				if (execvp(v[0], v) < 0)
 					my_str("Invalid command entered.\n");
