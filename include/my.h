@@ -13,6 +13,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 /* The following functions all print their types to stdout using my_char */
 void my_char(char);
