@@ -1,8 +1,15 @@
-#include <signal.h>
+/*
+ * Trevor Miranda
+ *
+ * Project Description:
+ * ---
+ * Create a client that sends a server of a specific PID a message.
+ */
 #include "my.h"
 
 #ifndef _H_SERVER_
 #define _H_SERVER_
+#include <signal.h>
 typedef struct s_gl_env {
 	int ack  : 1;
 	int done : 1;
@@ -16,6 +23,7 @@ void getclchar(int);
 
 #ifndef _H_CLIENT_
 #define _H_CLIENT_
+#include <signal.h>
 void ack(int);
 void putclchar(char, pid_t);
 void putclpid(pid_t, pid_t);

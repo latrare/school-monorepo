@@ -7,7 +7,7 @@ main(int argc, char **argv)
 	pid_t clpid, svpid;
 	char *str;
 
-	if (argc < 3) {
+	if (argc < 3 || my_atoi(argv[1]) < 0) {
 		my_str("Usage: ./client SERVER_PID MESSAGE\n");
 		exit(1);
 	}

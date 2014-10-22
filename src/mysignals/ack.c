@@ -3,5 +3,6 @@
 void
 ack(int s)
 {
-	gl_env_ack = 1;
+	if (s == SIGUSR1)
+		gl_env_ack = 1;
 }
