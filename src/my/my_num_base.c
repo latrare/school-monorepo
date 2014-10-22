@@ -16,7 +16,7 @@ my_num_base(int n, char* d)
 			my_char('-');
 		absi = (n < 0) ? ((long int)n * -1) : ((long int)n);
 		if (b > 1) {
-			for (pwr = 1; absi / pwr >= b; pwr *= b)
+			for (pwr = 1; absi / pwr >= (unsigned int)b; pwr *= b)
 				;
 			for (; pwr > 0; pwr /= b)
 				my_char(d[(absi / pwr) % 10]);
