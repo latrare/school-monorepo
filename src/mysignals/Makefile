@@ -1,23 +1,22 @@
-NAME = mysignals
+PROJECT = my
+NAME = signals
 BASE = ../..
+INC = $(BASE)/include
+LIB = $(BASE)/lib
 SRC = ack.c bye.c getclchar.c getclpid.c putclchar.c putclpid.c
 CLSRC = client.c
 SVSRC = server.c
 OBJ = $(SRC:.c=.o)
-INC = $(BASE)/include
-LIB = $(BASE)/lib
 CFGLAGS = -Wall -Wextra -ggdb
 RM = rm -fv
-
-re: fclean all
 
 all: client server
 
 client:
-	gcc $(CFLAGS) -I$(BASE)/include -L$(BASE)/lib $(SRC) $(CLSRC) -lmy -o $(CLSRC:.c=)
+	cc $(CFLAGS) -I$(INC) -L$(LIB) $(SRC) $(CLSRC) -l$(PROJECT) -o $(CLSRC:.c=)
 
 server:
-	gcc $(CFLAGS) -I$(BASE)/include -L$(BASE)/lib $(SRC) $(SVSRC) -lmy -o $(SVSRC:.c=)
+	cc $(CFLAGS) -I$(INC) -L$(LIB) $(SRC) $(SVSRC) -l$(PROJECT) -o $(SVSRC:.c=)
 
 clean:
 	$(RM) $(OBJ)
@@ -27,3 +26,5 @@ clean:
 fclean: clean
 	$(RM) $(CLSRC:.c=)
 	$(RM) $(SVSRC:.c=)
+
+re: fclean all

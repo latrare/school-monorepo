@@ -1,20 +1,20 @@
-NAME = mypipes
+PROJECT = my
+NAME = pipes
 BASE = ../..
-SRC = pipes.c
-OBJ = pipes.o
 INC = $(BASE)/include
 LIB = $(BASE)/lib
+SRC = pipes.c
+OBJ = pipes.o
 CFLAGS = -Wall -Wextra -ggdb
 RM = rm -fv
 
 all:
-	cc $(CFLAGS) -I$(INC) -L$(LIB) $(SRC) -lmy -o $(SRC:.c=)
+	cc $(CFLAGS) -I$(INC) -L$(LIB) $(SRC) -l$(PROJECT) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
-	$(RM) .*_*.sw*
 
 fclean: clean
-	$(RM) $(SRC:.c=)
+	$(RM) $(NAME)
 
 re: clean all
