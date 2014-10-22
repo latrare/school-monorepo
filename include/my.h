@@ -118,4 +118,7 @@ char **my_str2vect(char *);
 /* Free vector */
 void my_freevect(char **);
 
+/* Convert string of decimal numbers into integer */
+int my_atoi(char *);
+
 #endif
