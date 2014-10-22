@@ -1,5 +1,11 @@
 #include "signals.h"
 
+/*
+ * The server.
+ * ---
+ * Receives the PID of the client, acknowledges it, receives the client's
+ * message, acknowledges receipt, ends connection.
+ */
 int
 main()
 {

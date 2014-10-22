@@ -1,5 +1,9 @@
 #include "signals.h"
 
+/*
+ * pre: takes signal int
+ * post: outputs signal-specific error message and exits with return 1
+ */
 void
 bye(int s)
 {

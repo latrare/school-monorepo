@@ -1,5 +1,9 @@
 #include "signals.h"
 
+/*
+ * pre: takes signal int
+ * post: interprets client PID from signals
+ */
 void
 getclpid(int s)
 {

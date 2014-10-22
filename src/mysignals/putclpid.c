@@ -1,5 +1,9 @@
 #include "signals.h"
 
+/*
+ * pre: takes client PID and server PID
+ * post: uses signals to signal the client PID to the server PID
+ */
 void
 putclpid(pid_t clpid, pid_t svpid)
 {

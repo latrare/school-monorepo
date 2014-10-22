@@ -1,5 +1,9 @@
 #include "signals.h"
 
+/*
+ * pre: takes character to write using signals  and PID of server
+ * post: signals given character using signals to server PID
+ */
 void
 putclchar(char c, pid_t svpid)
 {

@@ -1,5 +1,9 @@
 #include "signals.h"
 
+/*
+ * pre: takes signal int
+ * post: interprets character from signals
+ */
 void
 getclchar(int s)
 {
