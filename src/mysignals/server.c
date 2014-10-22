@@ -27,6 +27,7 @@ main()
 			pause();
 		usleep(5000);
 		kill(gl_env.clpid, SIGUSR1);
+		my_str("Acknowledged client PID receipt.\n");
 
 		my_str("Received client PID: ");
 		my_int(gl_env.clpid);
