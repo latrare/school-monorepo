@@ -11,3 +11,4 @@ src/mysignals/server
 ## Ignored directories
 lib/
 test/
+notes/
