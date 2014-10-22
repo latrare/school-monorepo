@@ -1,2 +1,13 @@
-.o
+## Ignored file types
+*.o
+*.a
+
+## Ignored files
+src/mypipes/pipes
+src/myminishell/minishell
+src/mysignals/client
+src/mysignals/server
+
+## Ignored directories
+lib/
 test/
