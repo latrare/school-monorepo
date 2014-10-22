@@ -23,7 +23,7 @@ main()
 		signal(SIGUSR2, getclpid);
 
 		my_str("Waiting for client PID...\n");	
-		for (i = 0; i < sizeof(int) * 8; i++)
+		for (i = 0; i < sizeof(pid_t) * 8; i++)
 			pause();
 		usleep(5000);
 		kill(gl_env.clpid, SIGUSR1);
