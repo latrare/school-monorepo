@@ -15,7 +15,7 @@ all:
 	mv $(NAME).a $(LIB)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJ)
 	$(RM) $(NAME).o
 
 fclean: clean
