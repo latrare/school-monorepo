@@ -16,7 +16,7 @@ all:
 
 clean:
 	$(RM) $(OBJ)
-	$(RM) $(NAME)
+	$(RM) $(NAME).o
 
 fclean: clean
 	$(RM) $(LIB)/$(NAME).a
