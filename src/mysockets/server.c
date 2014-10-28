@@ -1,0 +1,125 @@
+#define _H_SERVER_
+
+#include "sockets.h"
+
+int
+main(int argc, char **argv)
+{
+	int pid, n, i;
+	char *buff, *username, **args;
+	struct sockaddr_in saddr, caddr;
+	socklen_t clen;
+
+	if (argc != 2 || my_atoi(argv[1]) < 0) {
+		my_str("usage: ./server SERVER_PORT\n");
+		exit(1);
+	}
+
+	signal(SIGINT, sv_bye);
+
+	my_str("Welcome to the simple socket server!\n");
+	my_str("------------------------------------\n\n");
+
+	if ((sfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+		my_str("ERROR: Failed to create socket.\n");
+		exit(1);
+	}
+
+	memset(&saddr, 0, sizeof(saddr));
+	saddr.sin_family = AF_INET;
+	saddr.sin_port = htons(my_atoi(argv[1]));
+	saddr.sin_addr.s_addr = INADDR_ANY;
+
+	if (bind(sfd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
+		my_str("ERROR: Failed to bind to socket.\n");
+		close(sfd);
+		exit(1);
+	}
+
+	if (listen(sfd, 5) < 0) {
+		my_str("ERROR: Failed to listen on socket.\n");
+		close(sfd);
+		exit(1);
+	}
+
+	memset(&saddr, 0, sizeof(saddr));
+	for (;;) {
+		clen = (socklen_t)sizeof(caddr);
+		if ((cfd = accept(sfd, (struct sockaddr *)&caddr, &clen)) < 0) {
+			my_str("ERROR: Failed to accept on socket.\n");
+			close(sfd);
+			exit(1);
+		} else {
+			if ((pid = fork()) < 0) {
+				my_str("ERROR: Process could not fork.\n");
+				close(cfd);
+				close(sfd);
+				exit(1);
+			} else if (pid > 0) {
+				/* parent */
+				continue;
+			} else {
+				/* child */
+				signal(SIGINT, sv_cbye);
+				buff = (char *)xmalloc(256);
+				i = 0; /* track number of nick changes */
+				while ((n = read(cfd, buff, 256)) > 0) {
+					args = my_str2vect(buff);
+					if (my_strcmp("/exit", args[0]) == 0) {
+						if (i > 0) {
+							my_str("***");
+							my_str(username);
+							my_str(" disconnected.\n");
+						}
+						break;
+					} else if (my_strcmp("/nick", args[0]) == 0) {
+						my_str("***");
+						if (i++ > 0) {
+							my_str(username);
+							my_str(" changed name to ");
+							free(username);
+							username = my_strdup(&buff[6]);
+							username[my_strlen(username) - 1] = '\0';
+							my_str(username);
+							my_char('\n');
+						} else {
+							username = my_strdup(&buff[6]);
+							username[my_strlen(username) - 1] = '\0';
+							my_str(username);
+							my_str(" connected.\n");
+						}
+					} else if (my_strcmp("/me", args[0]) == 0) {
+						my_str("***");
+						my_str(username);
+						my_str(" ");
+						my_str(my_vect2str(&args[1]));
+						my_char('\n');
+					}  else {
+						my_str(username);
+						my_str(": ");
+						my_str(buff);
+					}
+
+					/* Acknowledge client */
+					if ((n = write(cfd, ".", 2)) < 0) {
+						my_str("ERROR: Failed to send ACK to ");
+						my_str(username);
+						my_char('\n');
+						break;
+					}
+				}
+
+				close(cfd);
+				free(buff);
+				if (i > 0)
+					free(username);
+				my_freevect(args);
+				exit(0);
+			}
+		}
+	}
+
+	close(sfd);
+
+	return (0);
+}
