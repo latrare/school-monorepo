@@ -81,18 +81,18 @@ main(int argc, char **argv)
 		if ((n = read(STDIN_FILENO, buff, 256)) == 0)
 			continue;
 		else if (n < 0) {
-			my_str("\n\nERROR: Could not read from STDIN.\n");
+			my_str("\nERROR: Could not read from STDIN.\n");
 			break;
 		}
 
 		if (write(fd, buff, 256) < 0) {
-			my_str("\n\nERROR: Could not send message to host.\n");
+			my_str("\nERROR: Could not send message to host.\n");
 			break;
 		}
 
 		args = my_str2vect(buff);
 		if (my_strcmp("/exit", args[0]) == 0) {
-			my_str("\n\nERROR: Client instance closed.\n");
+			my_str("\nERROR: Client instance closed.\n");
 			break;
 		} else if (my_strcmp("/nick", args[0]) == 0) {
 			free(username);
@@ -104,7 +104,7 @@ main(int argc, char **argv)
 		if ((n = read(fd, buff, 256)) > 0)
 			alarm(0);
 		else if (n == 0) {
-			my_str("\n\nERROR: Server failed to send acknowledgment.\n");
+			my_str("\nERROR: Server failed to send acknowledgment.\n");
 			break;
 		}
 
