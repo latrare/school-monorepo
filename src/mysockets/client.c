@@ -19,7 +19,7 @@ main(int argc, char **argv)
 	signal(SIGALRM, cl_bye);
 
 	if ((fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		my_str("ERROR: Failed to create socket.\n");
+		my_str("\nERROR: Failed to create socket.\n");
 		exit(1);
 	}
 
@@ -27,13 +27,13 @@ main(int argc, char **argv)
 	my_str("------------------------------------\n\n");
 
 	if ((shost = gethostbyname(argv[1])) == NULL) {
-		my_str("ERROR: Unable to resolve host.\n");
+		my_str("\nERROR: Unable to resolve host.\n");
 		close(fd);
 		exit(1);
 	}
 
 	if (shost->h_length <= 0) {
-		my_str("ERROR: Failed to retrieve address for host.\n");
+		my_str("\nERROR: Failed to retrieve address for host.\n");
 		close(fd);
 		exit(1);
 	}
@@ -44,7 +44,7 @@ main(int argc, char **argv)
 	memcpy(&(saddr.sin_addr.s_addr), shost->h_addr, shost->h_length);
 
 	if (connect(fd, (struct sockaddr *)&saddr, (socklen_t)sizeof(saddr)) < 0) {
-		my_str("ERROR: Failed to connect to host.\n");
+		my_str("\nERROR: Failed to connect to host.\n");
 		close(fd);
 		exit(1);
 	}
@@ -52,7 +52,7 @@ main(int argc, char **argv)
 	buff = (char *)xmalloc(256);
 	my_str("Choose username: ");
 	if ((n = read(STDIN_FILENO, buff, 256)) <= 0) {
-		my_str("ERROR: Username could not be read.\n");
+		my_str("\nERROR: Username could not be read.\n");
 		close(fd);
 		exit(1);
 	}
@@ -63,13 +63,13 @@ main(int argc, char **argv)
 	my_char('\n');
 
 	if (write(fd, buff, 256) < 0) {
-		my_str("ERROR: Could not send username to host.\n");
+		my_str("\nERROR: Could not send username to host.\n");
 		close(fd);
 		exit(1);
 	}
 
 	if ((n = read(fd, buff, 256)) <= 0) {
-		my_str("ERROR: Server failed to send acknowledgment.\n");
+		my_str("\nERROR: Server failed to send acknowledgment.\n");
 		close(fd);
 		exit(1);
 	}
@@ -81,18 +81,18 @@ main(int argc, char **argv)
 		if ((n = read(STDIN_FILENO, buff, 256)) == 0)
 			continue;
 		else if (n < 0) {
-			my_str("\nERROR: Could not read from STDIN.\n");
+			my_str("\n\nERROR: Could not read from STDIN.\n");
 			break;
 		}
 
 		if (write(fd, buff, 256) < 0) {
-			my_str("\nERROR: Could not send message to host.\n");
+			my_str("\n\nERROR: Could not send message to host.\n");
 			break;
 		}
 
 		args = my_str2vect(buff);
 		if (my_strcmp("/exit", args[0]) == 0) {
-			my_str("\nERROR: Client instance closed.\n");
+			my_str("\n\nERROR: Client instance closed.\n");
 			break;
 		} else if (my_strcmp("/nick", args[0]) == 0) {
 			free(username);
@@ -104,7 +104,7 @@ main(int argc, char **argv)
 		if ((n = read(fd, buff, 256)) > 0)
 			alarm(0);
 		else if (n == 0) {
-			my_str("\nERROR: Server failed to send acknowledgment.\n");
+			my_str("\n\nERROR: Server failed to send acknowledgment.\n");
 			break;
 		}
 

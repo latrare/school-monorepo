@@ -21,7 +21,7 @@ main(int argc, char **argv)
 	my_str("------------------------------------\n\n");
 
 	if ((sfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		my_str("ERROR: Failed to create socket.\n");
+		my_str("\nERROR: Failed to create socket.\n");
 		exit(1);
 	}
 
@@ -31,13 +31,13 @@ main(int argc, char **argv)
 	saddr.sin_addr.s_addr = INADDR_ANY;
 
 	if (bind(sfd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
-		my_str("ERROR: Failed to bind to socket.\n");
+		my_str("\nERROR: Failed to bind to socket.\n");
 		close(sfd);
 		exit(1);
 	}
 
 	if (listen(sfd, 5) < 0) {
-		my_str("ERROR: Failed to listen on socket.\n");
+		my_str("\nERROR: Failed to listen on socket.\n");
 		close(sfd);
 		exit(1);
 	}
@@ -46,12 +46,12 @@ main(int argc, char **argv)
 	for (;;) {
 		clen = (socklen_t)sizeof(caddr);
 		if ((cfd = accept(sfd, (struct sockaddr *)&caddr, &clen)) < 0) {
-			my_str("ERROR: Failed to accept on socket.\n");
+			my_str("\nERROR: Failed to accept on socket.\n");
 			close(sfd);
 			exit(1);
 		} else {
 			if ((pid = fork()) < 0) {
-				my_str("ERROR: Process could not fork.\n");
+				my_str("\nERROR: Process could not fork.\n");
 				close(cfd);
 				close(sfd);
 				exit(1);
@@ -102,7 +102,7 @@ main(int argc, char **argv)
 
 					/* Acknowledge client */
 					if ((n = write(cfd, ".", 2)) < 0) {
-						my_str("ERROR: Failed to send ACK to ");
+						my_str("\nERROR: Failed to send ACK to ");
 						my_str(username);
 						my_char('\n');
 						break;
