@@ -1,3 +1,5 @@
+#define _H_CLIENT_
+
 #include "signals.h"
 
 /*
@@ -17,7 +19,7 @@ main(int argc, char **argv)
 		my_str("Usage: ./client SERVER_PID MESSAGE\n");
 		exit(1);
 	}
-	
+
 	gl_env_ack = 0; /* Zeroing out gl_env_ack */
 	signal(SIGINT, bye);
 	signal(SIGALRM, bye);

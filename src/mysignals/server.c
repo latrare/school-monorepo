@@ -1,3 +1,5 @@
+#define _H_SERVER_
+
 #include "signals.h"
 
 /*
@@ -22,7 +24,7 @@ main()
 		signal(SIGUSR1, getclpid);
 		signal(SIGUSR2, getclpid);
 
-		my_str("Waiting for client PID...\n");	
+		my_str("Waiting for client PID...\n");
 		for (i = 0; i < sizeof(pid_t) * 8; i++)
 			pause();
 		usleep(5000);
