@@ -17,7 +17,7 @@ main(int argc, char **argv)
 	struct sockaddr_in saddr, caddr;
 	socklen_t clen;
 
-	if (argc != 2 || my_atoi(argv[2]) < 1 || my_atoi(argv[2]) > (2 << 15) - 1) {
+	if (argc != 2 || my_atoi(argv[1]) < 1 || my_atoi(argv[1]) > (2 << 15) - 1) {
 		my_str("usage: ./server SERVER_PORT\n");
 		exit(1);
 	}
@@ -49,82 +49,82 @@ main(int argc, char **argv)
 		exit(1);
 	}
 
-	memset(&saddr, 0, sizeof(saddr));
 	for (;;) {
 		clen = sizeof(caddr);
+		memset(&caddr, 0, sizeof(caddr));
 		if ((cfd = accept(sfd, (struct sockaddr *)&caddr, &clen)) < 0) {
 			my_str("\nERROR: Failed to accept on socket.\n");
+			break;
+		}
+
+		if ((pid = fork()) < 0) {
+			my_str("\nERROR: Process could not fork.\n");
+			close(cfd);
 			close(sfd);
 			exit(1);
+		} else if (pid > 0) {
+			/* parent */
+			continue;
 		} else {
-			if ((pid = fork()) < 0) {
-				my_str("\nERROR: Process could not fork.\n");
-				close(cfd);
-				close(sfd);
-				exit(1);
-			} else if (pid > 0) {
-				/* parent */
-				continue;
-			} else {
-				/* child */
-				signal(SIGINT, sv_cbye);
-				buff = (char *)xmalloc(256);
-				i = 0; /* track number of nick changes */
-				while ((n = read(cfd, buff, 256)) > 0) {
-					args = my_str2vect(buff);
-					if (my_strcmp("/exit", args[0]) == 0) {
-						if (i > 0) {
-							my_str("***");
-							my_str(username);
-							my_str(" disconnected.\n");
-						}
-						break;
-					} else if (my_strcmp("/nick", args[0]) == 0) {
-						my_str("***");
-						if (i++ > 0) {
-							my_str(username);
-							my_str(" changed name to ");
-							free(username);
-							username = my_strdup(&buff[6]);
-							username[my_strlen(username) - 1] = '\0';
-							my_str(username);
-							my_char('\n');
-						} else {
-							username = my_strdup(&buff[6]);
-							username[my_strlen(username) - 1] = '\0';
-							my_str(username);
-							my_str(" connected.\n");
-						}
-					} else if (my_strcmp("/me", args[0]) == 0) {
+			/* child */
+			signal(SIGINT, sv_cbye);
+			buff = (char *)xmalloc(256);
+			i = 0; /* track number of nick changes */
+			while ((n = read(cfd, buff, 256)) > 0) {
+				args = my_str2vect(buff);
+				if (my_strcmp("/exit", args[0]) == 0) {
+					if (i > 0) {
 						my_str("***");
 						my_str(username);
-						my_str(" ");
-						my_str(&buff[4]);
-					} else {
-						my_str(username);
-						my_str(": ");
-						my_str(buff);
+						my_str(" disconnected.\n");
 					}
-
-					/* Acknowledge client */
-					if ((n = write(cfd, ".", 2)) < 0) {
-						my_str("\nERROR: Failed to send ACK to ");
+					break;
+				} else if (my_strcmp("/nick", args[0]) == 0) {
+					my_str("***");
+					if (i++ > 0) {
+						my_str(username);
+						my_str(" changed name to ");
+						free(username);
+						username = my_strdup(&buff[6]);
+						username[my_strlen(username) - 1] = '\0';
 						my_str(username);
 						my_char('\n');
-						break;
+					} else {
+						username = my_strdup(&buff[6]);
+						username[my_strlen(username) - 1] = '\0';
+						my_str(username);
+						my_str(" connected.\n");
 					}
-
-					my_freevect(args);
-					args = NULL;
+				} else if (my_strcmp("/me", args[0]) == 0) {
+					my_str("***");
+					my_str(username);
+					my_str(" ");
+					my_str(&buff[4]);
+				} else {
+					my_str(username);
+					my_str(": ");
+					my_str(buff);
 				}
 
-				close(cfd);
-				free(buff);
-				if (i > 0)
-					free(username);
+				/* Acknowledge client */
+				if ((n = write(cfd, ".", 2)) < 0) {
+					my_str("\nERROR: Failed to send ACK to ");
+					my_str(username);
+					my_char('\n');
+					break;
+				}
+
 				my_freevect(args);
-				exit(0);
+				args = NULL;
 			}
+
+			close(sfd);
+			close(cfd);
+			free(buff);
+			if (i > 0)
+				free(username);
+			my_freevect(args);
+			exit(0);
 		}
 	}
 
