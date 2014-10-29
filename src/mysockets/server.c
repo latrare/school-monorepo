@@ -106,6 +106,9 @@ main(int argc, char **argv)
 						my_char('\n');
 						break;
 					}
+
+					my_freevect(args);
+					args = NULL;
 				}
 
 				close(cfd);
