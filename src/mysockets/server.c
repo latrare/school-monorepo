@@ -49,8 +49,7 @@ main(int argc, char **argv)
 		exit(1);
 	}
 
-	for (;;) {
-		clen = sizeof(caddr);
+	for (clen = sizeof(caddr);;) {
 		memset(&caddr, 0, sizeof(caddr));
 		if ((cfd = accept(sfd, (struct sockaddr *)&caddr, &clen)) < 0) {
 			my_str("\nERROR: Failed to accept on socket.\n");
@@ -68,9 +67,7 @@ main(int argc, char **argv)
 		} else {
 			/* child */
 			signal(SIGINT, sv_cbye);
-			buff = (char *)xmalloc(256);
-			i = 0; /* track number of nick changes */
-			while ((n = read(cfd, buff, 256)) > 0) {
+			for (buff = (char *)xmalloc(256), i = 0; (n = read(cfd, buff, 256)) > 0;) {
 				args = my_str2vect(buff);
 				if (my_strcmp("/exit", args[0]) == 0) {
 					if (i > 0) {
