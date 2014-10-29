@@ -51,7 +51,7 @@ main(int argc, char **argv)
 
 	memset(&saddr, 0, sizeof(saddr));
 	for (;;) {
-		clen = (socklen_t)sizeof(caddr);
+		clen = sizeof(caddr);
 		if ((cfd = accept(sfd, (struct sockaddr *)&caddr, &clen)) < 0) {
 			my_str("\nERROR: Failed to accept on socket.\n");
 			close(sfd);

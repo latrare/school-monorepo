@@ -51,7 +51,7 @@ main(int argc, char **argv)
 	saddr.sin_port = htons(my_atoi(argv[2]));
 	memcpy(&(saddr.sin_addr.s_addr), shost->h_addr, shost->h_length);
 
-	if (connect(fd, (struct sockaddr *)&saddr, (socklen_t)sizeof(saddr)) < 0) {
+	if (connect(fd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
 		my_str("\nERROR: Failed to connect to host.\n");
 		close(fd);
 		exit(1);
