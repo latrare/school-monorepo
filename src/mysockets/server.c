@@ -81,7 +81,7 @@ main(int argc, char **argv)
 					break;
 				} else if (my_strcmp("/nick", args[0]) == 0) {
 					my_str("***");
-					if (i++ > 0) {
+					if (i > 0) {
 						my_str(username);
 						my_str(" changed name to ");
 						free(username);
@@ -90,6 +90,7 @@ main(int argc, char **argv)
 						my_str(username);
 						my_char('\n');
 					} else {
+						i++;
 						username = my_strdup(&buff[6]);
 						username[my_strlen(username) - 1] = '\0';
 						my_str(username);
