@@ -107,6 +107,7 @@ main(int argc, char **argv)
 			username = my_strdup(&buff[6]);
 			username[my_strlen(&buff[6]) - 1] = '\0';
 		}
+		free(args);
 
 		alarm(5);
 		if ((n = read(fd, buff, 256)) > 0)
