@@ -13,12 +13,13 @@
 int
 main(int argc, char **argv)
 {
-	int n;
+	int port, n;
 	char *buff, *username, **args;
 	struct hostent *shost;
 	struct sockaddr_in saddr;
 
-	if (argc != 3 || my_atoi(argv[2]) < 1 || my_atoi(argv[2]) > (2 << 15) - 1) {
+	port = my_atoi(argv[2]);
+	if (argc != 3 || port < 1 || port > (2 << 15) - 1) {
 		my_str("usage: ./client SERVER_NAME SERVER_PORT\n");
 		exit(1);
 	}
@@ -48,7 +49,7 @@ main(int argc, char **argv)
 
 	memset(&saddr, 0, sizeof(saddr));
 	saddr.sin_family = AF_INET;
-	saddr.sin_port = htons(my_atoi(argv[2]));
+	saddr.sin_port = htons(port);
 	memcpy(&(saddr.sin_addr.s_addr), shost->h_addr, shost->h_length);
 
 	if (connect(fd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
