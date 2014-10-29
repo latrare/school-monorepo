@@ -7,7 +7,7 @@ cl_bye(int sfd)
 
 	if (sfd == SIGINT) {
 		bye = "/exit\n";
-		if (write(fd, bye, 256) < 0)
+		if (write(fd, bye, 7) < 0)
 			my_str("\nERROR: Failed to send exit transmission.\n");
 		my_str("\nERROR: Client instance closed.\n");
 	} else if (sfd == SIGALRM)
