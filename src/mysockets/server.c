@@ -93,7 +93,6 @@ main(int argc, char **argv)
 						my_str(username);
 						my_str(" ");
 						my_str(&buff[4]);
-						my_char('\n');
 					}  else {
 						my_str(username);
 						my_str(": ");
