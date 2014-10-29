@@ -63,13 +63,13 @@ main(int argc, char **argv)
 	my_char('\n');
 
 	if (write(fd, buff, 256) < 0) {
-		my_str("\nERROR: Could not send username to host.\n");
+		my_str("ERROR: Could not send username to host.\n");
 		close(fd);
 		exit(1);
 	}
 
 	if ((n = read(fd, buff, 256)) <= 0) {
-		my_str("\nERROR: Server failed to send acknowledgment.\n");
+		my_str("ERROR: Server failed to send acknowledgment.\n");
 		close(fd);
 		exit(1);
 	}
