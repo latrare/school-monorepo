@@ -2,7 +2,7 @@
 *.o
 *.a
 
-## Ignored files
+## Ignored executables
 src/mypipes/pipes
 src/myminishell/minishell
 src/mysignals/client
