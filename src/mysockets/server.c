@@ -2,6 +2,13 @@
 
 #include "sockets.h"
 
+/*
+ * The server.
+ * ---
+ * Receives connections from clients. Forks into child process for each client.
+ * Clients send text to server, server prints out text attached to handle.
+ * Server interprets and alters output based on commands.
+ */
 int
 main(int argc, char **argv)
 {

@@ -2,6 +2,14 @@
 
 #include "sockets.h"
 
+/*
+ * The client.
+ * ---
+ *  Identifies itself by send the input username.
+ *  Can send text to the server, which the server displays.
+ *  Commands /nick (to change handle), /me (to RP), and /exit (to exit)
+ *  	are supported.
+ */
 int
 main(int argc, char **argv)
 {
