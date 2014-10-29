@@ -92,7 +92,7 @@ main(int argc, char **argv)
 						my_str("***");
 						my_str(username);
 						my_str(" ");
-						my_str(my_vect2str(&args[1]));
+						my_str(&buff[4]);
 						my_char('\n');
 					}  else {
 						my_str(username);
