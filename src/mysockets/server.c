@@ -12,12 +12,13 @@
 int
 main(int argc, char **argv)
 {
-	int pid, n, i;
+	int port, pid, n, i;
 	char *buff, *username, **args;
 	struct sockaddr_in saddr, caddr;
 	socklen_t clen;
 
-	if (argc != 2 || my_atoi(argv[1]) < 1 || my_atoi(argv[1]) > (2 << 15) - 1) {
+	port = my_atoi(argv[1]);
+	if (argc != 2 || port < 1 || port > (2 << 15) - 1) {
 		my_str("usage: ./server SERVER_PORT\n");
 		exit(1);
 	}
@@ -34,7 +35,7 @@ main(int argc, char **argv)
 
 	memset(&saddr, 0, sizeof(saddr));
 	saddr.sin_family = AF_INET;
-	saddr.sin_port = htons(my_atoi(argv[1]));
+	saddr.sin_port = htons(port);
 	saddr.sin_addr.s_addr = INADDR_ANY;
 
 	if (bind(sfd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
