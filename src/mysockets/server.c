@@ -29,7 +29,7 @@ main(int argc, char **argv)
 	my_str("------------------------------------\n\n");
 
 	if ((sfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		my_str("\nERROR: Failed to create socket.\n");
+		my_str("ERROR: Failed to create socket.\n");
 		exit(1);
 	}
 
@@ -39,13 +39,13 @@ main(int argc, char **argv)
 	saddr.sin_addr.s_addr = INADDR_ANY;
 
 	if (bind(sfd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
-		my_str("\nERROR: Failed to bind to socket.\n");
+		my_str("ERROR: Failed to bind to socket.\n");
 		close(sfd);
 		exit(1);
 	}
 
 	if (listen(sfd, 5) < 0) {
-		my_str("\nERROR: Failed to listen on socket.\n");
+		my_str("ERROR: Failed to listen on socket.\n");
 		close(sfd);
 		exit(1);
 	}
