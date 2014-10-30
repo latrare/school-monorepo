@@ -36,13 +36,13 @@ main(int argc, char **argv)
 	my_str("------------------------------------\n\n");
 
 	if ((shost = gethostbyname(argv[1])) == NULL) {
-		my_str("\nERROR: Unable to resolve host.\n");
+		my_str("ERROR: Unable to resolve host.\n");
 		close(fd);
 		exit(1);
 	}
 
 	if (shost->h_length <= 0) {
-		my_str("\nERROR: Failed to retrieve address for host.\n");
+		my_str("ERROR: Failed to retrieve address for host.\n");
 		close(fd);
 		exit(1);
 	}
@@ -53,7 +53,7 @@ main(int argc, char **argv)
 	memcpy(&(saddr.sin_addr.s_addr), shost->h_addr, shost->h_length);
 
 	if (connect(fd, (struct sockaddr *)&saddr, sizeof(saddr)) < 0) {
-		my_str("\nERROR: Failed to connect to host.\n");
+		my_str("ERROR: Failed to connect to host.\n");
 		close(fd);
 		exit(1);
 	}
