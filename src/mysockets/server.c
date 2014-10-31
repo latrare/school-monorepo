@@ -17,8 +17,7 @@ main(int argc, char **argv)
 	struct sockaddr_in saddr, caddr;
 	socklen_t clen;
 
-	port = my_atoi(argv[1]);
-	if (argc != 2 || port < 1 || port > (2 << 15) - 1) {
+	if (argc != 2 || (port = my_atoi(argv[1])) < 1 || port > (2 << 15) - 1) {
 		my_str("usage: ./server SERVER_PORT\n");
 		exit(1);
 	}

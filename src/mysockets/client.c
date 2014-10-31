@@ -18,8 +18,7 @@ main(int argc, char **argv)
 	struct hostent *shost;
 	struct sockaddr_in saddr;
 
-	port = my_atoi(argv[2]);
-	if (argc != 3 || port < 1 || port > (2 << 15) - 1) {
+	if (argc != 3 || (port = my_atoi(argv[2])) < 1 || port > (2 << 15) - 1) {
 		my_str("usage: ./client SERVER_NAME SERVER_PORT\n");
 		exit(1);
 	}
