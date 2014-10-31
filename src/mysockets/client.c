@@ -59,7 +59,7 @@ main(int argc, char **argv)
 
 	buff = (char *)xmalloc(256);
 	my_str("Choose username: ");
-	if ((n = read(STDIN_FILENO, buff, 256)) <= 0) {
+	if ((n = read(STDIN_FILENO, buff, 256)) <= 1) {
 		my_str("\nERROR: Username could not be read.\n");
 		close(fd);
 		exit(1);
