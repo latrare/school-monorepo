@@ -101,6 +101,8 @@ main(int argc, char **argv)
 
 		args = my_str2vect(buff);
 		if (my_strcmp("/exit", args[0]) == 0) {
+			if (args != NULL)
+				my_freevect(args);
 			my_str("\nERROR: Client instance closed.\n");
 			break;
 		} else if (my_strcmp("/nick", args[0]) == 0) {
@@ -108,7 +110,7 @@ main(int argc, char **argv)
 			username = my_strdup(my_strfind(buff, '/') + 6);
 			username[my_strlen(my_strfind(buff, '/') + 6) - 1] = '\0';
 		}
-		free(args);
+		my_freevect(args);
 
 		alarm(5);
 		if ((n = read(fd, buff, 256)) > 0)
