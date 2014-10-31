@@ -83,13 +83,13 @@ main(int argc, char **argv)
 						my_str(username);
 						my_str(" changed name to ");
 						free(username);
-						username = my_strdup(&buff[6]);
+						username = my_strdup(my_strfind(buff, '/') + 6);
 						username[my_strlen(username) - 1] = '\0';
 						my_str(username);
 						my_char('\n');
 					} else {
 						i++;
-						username = my_strdup(&buff[6]);
+						username = my_strdup(my_strfind(buff, '/') + 6);
 						username[my_strlen(username) - 1] = '\0';
 						my_str(username);
 						my_str(" connected.\n");
@@ -98,7 +98,7 @@ main(int argc, char **argv)
 					my_str("***");
 					my_str(username);
 					my_str(" ");
-					my_str(&buff[4]);
+					my_str(my_strfind(buff, '/') + 4);
 				} else {
 					my_str(username);
 					my_str(": ");

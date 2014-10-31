@@ -105,8 +105,8 @@ main(int argc, char **argv)
 			break;
 		} else if (my_strcmp("/nick", args[0]) == 0) {
 			free(username);
-			username = my_strdup(&buff[6]);
-			username[my_strlen(&buff[6]) - 1] = '\0';
+			username = my_strdup(my_strfind(buff, '/') + 6);
+			username[my_strlen(my_strfind(buff, '/') + 6) - 1] = '\0';
 		}
 		free(args);
 
