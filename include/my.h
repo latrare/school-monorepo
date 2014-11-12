@@ -4,16 +4,16 @@
  * Project Description:
  * An implementation of stdlibc functions.
  */
-
 #ifndef _MY_H_
 #define _MY_H_
 #ifndef NULL
 #define NULL ((void *)0)
 #endif
 
+#include <sys/wait.h>
+
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
 
 /* The following functions all print their types to stdout using my_char */
 void my_char(char);
