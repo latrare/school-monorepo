@@ -11,7 +11,7 @@ init_terminal()
 	char *name;
 	struct termio mod;
 
-	ioctl(0, TCGETA, &(gl_env.line_backup));
+	ioctl(0, TCGETA, &gl_env.line_backup);
 	ioctl(0, TCGETA, &mod);
 	mod.c_lflag &= ~(ICANON | ECHO | ISIG);
 	mod.c_cc[VMIN] = READMIN;
