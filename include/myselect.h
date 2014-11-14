@@ -88,7 +88,7 @@ int  my_termprint(int);
 void term_clear();
 void term_vi();
 void term_ve();
-char check_char(char *c);
+char check_char(char *);
 char get_win_size();
 void show_elems();
 void refreshin();
@@ -105,5 +105,6 @@ void term_underline();
 void term_standout();
 void term_standend();
 void term_underend();
+void term_move(int, int);
 
 #endif
