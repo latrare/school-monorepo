@@ -74,6 +74,7 @@ typedef struct s_env
 	int            stdio_backup;
 	int            nbelems;
 	int            pos;
+	int            lpos;
 	t_elem         *elements;
 } t_env;
 
@@ -88,7 +89,7 @@ int  my_termprint(int);
 void term_clear();
 void term_vi();
 void term_ve();
-char check_char(char *);
+void check_char(char *);
 char get_win_size();
 void show_elems();
 void refreshin();
