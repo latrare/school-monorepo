@@ -90,7 +90,6 @@ void term_clear();
 void term_vi();
 void term_ve();
 void check_char(char *);
-char get_win_size();
 void show_elems();
 void refreshin();
 void refreshout(int);
@@ -102,10 +101,10 @@ void doselect();
 void getout(char);
 void setup_elems(int, char**);
 void term_move_to_item(int);
+void term_move(int, int);
 void term_underline();
 void term_standout();
 void term_standend();
 void term_underend();
-void term_move(int, int);
 
 #endif
