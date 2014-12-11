@@ -33,6 +33,8 @@ show_elems()
 		refreshout(i);
 	}
 
-	term_move_to_item(gl_env.lpos);
-	refreshin();
+	if (gl_env.flag != 1) {
+		term_move_to_item(gl_env.lpos);
+		refreshin();
+	}
 }
