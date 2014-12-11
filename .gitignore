@@ -13,6 +13,5 @@ src/mysockets/server
 
 ## Ignored directories
 lib/
-test/
 notes/
 DATR/
