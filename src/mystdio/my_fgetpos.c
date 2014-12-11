@@ -3,10 +3,10 @@
 int
 my_fgetpos(t_my_file *fp, fpos_t *pos)
 {
-	if (fp != NULL) {
-		*pos = fp->pos;
-		return (0);
-	}
+	int res;
 
-	return (-1);
+	if ((res = my_ftell(fp)) >= 0)
+		*pos = res;
+
+	return ((res >= 0) ? 0 : -1);
 }
