@@ -1,0 +1,95 @@
+Going to create three separate processes.
+
+Grandpa process (initial)
+|
+|-Dad process (child of Grandpa)
+  |
+  |-Child process (child of Dad)
+
+Two pipes, one between grandpa and dad, the other between dad and child.
+
+Each process will print the input from the following syntax:
+`./pipes This is a test`
+
+Grandpa will say: "I'm grandpa sending: 'This is a test'"
+Dad will say: "I'm dad receiving: 'This is a test'"
+Child will say: "I'm child receiving: 'This is a test'"
+
+
+
+Creation of new process
+---
+
+`fork()` - no args, returns process ID (PID)
+
+fork() will return twice, different from other functions we're used to, as it is returning in two processes at once.
+
+If fork() < 0, there is a problem that is preventing the process from forking.
+
+Example if-statement that will separate logic for the parent and child process:
+
+pid = fork();
+if (pid > 0)
+	/* parent */
+else
+	/* child */
+
+Can use `wait()` and `waitpid()`
+
+What happens when you call wait()
+---
+
+Must only be called in the parent process.
+
+This function forces a parent process to stay live until its child processes have died.
+
+
+Other methods to use
+---
+
+`exit()` - kills the process it is called in
+
+
+Pipes
+---
+
+Allows sending information from one file descriptor to another one.
+
+int fds[2];
+
+BEFORE A FORK: call `pipe(fds)` (creates two file descriptors with integers given in array declared above; will then proceed to link them so that they can be read and written to)
+
+
+CONVERSION OF STRING MUST BE DONE AFTER THE PROCESSES FORK. OTHERWISE, ALL THREE PROCESSES WOULD BE ABLE TO SEE THE STRING, THEREFORE MAKING PIPES ENTIRELY POINTLESS.
+
+How to set up pipes so that there is no ambiguity in the direction in which the pipes will send data:
+
+---
+pipe.c
+---
+int fds[2];
+pipe(fds);
+if((pid = fork()) < 0)
+	//error
+if (pid > 0) {
+	close(fds[0);
+	write(fds[1], ...);
+} else {
+	close(fds[1]);
+	n = read(fds[0], ...);
+}
+---
+
+
+Vectors
+---
+
+An array of strings with a null pointer at the end of it. (What a string is to an array of chars.)
+
+The argv (char **) in main() is a vector for the arguments given on the command line.
+
+&argv[1] -- Vector starting at argv[1] (pointer to a string)
+
+vect2str will need to concatenate all arguments as a single string, including whitespaces and return the resulting string
+
+
