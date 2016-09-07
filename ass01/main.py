@@ -77,7 +77,7 @@ def main():
             print('[+] Bruteforcing passwords of length: {}'.format(n))
             processes = []
             perms = itertools.permutations(list(string.printable), n)
-            slicesize = ((len(string.printable) ** n) // 16) // (10 ** n)
+            slicesize = ((len(string.printable) ** n) // 8) // (10 ** (n + 1)) or 1000
             while True:
                 s = list(itertools.islice(perms, slicesize))
                 if not s:
