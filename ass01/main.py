@@ -18,15 +18,32 @@ import time
 SALT = '_1984'
 
 
-def bruteforce_worker(passwords, trial):
-    hashes = tuple(passwords.keys())
-    cracked = []
-    for t in trial:
-        t = ''.join(t)
-        h = hashlib.sha256(t.encode('utf-8')).hexdigest()
-        if h in hashes:
-            with open('results.txt', 'a+') as results:
-                results.write('{}::{}\n'.format(t, h))
+def dictionary_worker(resfile, passwords, trial, salt=None):
+    for password in trial:
+        if salt:
+            password += salt
+        # TODO: Fix code duplication
+        sha256 = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        if sha256 in passwords:
+            for uid in passwords[sha256]:
+                write_result(resfile, password, uid, sha256)
+
+
+def bruteforce_worker(resfile, passwords, trial, salt=None):
+    for password in trial:
+        password = ''.join(password) # Necessary due to how permutations returns
+        if salt:
+            password += salt
+        # TODO: Fix code duplication
+        sha256 = hashlib.sha256(password.encode('utf-8')).hexdigest()
+        if sha256 in passwords:
+            for uid in passwords[sha256]:
+                write_result(resfile, password, uid, sha256)
+
+
+def write_result(resfile, plaintext, uid, sha256):
+    with open(resfile, 'a+') as result:
+        result.write('{}::{}::{}\n'.format(plaintext, uid, sha256))
 
 
 def main():
@@ -72,13 +89,20 @@ def main():
     # Thread pool lifeguard spin waiting
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
-    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
+
+    cpus = multiprocessing.cpu_count()
+    with multiprocessing.Pool(cpus) as pool:
+        # Process:
+        # 1. Dictionary attack
+        # Load in dictionary file
+        # 2. 1337speak dictionary attack
+        # 3. Bruteforce
         for n in range(1, 7):
             print('[+] Bruteforcing passwords of length: {}'.format(n))
+
             processes = []
-            perms = itertools.permutations(list(string.printable), n)
-            permsize = len(string.printable) ** n
-            slicesize = ((len(string.printable) ** n) // multiprocessing.cpu_count()) // (10 ** (n - 1))
+            perms = itertools.product(list(string.printable), repeat=n)
+            slicesize = ((len(string.printable) ** n) // cpus) // (10 ** (n - 1)) 
             while True:
                 s = list()
                 try:
@@ -86,7 +110,7 @@ def main():
                         s.append(next(perms))
                 except StopIteration:
                     break
-                proc = pool.apply_async(bruteforce_worker, (passwords, tuple(s)))
+                proc = pool.apply_async(bruteforce_worker, (args.results_file, passwords, tuple(s), args.salt))
                 processes.append(proc)
 
             for p in processes:
