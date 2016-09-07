@@ -72,13 +72,14 @@ def main():
     # Thread pool lifeguard spin waiting
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
-    with multiprocessing.Pool(processes=14) as pool:
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count() * 2) as pool:
         for n in range(1, 7):
-            processes = []
             print('[+] Bruteforcing passwords of length: {}'.format(n))
+            processes = []
             perms = itertools.permutations(list(string.printable), n)
+            slicesize = ((len(string.printable) ** n) // 16) // (10 ** (n - 1))
             while True:
-                s = list(itertools.islice(perms, 10000000))
+                s = list(itertools.islice(perms, slicesize))
                 if not s:
                     break
                 proc = pool.apply_async(bruteforce_worker, (passwords, s))
@@ -86,30 +87,6 @@ def main():
 
             for p in processes:
                 p.get()
-'''
-    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
-        futures = []
-        for n in range(1, 7):
-            print('[+] Bruteforcing passwords of length: {}'.format(n))
-            future = pool.submit(bruteforce_worker, passwords, itertools.permutations(list(string.printable), n))
-            futures.append(future)
-
-        for f in futures:
-            res = f.result()
-            if len(res):
-                passlen = len(res[-1])
-                print('[+] Passwords of length {} cracked: {}'.format(passlen, res))
-
-            futures = []
-            for s in itertools.permutations(list(string.printable), n):
-                futures.append(pool.submit(bruteforce_worker, passwords, ''.join(s)))
-
-            # Wait for results from futures
-            for f in concurrent.futures.as_completed(futures):
-                res = f.result()
-                if len(res):
-                    print('[+] Passwords cracked: {}.'.format(repr(res)))
-'''
 
 
 if __name__ == '__main__':
