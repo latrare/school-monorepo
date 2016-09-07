@@ -72,12 +72,12 @@ def main():
     # Thread pool lifeguard spin waiting
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
-    with multiprocessing.Pool(processes=multiprocessing.cpu_count() * 2) as pool:
+    with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
         for n in range(1, 7):
             print('[+] Bruteforcing passwords of length: {}'.format(n))
             processes = []
             perms = itertools.permutations(list(string.printable), n)
-            slicesize = (len(string.printable) ** n) // 16
+            slicesize = ((len(string.printable) ** n) // 16) // (10 ** n)
             while True:
                 s = list(itertools.islice(perms, slicesize))
                 if not s:
