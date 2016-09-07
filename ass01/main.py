@@ -17,12 +17,11 @@ import time
 SALT = '_1984'
 
 
-def bruteforce_worker(passwords, sliced):
+def bruteforce_worker(passwords, trial):
     hashes = tuple(passwords.keys())
     cracked = []
-    for perm in sliced:
-        if hashlib.sha256(perm[0].encode('utf-8')).hexdigest() in hashes:
-            cracked.append(perm[0])
+    if hashlib.sha256(trial.encode('utf-8')).hexdigest() in hashes:
+        cracked.append(trial)
     return cracked
 
         
@@ -70,13 +69,12 @@ def main():
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
-        for n in [2,]:#range(1, 7):
+        for n in range(1, 7):
             print('[+] Bruteforcing passwords of length: {}'.format(n))
 
             futures = []
-            sliced = itertools.islice(itertools.permutations(list(string.printable), n), None)
-            for s in sliced:
-                futures.append(pool.submit(bruteforce_worker, passwords, s))
+            for s in itertools.permutations(list(string.printable), n):
+                futures.append(pool.submit(bruteforce_worker, passwords, ''.join(s)))
         
             # Wait for results from futures
             for f in concurrent.futures.as_completed(futures):
