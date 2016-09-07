@@ -23,10 +23,10 @@ def bruteforce_worker(passwords, trial):
     cracked = []
     for t in trial:
         t = ''.join(t)
-        if hashlib.sha256(t.encode('utf-8')).hexdigest() in hashes:
-            cracked.append(t)
-    if cracked:
-        print('Cracked passwords: {}'.format(cracked))
+        h = hashlib.sha256(t.encode('utf-8')).hexdigest()
+        if h in hashes:
+            with open('results.txt', 'a+') as results:
+                results.write('{}::{}\n'.format(t, h))
 
 
 def main():
