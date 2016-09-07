@@ -77,11 +77,9 @@ def main():
             print('[+] Bruteforcing passwords of length: {}'.format(n))
             processes = []
             perms = itertools.permutations(list(string.printable), n)
-            slicesize = ((len(string.printable) ** n) // 8) // (10 ** (n + 1)) or 1000
-            while True:
-                s = list(itertools.islice(perms, slicesize))
-                if not s:
-                    break
+            slicesize = ((len(string.printable) ** n) // multiprocessing.cpu_count()) // (10 ** n)
+            for x in range(0, ((len(string.printable) ** n) // slicesize)):
+                s = itertools.islice(perms, slicesize)
                 proc = pool.apply_async(bruteforce_worker, (passwords, s))
                 processes.append(proc)
 
