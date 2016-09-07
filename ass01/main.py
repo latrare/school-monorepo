@@ -14,22 +14,18 @@ import sys
 import time
 
 
-# Default salt value given in assignment PDF
-SALT = '_1984'
-
-
-def dictionary_worker(resfile, passwords, trial, salt=None):
-    for password in trial:
-        if salt:
-            password += salt
-        # TODO: Fix code duplication
-        sha256 = hashlib.sha256(password.encode('utf-8')).hexdigest()
-        if sha256 in passwords:
-            for uid in passwords[sha256]:
-                write_result(resfile, password, uid, sha256)
+def dictionary_worker(resfile, passwords, dictionary, salt=None):
+    cracked = []
+    for h in passwords:
+        if h in dictionary:
+            for uid in passwords[h]:
+                cracked.append((dictionary[h], uid, h))
+                write_result(resfile, dictionary[h], uid, h)
+    return cracked
 
 
 def bruteforce_worker(resfile, passwords, trial, salt=None):
+    cracked = []
     for password in trial:
         password = ''.join(password) # Necessary due to how permutations returns
         if salt:
@@ -38,7 +34,9 @@ def bruteforce_worker(resfile, passwords, trial, salt=None):
         sha256 = hashlib.sha256(password.encode('utf-8')).hexdigest()
         if sha256 in passwords:
             for uid in passwords[sha256]:
+                cracked.append(password, uid, sha256)
                 write_result(resfile, password, uid, sha256)
+    return cracked
 
 
 def write_result(resfile, plaintext, uid, sha256):
@@ -81,28 +79,47 @@ def main():
 
     if not passwords:
         sys.exit('[-] Password file given is empty.')
-    else:
-        print('[+] Password file successfully parsed.')
 
-    print('[+] {:,} passwords loaded from file.'.format(len(passwords)))
+    print('[*] {:,} passwords loaded from file.'.format(len(passwords)))
 
     # Thread pool lifeguard spin waiting
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
 
     cpus = multiprocessing.cpu_count()
+    # TODO: Place this whole manager in a separate thread so main thread can keep track of time
     with multiprocessing.Pool(cpus) as pool:
-        # Process:
         # 1. Dictionary attack
-        # Load in dictionary file
+        print('[*] Preparing dictionary attack...')
+        with open('john.txt') as dfile:
+            if args.salt:
+                dict_hashes = {hashlib.sha256((p.strip() + args.salt).encode('utf-8')).hexdigest(): p.strip() for p in dfile if p.strip()}
+            else:
+                dict_hashes = {hashlib.sha256(p.strip().encode('utf-8')).hexdigest(): p.strip() for p in dfile if p.strip()}
+        print('[*] {:,} hashes pre-computed for dictionary entries.'.format(len(dict_hashes)))
+
+        print('[+] Running dictionary attack...')
+        cracked_dict = pool.apply(dictionary_worker, (args.results_file, passwords, dict_hashes, args.salt))
+        print('[+] {:,} passwords found using dictionary.'.format(len(cracked_dict)))
+
+        for h in cracked_dict:
+            del passwords[h[-1]]
+        print('[*] {:,} passwords remaining.'.format(len(passwords)))
+
         # 2. 1337speak dictionary attack
+        print('[*] Preparing dictionary attack...')
+        print('[*] {:,} hashes pre-computed for 1337 dictionary substitutions.')
+        print('[+] Running 1337-dictionary attack...')
+        print('[+] {:,} passwords found using 1337-dictionary.')
+
         # 3. Bruteforce
+'''
         for n in range(1, 7):
             print('[+] Bruteforcing passwords of length: {}'.format(n))
 
             processes = []
             perms = itertools.product(list(string.printable), repeat=n)
-            slicesize = ((len(string.printable) ** n) // cpus) // (10 ** (n - 1)) 
+            slicesize = ((len(string.printable) ** n) // cpus) // (10 ** (n - 1))
             while True:
                 s = list()
                 try:
@@ -115,6 +132,7 @@ def main():
 
             for p in processes:
                 p.get()
+'''
 
 
 if __name__ == '__main__':
