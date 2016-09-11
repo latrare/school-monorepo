@@ -14,6 +14,12 @@ import sys
 import time
 
 
+class TreeNode:
+    def __init__(self, v):
+        self.value = v
+        self.children = []
+
+
 def dictionary_worker(resfile, passwords, dictionary, salt=None):
     cracked = []
     for h in passwords:
@@ -39,12 +45,74 @@ def bruteforce_worker(resfile, passwords, trial, salt=None):
     return cracked
 
 
+def traverse_build(root, word, leet, path='', paths=[]):
+    if word:
+        children = [TreeNode(r) for r in leet[word[0]]]
+        children.extend([TreeNode(word[0]), TreeNode(word[0].swapcase())])
+        root.children = children
+        for node in root.children:
+            traverse_build(node, word[1:], leet, path + node.value, paths)
+    else:
+        paths.append(path)
+    return paths
+
+
+def leet_mutation_generator(word):
+    'Generates simple, single-character replacement, 1337 versions of a given word'
+    # TODO: Source where you got the substitutions from
+    # XXX: When adding children, add the opposite case character to the child nodes
+    leet = {
+        'a': ['4', '@', '/-\\', '/_\\'],
+        'b': ['8', '|3', '|o'],
+        'c': ['(', '[', '{', '<', 'k', 's', 'K', 'S'],
+        'd': ['|)', 'o|', '|>', '<|', '|)', '|}', '|]'],
+        'e': ['3'],
+        'f': ['ph', '|='],
+        'g': ['(', '9', '6', '[', '-', '[+'],
+        'h': ['#', '|-|', '[-]', '{-}', '|=|', '[=]', '{=}', ']-[', '}-{', '(-)', ')-('],
+        'i': ['1', 'l', '|', '!', ']['],
+        'j': ['_|'],
+        'k': ['|<', '/<', '\\<', '|{', '1<'],
+        'l': ['1', '|_', '|'],
+        'm': ['|\\/|', '^^', '/\\/\\', "|'|'|", '(\\/)', '/\\', '/|\\', '/v\\'],
+        'n': ['|\\|', '/\\/', '|\\\\|', '/|/'],
+        'o': ['()', '[]', '{}', '0'],
+        'p': ['|2', '|D', '|o', '|O', '|>'],
+        'q': ['O', '9', '(,)', 'kw'],
+        'r': ['|2', '|Z', '|?', '12'],
+        's': ['5', '$'],
+        't': ['+', "']['", '7'],
+        'u': ['|_|'],
+        'v': ['|/', '\\|', '\\/', '/'],
+        'w': ['\\/\\/', '\\|\\|', '|/|/', '\\|/', '\\^/', '//'],
+        'x': ['><', '}{'],
+        'y': ['`/', "'/", 'j'],
+        'z': ['2', '(/)'],
+        '0': ['O', '()'],
+        '1': ['L', 'I', '|', ']['],
+        '2': ['Z'],
+        '3': ['E'],
+        '4': ['A'],
+        '5': ['S'],
+        '6': ['G'],
+        '7': ['T'],
+        '8': ['B'],
+        '9': ['G']
+    }
+
+    # Build the tree
+    root = TreeNode(None)
+    return traverse_build(root, word, leet)
+
+
 def write_result(resfile, plaintext, uid, sha256):
     with open(resfile, 'a+') as result:
         result.write('{}::{}::{}\n'.format(plaintext, uid, sha256))
 
 
 def main():
+    print(leet_mutation_generator("oat"))
+    return
     # Parse arguments
     parser = argparse.ArgumentParser(description='Password cracker.')
     parser.add_argument('password_file', help='The file to retrieve the password hashes to crack.')
@@ -82,7 +150,11 @@ def main():
 
     print('[*] {:,} passwords loaded from file.'.format(len(passwords)))
 
-    # Thread pool lifeguard spin waiting
+    # Clear results file
+    with open(args.results_file, 'w+'):
+        pass
+
+    # Mark start time
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
 
@@ -92,10 +164,12 @@ def main():
         # 1. Dictionary attack
         print('[*] Preparing dictionary attack...')
         with open('john.txt') as dfile:
-            if args.salt:
-                dict_hashes = {hashlib.sha256((p.strip() + args.salt).encode('utf-8')).hexdigest(): p.strip() for p in dfile if p.strip()}
-            else:
-                dict_hashes = {hashlib.sha256(p.strip().encode('utf-8')).hexdigest(): p.strip() for p in dfile if p.strip()}
+            dict_hashes = dict()
+            for p in dfile:
+                p = p.strip()
+                if args.salt:
+                    p += args.salt
+                dict_hashes[hashlib.sha256(p.encode('utf-8')).hexdigest()] = p
         print('[*] {:,} hashes pre-computed for dictionary entries.'.format(len(dict_hashes)))
 
         print('[+] Running dictionary attack...')
@@ -107,7 +181,7 @@ def main():
         print('[*] {:,} passwords remaining.'.format(len(passwords)))
 
         # 2. 1337speak dictionary attack
-        print('[*] Preparing dictionary attack...')
+        print('[*] Preparing 1337 dictionary attack...')
         print('[*] {:,} hashes pre-computed for 1337 dictionary substitutions.')
         print('[+] Running 1337-dictionary attack...')
         print('[+] {:,} passwords found using 1337-dictionary.')
