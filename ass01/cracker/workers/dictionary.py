@@ -8,5 +8,4 @@ def dictionary_worker(trials, dictionary, resfile, salt=None):
         if sha256 in dictionary:
             cracked.append((trial, uid, sha256))
             write_result(trial, uid, sha256)
-            
     return cracked
