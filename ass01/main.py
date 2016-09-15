@@ -64,7 +64,8 @@ def main():
                 print('[*] Dictionary found: {}'.format(dictionary[sha256]))
                 found.append(sha256)
                 for uid in passwords[sha256]:
-                    write_result(args.results_file, dictionary[sha256], uid, sha256)
+                    write_result(args.results_file, dictionary[sha256], uid,
+                                 sha256)
         # Remove found entries from unknown passwords
         for sha256 in found:
             del passwords[sha256]
@@ -75,7 +76,8 @@ def main():
         found = []
         with open('resources/leet.txt') as dictionary_leet:
             leet = Leet(passwords, args.results_file, args.salt)
-            results = executor.imap_unordered(leet.heuristic, iter(dictionary_leet), 100000)
+            results = executor.imap_unordered(leet.heuristic,
+                                              iter(dictionary_leet), 100000)
             for result in results:
                 if result:
                     print('[*] Leet dictionary found: {}'.format(result[0][0]))
@@ -112,15 +114,21 @@ def main():
                                                  repeat=n)
                            for n in range(1, 7)}
         for n, gen in brute_perm_gens.items():
+            chunksize = 1000
+            if n > 4:
+                chunksize = 10000
             bruteforcer = Bruteforcer(passwords, args.results_file, args.salt)
-            results_all.append(executor.imap_unordered(bruteforcer.bruteforce,
-                                gen, 100000))
+            results_all.append((n, executor.imap_unordered(bruteforcer.bruteforce,
+                                                           gen, chunksize)))
 
         for results in results_all:
-            for result in results:
-                if result:
-                    found.append(result[0][-1])
-                    print('[*] Bruteforced: {}'.format(result[0][0]))
+            if results:
+                print('[*] Bruteforcing length {}...'.format(results[0]))
+                results = results[1]
+                for result in results:
+                    if result:
+                        found.append(result[0][-1])
+                        print('[*] Bruteforced: {}'.format(result[0][0]))
         print('[-] Bruteforce attack completed.')
 
 
