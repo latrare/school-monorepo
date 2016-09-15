@@ -24,8 +24,8 @@ def main():
                         help='Number of seconds that cracker should run.')
     parser.add_argument('salt', nargs='?', default=None,
                         help='Salt to be appended to passwords before hashing')
-
     args = parser.parse_args()
+
     if not os.path.exists(args.password_file):
         sys.exit('[-] Password file given does not exist.')
     if not os.path.exists(args.results_file):
@@ -97,9 +97,15 @@ def main():
                                                  repeat=n)
                            for n in range(1, 7)}
         for n, gen in brute_perm_gens.items():
+            if n < 4:
+                chunksize = 10000
+            elif n == 4:
+                chunksize = 100000
+            else:
+                chunksize = 1000000
             bruteforcer = Bruteforcer(passwords, args.results_file, args.salt)
             results_all.append(executor.imap_unordered(bruteforcer.bruteforce,
-                                gen, 100000))
+                                gen, chunksize))
 
         for results in results_all:
             for result in results:
