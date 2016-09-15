@@ -14,7 +14,7 @@ def main():
 
     lines = None
     with open('resources/leet.txt', 'r') as f:
-        lines = set(f.readlines())
+        lines = sorted(list(set(f.readlines())), key=lambda x: len(x))
 
     with open('resources/leet.txt', 'w+') as f:
         for line in lines:
