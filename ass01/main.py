@@ -73,11 +73,13 @@ def main():
         ### DIGIT HEURISTIC OPERATION ###
         print('[+] Beginning digit heuristic attack...')
         found = []
+        results_gens = []
         digit_gens = list(itertools.product(list(string.digits), repeat=n)
                           for n in range(1, 7))
         for gen in digit_gens:
             digits = Digits(passwords, args.results_file, args.salt)
-            results = executor.imap_unordered(digits.heuristic, gen, 10000)
+            results_gens.append(executor.imap_unordered(digits.heuristic, gen, 10000))
+        for results in results_gens:
             for result in results:
                 if result:
                     found.append(result[0][-1])
@@ -90,18 +92,19 @@ def main():
         ### BRUTEFORCE OPERATION ###
         print('[+] Beginning bruteforce attack...')
         # Bruteforce ASCII character cross product generators
+        results_gens = []
         brute_perm_gens = {n : itertools.product(tuple(string.printable),
                                                  repeat=n)
                            for n in range(1, 7)}
-
         for n, gen in brute_perm_gens.items():
-            print('[*] Bruteforcing passwords of length {}'.format(n))
             bruteforcer = Bruteforcer(passwords, args.results_file, args.salt)
-            results = executor.imap_unordered(bruteforcer.bruteforce, gen,
-                                              100000)
+            results_gens.append(executor.imap_unordered(bruteforcer.bruteforce,
+                                gen, 100000))
 
+        for results in results_gens:
             for result in results:
                 if result:
+                    found.append(result[0][-1])
                     print('[*] Bruteforced: {}'.format(result[0][0]))
         print('[-] Bruteforce attack completed.')
 
