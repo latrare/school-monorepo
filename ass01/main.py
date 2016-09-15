@@ -77,7 +77,7 @@ def main():
         with open('resources/leet.txt') as dictionary_leet:
             leet = Leet(passwords, args.results_file, args.salt)
             results = executor.imap_unordered(leet.heuristic,
-                                              iter(dictionary_leet), 10000)
+                                              iter(dictionary_leet), 1000)
             for result in results:
                 if result:
                     print('[*] Leet dictionary found: {}'.format(result[0][0]))
@@ -110,16 +110,13 @@ def main():
         print('[+] Beginning bruteforce attack...')
         # Bruteforce ASCII character cross product generators
         results_all = []
-        brute_perm_gens = {n : itertools.product(tuple(string.printable),
+        brute_perm_gens = {n : itertools.product(tuple(string.ascii_lowercase + string.digits),
                                                  repeat=n)
                            for n in range(1, 7)}
         for n, gen in brute_perm_gens.items():
-            chunksize = 1000
-            if n > 4:
-                chunksize = 10000
             bruteforcer = Bruteforcer(passwords, args.results_file, args.salt)
             results_all.append((n, executor.imap_unordered(bruteforcer.bruteforce,
-                                                           gen, chunksize)))
+                                                           gen, 1000)))
 
         for results in results_all:
             if results:
