@@ -8,9 +8,17 @@ def main():
     dictionary = parse_dictionary_file('resources/john.txt')
     with open('resources/leet.txt', 'w+') as f:
         with multiprocessing.Pool(multiprocessing.cpu_count() * 2) as pool:
-            dictionary = sorted(dictionary, key=lambda x: len(x))
+            dictionary = filter(lambda x: len(x) < 7, sorted(dictionary, key=lambda x: len(x)))
             for result in pool.imap_unordered(leet_mutate, dictionary):
                 pass
+
+    lines = None
+    with open('resources/leet.txt', 'r') as f:
+        lines = set(f.readlines())
+
+    with open('resources/leet.txt', 'w+') as f:
+        for line in lines:
+            f.write(line)
 
 
 if __name__ == '__main__':
