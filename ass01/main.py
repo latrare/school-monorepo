@@ -1,212 +1,90 @@
-# Password cracker
-# Structure: master thread pool controller that wraps the thread creation, threads report back to controller, controller displays: progress information, duration information, and thread diagnostics
 import argparse
-import concurrent, concurrent.futures
-from datetime import datetime
 import itertools
-import hashlib
-import logging
 import multiprocessing
 import os
-import threading
 import string
-import sys
+import threading
 import time
+from datetime import datetime
 
-
-class TreeNode:
-    def __init__(self, v):
-        self.value = v
-        self.children = []
-
-
-def dictionary_worker(resfile, passwords, dictionary, salt=None):
-    cracked = []
-    for h in passwords:
-        if h in dictionary:
-            for uid in passwords[h]:
-                cracked.append((dictionary[h], uid, h))
-                write_result(resfile, dictionary[h], uid, h)
-    return cracked
-
-
-def bruteforce_worker(resfile, passwords, trial, salt=None):
-    cracked = []
-    for password in trial:
-        password = ''.join(password) # Necessary due to how permutations returns
-        if salt:
-            password += salt
-        # TODO: Fix code duplication
-        sha256 = hashlib.sha256(password.encode('utf-8')).hexdigest()
-        if sha256 in passwords:
-            for uid in passwords[sha256]:
-                cracked.append(password, uid, sha256)
-                write_result(resfile, password, uid, sha256)
-    return cracked
-
-
-def traverse_build(root, word, leet, path='', paths=[]):
-    if word:
-        children = [TreeNode(r) for r in leet[word[0]]]
-        children.extend([TreeNode(word[0]), TreeNode(word[0].swapcase())])
-        root.children = children
-        for node in root.children:
-            traverse_build(node, word[1:], leet, path + node.value, paths)
-    else:
-        paths.append(path)
-    return paths
-
-
-def leet_mutation_generator(word):
-    'Generates simple, single-character replacement, 1337 versions of a given word'
-    # TODO: Source where you got the substitutions from
-    # XXX: When adding children, add the opposite case character to the child nodes
-    leet = {
-        'a': ['4', '@', '/-\\', '/_\\'],
-        'b': ['8', '|3', '|o'],
-        'c': ['(', '[', '{', '<', 'k', 's', 'K', 'S'],
-        'd': ['|)', 'o|', '|>', '<|', '|)', '|}', '|]'],
-        'e': ['3'],
-        'f': ['ph', '|='],
-        'g': ['(', '9', '6', '[', '-', '[+'],
-        'h': ['#', '|-|', '[-]', '{-}', '|=|', '[=]', '{=}', ']-[', '}-{', '(-)', ')-('],
-        'i': ['1', 'l', '|', '!', ']['],
-        'j': ['_|'],
-        'k': ['|<', '/<', '\\<', '|{', '1<'],
-        'l': ['1', '|_', '|'],
-        'm': ['|\\/|', '^^', '/\\/\\', "|'|'|", '(\\/)', '/\\', '/|\\', '/v\\'],
-        'n': ['|\\|', '/\\/', '|\\\\|', '/|/'],
-        'o': ['()', '[]', '{}', '0'],
-        'p': ['|2', '|D', '|o', '|O', '|>'],
-        'q': ['O', '9', '(,)', 'kw'],
-        'r': ['|2', '|Z', '|?', '12'],
-        's': ['5', '$'],
-        't': ['+', "']['", '7'],
-        'u': ['|_|'],
-        'v': ['|/', '\\|', '\\/', '/'],
-        'w': ['\\/\\/', '\\|\\|', '|/|/', '\\|/', '\\^/', '//'],
-        'x': ['><', '}{'],
-        'y': ['`/', "'/", 'j'],
-        'z': ['2', '(/)'],
-        '0': ['O', '()'],
-        '1': ['L', 'I', '|', ']['],
-        '2': ['Z'],
-        '3': ['E'],
-        '4': ['A'],
-        '5': ['S'],
-        '6': ['G'],
-        '7': ['T'],
-        '8': ['B'],
-        '9': ['G']
-    }
-
-    # Build the tree
-    root = TreeNode(None)
-    return traverse_build(root, word, leet)
-
-
-def write_result(resfile, plaintext, uid, sha256):
-    with open(resfile, 'a+') as result:
-        result.write('{}::{}::{}\n'.format(plaintext, uid, sha256))
+from cracker.workers import *
+from cracker.files import *
+from cracker.util import *
 
 
 def main():
-    print(leet_mutation_generator("oat"))
-    return
     # Parse arguments
     parser = argparse.ArgumentParser(description='Password cracker.')
-    parser.add_argument('password_file', help='The file to retrieve the password hashes to crack.')
-    parser.add_argument('results_file', help='The file to store the results of the cracking into.')
-    parser.add_argument('timeout', type=int, help='Number of seconds that cracker should run.')
-    parser.add_argument('salt', nargs='?', help='Salt to be appended to passwords before hashing')
+    parser.add_argument('password_file',
+                        help='The file to retrieve the sha256 hashes to crack.')
+    parser.add_argument('results_file',
+                        help='The file to store the results into.')
+    parser.add_argument('timeout', type=int,
+                        help='Number of seconds that cracker should run.')
+    parser.add_argument('salt', nargs='?', default=None,
+                        help='Salt to be appended to passwords before hashing')
 
     args = parser.parse_args()
-
     if not os.path.exists(args.password_file):
         sys.exit('[-] Password file given does not exist.')
-
     if not os.path.exists(args.results_file):
         # Create file if it does not yet exist
         with open(args.results_file, 'w+'):
             pass
-
     if not args.salt:
         print('[-] No salt argument provided. Passwords will not be salted.')
 
     # Parse in password hash list
-    passwords = dict()
-    with open(args.password_file) as passfile:
-        for password in passfile:
-            if password.strip():
-                _, pid, phash = password.split('::')
-                phash = phash.strip()
-                if not passwords.get(phash.lower()):
-                    passwords[phash.lower()] = [pid,]
-                else:
-                    passwords[phash.lower()].append(pid)
-
+    passwords = parse_password_file(args.password_file)
     if not passwords:
         sys.exit('[-] Password file given is empty.')
-
     print('[*] {:,} passwords loaded from file.'.format(len(passwords)))
 
     # Clear results file
     with open(args.results_file, 'w+'):
         pass
 
+    # Load in dictionary
+    dictionary = parse_dictionary_file('john.txt')
+    dictionary = dictionary_generate_sha256(dictionary)
+
     # Mark start time
     start = time.time()
     print('[+] Start datetime: {}'.format(datetime.today().isoformat()))
 
-    cpus = multiprocessing.cpu_count()
-    # TODO: Place this whole manager in a separate thread so main thread can keep track of time
-    with multiprocessing.Pool(cpus) as pool:
-        # 1. Dictionary attack
-        print('[*] Preparing dictionary attack...')
-        with open('john.txt') as dfile:
-            dict_hashes = dict()
-            for p in dfile:
-                p = p.strip()
-                if args.salt:
-                    p += args.salt
-                dict_hashes[hashlib.sha256(p.encode('utf-8')).hexdigest()] = p
-        print('[*] {:,} hashes pre-computed for dictionary entries.'.format(len(dict_hashes)))
+    cpu_count = multiprocessing.cpu_count()
+    # Create process executor for concurrency support
+    with multiprocessing.Pool(cpu_count * 2) as executor:
+        ### DICTIONARY OPERATION ###
+        print('[+] Beginning dictionary attack...')
+        found = []
+        for sha256 in passwords:
+            if sha256 in dictionary:
+                print('[*] Dictionary found: {}'.format(dictionary[sha256]))
+                found.append(sha256)
+                for uid in passwords[sha256]:
+                    write_result(args.results_file, dictionary[sha256], uid, sha256)
 
-        print('[+] Running dictionary attack...')
-        cracked_dict = pool.apply(dictionary_worker, (args.results_file, passwords, dict_hashes, args.salt))
-        print('[+] {:,} passwords found using dictionary.'.format(len(cracked_dict)))
+        # Delete entries found from password search dictionary
+        for sha256 in found:
+            del passwords[sha256]
+        print('[-] Dictionary attack completed.')
 
-        for h in cracked_dict:
-            del passwords[h[-1]]
-        print('[*] {:,} passwords remaining.'.format(len(passwords)))
+        ### BRUTEFORCE OPERATION ###
+        print('[+] Beginning bruteforce attack...')
+        # Bruteforce ASCII character cross product generators
+        brute_perm_gens = {n : itertools.product(tuple(string.printable), repeat=n)
+                           for n in range(1, 7)}
 
-        # 2. 1337speak dictionary attack
-        print('[*] Preparing 1337 dictionary attack...')
-        print('[*] {:,} hashes pre-computed for 1337 dictionary substitutions.')
-        print('[+] Running 1337-dictionary attack...')
-        print('[+] {:,} passwords found using 1337-dictionary.')
+        for n, gen in brute_perm_gens.items():
+            print('[*] Bruteforcing passwords of length {}'.format(n))
+            bruteforcer = Bruteforcer(passwords, args.results_file, salt=args.salt)
+            results = executor.imap_unordered(bruteforcer.bruteforce, gen, 100000)
 
-        # 3. Bruteforce
-'''
-        for n in range(1, 7):
-            print('[+] Bruteforcing passwords of length: {}'.format(n))
-
-            processes = []
-            perms = itertools.product(list(string.printable), repeat=n)
-            slicesize = ((len(string.printable) ** n) // cpus) // (10 ** (n - 1))
-            while True:
-                s = list()
-                try:
-                    for x in range(slicesize):
-                        s.append(next(perms))
-                except StopIteration:
-                    break
-                proc = pool.apply_async(bruteforce_worker, (args.results_file, passwords, tuple(s), args.salt))
-                processes.append(proc)
-
-            for p in processes:
-                p.get()
-'''
+            for result in results:
+                if result:
+                    print('[*] Bruteforced: {}'.format(result))
+        print('[-] Bruteforce attack completed.')
 
 
 if __name__ == '__main__':
