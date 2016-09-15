@@ -14,7 +14,8 @@ def parse_password_file(path):
 def parse_dictionary_file(path, salt=None):
     with open(path) as f:
         for line in f:
-            if line.strip():
+            line = line.strip()
+            if line:
                 if salt:
                     yield line + salt
                 else:
