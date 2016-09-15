@@ -71,25 +71,19 @@ def main():
         print('[-] Dictionary attack completed.')
 
         ### LEET DICTIONARY OPERATION ###
-        """
         print('[+] Beginning 1337 dictionary heuristic attack...')
         found = []
         with open('resources/leet.txt') as dictionary_leet:
-            for leet in dictionary_leet:
-                leet = leet.strip() + args.salt if args.salt else leet.strip()
-                # Have to do this progressively as the file is massive
-                sha256 = hashlib.sha256(leet.encode('utf-8'))
-                if sha256 in passwords:
-                    print('[*] Leet dictionary found: {}'.format(leet))
-                    found.append(sha256)
-                    for uid in passwords[sha256]:
-                        write_result(args.results_file, dictionary[sha256], uid,
-                                     sha256)
+            leet = Leet(passwords, args.results_file, args.salt)
+            results = executor.imap_unordered(leet.heuristic, iter(dictionary_leet), 100000)
+            for result in results:
+                if result:
+                    print('[*] Leet dictionary found: {}'.format(result[0][0]))
+                    found.append(result[0][-1])
         # Remove found entries from unknown passwords
         for sha256 in found:
             del passwords[sha256]
         print('[-] 1337 dictionary heuristic attack completed.')
-        """
 
         ### DIGIT HEURISTIC OPERATION ###
         print('[+] Beginning digit heuristic attack...')
