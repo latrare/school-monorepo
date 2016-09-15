@@ -48,8 +48,6 @@ def main():
     # Load in dictionary
     dictionary = generate_dictionary(
                     parse_dictionary_file('resources/john.txt'), salt=args.salt)
-    dictionary_leet = generate_dictionary(
-                    parse_dictionary_file('resources/leet.txt'), salt=args.salt)
 
     # Mark start time
     start = time.time()
@@ -73,20 +71,25 @@ def main():
         print('[-] Dictionary attack completed.')
 
         ### LEET DICTIONARY OPERATION ###
+        """
         print('[+] Beginning 1337 dictionary heuristic attack...')
         found = []
-        for sha256 in passwords:
-            if sha256 in dictionary_leet:
-                print('[*] Leet dictionary found: {}'
-                      .format(dictionary_leet[sha256]))
-                found.append(sha256)
-                for uid in passwords[sha256]:
-                    write_result(args.results_file, dictionary[sha256], uid,
-                                 sha256)
+        with open('resources/leet.txt') as dictionary_leet:
+            for leet in dictionary_leet:
+                leet = leet.strip() + args.salt if args.salt else leet.strip()
+                # Have to do this progressively as the file is massive
+                sha256 = hashlib.sha256(leet.encode('utf-8'))
+                if sha256 in passwords:
+                    print('[*] Leet dictionary found: {}'.format(leet))
+                    found.append(sha256)
+                    for uid in passwords[sha256]:
+                        write_result(args.results_file, dictionary[sha256], uid,
+                                     sha256)
         # Remove found entries from unknown passwords
         for sha256 in found:
             del passwords[sha256]
         print('[-] 1337 dictionary heuristic attack completed.')
+        """
 
         ### DIGIT HEURISTIC OPERATION ###
         print('[+] Beginning digit heuristic attack...')

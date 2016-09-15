@@ -1,13 +1,13 @@
 from ..files import write_result
 
 
-LEET = {
-    '''1337 substitution dictionary, taken from the following sites
-    (thank you!):
+'''1337 substitution dictionary, taken from the following sites
+(thank you!):
 
-        * http://www.securepasswords.net/site/ASCII-1337-Alphabet/page/23.html
-        * <website>
-    '''
+    * http://www.securepasswords.net/site/ASCII-1337-Alphabet/page/23.html
+    * <website>
+'''
+LEET = {
     'a': ['4', '@', '/-\\', '/_\\'],
     'b': ['8', '|3', '|o'],
     'c': ['(', '[', '{', '<', 'k', 's', 'K', 'S'],
@@ -48,25 +48,29 @@ LEET = {
 
 
 class TreeNode:
-    def __init__(self, letter, remaining):
-        this.letter = letter
-        this.remaining = remaining
+    def __init__(self, letter):
+        self.letter = letter
+        self.children = []
 
 
 def __traverse_mutation_tree(root, word, path='', paths=[]):
     if word:
-        children = [TreeNode(r) for r in LEET[word[0]]]
-        children.extend([TreeNode(word[0]), TreeNode(word[0].swapcase())])
-        root.children = children
+        try:
+            root.children = [TreeNode(r) for r in LEET[word[0].lower()]]
+            root.children.extend([TreeNode(word[0]), TreeNode(word[0].swapcase())])
+        except KeyError:
+            root.children.append(TreeNode(word[0]))
         for node in root.children:
             __traverse_mutation_tree(node, word[1:], path + node.letter, paths)
     else:
-        paths.append(paths)
+        paths.append(path)
     return paths
 
 
-def leet_mutate(word, outfile):
-    root = TreeNode(None)
-    with open(outfile, 'a+') as f:
+def leet_mutate(word):
+    with open('resources/leet.txt', 'a') as f:
+        root = TreeNode(None)
         for path in __traverse_mutation_tree(root, word):
-            f.write('{}\n'.format(path))
+            if path.strip():
+                f.write(path + '\n')
+    return None
