@@ -3,7 +3,7 @@ import hashlib
 from ..files import write_result
 
 
-def dictionary_generate_sha256(dictionary, salt=None):
+def generate_dictionary(dictionary, salt=None):
     'Generates dictionary of sha256 hashes for list of dictionary words'
     realdict = dict()
     for entry in dictionary:
