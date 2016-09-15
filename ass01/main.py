@@ -47,7 +47,7 @@ def main():
 
     # Load in dictionary
     dictionary = parse_dictionary_file('resources/john.txt')
-    dictionary = dictionary_generate_sha256(dictionary)
+    dictionary = dictionary_generate_sha256(dictionary, salt=args.salt)
 
     # Mark start time
     start = time.time()

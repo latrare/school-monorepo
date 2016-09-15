@@ -3,10 +3,11 @@ import hashlib
 from ..files import write_result
 
 
-def dictionary_generate_sha256(dictionary):
+def dictionary_generate_sha256(dictionary, salt=None):
     'Generates dictionary of sha256 hashes for list of dictionary words'
     realdict = dict()
     for entry in dictionary:
+        entry = entry + salt if salt else entry
         sha256 = hashlib.sha256(entry.encode('utf-8')).hexdigest()
         realdict[sha256] = entry
 
