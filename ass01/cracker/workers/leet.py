@@ -1,9 +1,13 @@
-'''1337 substitution dictionary, taken from the following sites (thank you!):
+from ..files import write_result
 
-    * http://www.securepasswords.net/site/ASCII-1337-Alphabet/page/23.html
-    * <website>
-'''
+
 LEET = {
+    '''1337 substitution dictionary, taken from the following sites
+    (thank you!):
+
+        * http://www.securepasswords.net/site/ASCII-1337-Alphabet/page/23.html
+        * <website>
+    '''
     'a': ['4', '@', '/-\\', '/_\\'],
     'b': ['8', '|3', '|o'],
     'c': ['(', '[', '{', '<', 'k', 's', 'K', 'S'],
@@ -49,11 +53,20 @@ class TreeNode:
         this.remaining = remaining
 
 
-def build_mutation_tree():
-    'Create the tree that will generate the 1337 mutations of words form a dictionary'
-    pass
+def __traverse_mutation_tree(root, word, path='', paths=[]):
+    if word:
+        children = [TreeNode(r) for r in LEET[word[0]]]
+        children.extend([TreeNode(word[0]), TreeNode(word[0].swapcase())])
+        root.children = children
+        for node in root.children:
+            __traverse_mutation_tree(node, word[1:], path + node.letter, paths)
+    else:
+        paths.append(paths)
+    return paths
 
 
-def traverse_mutation_tree():
-    'Traverse the tree and form the 1337 mutations'
-    pass
+def leet_mutate(word, outfile):
+    root = TreeNode(None)
+    with open(outfile, 'a+') as f:
+        for path in __traverse_mutation_tree(root, word):
+            f.write('{}\n'.format(path))

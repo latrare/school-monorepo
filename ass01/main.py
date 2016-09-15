@@ -46,8 +46,10 @@ def main():
         pass
 
     # Load in dictionary
-    dictionary = parse_dictionary_file('resources/john.txt')
-    dictionary = dictionary_generate_sha256(dictionary, salt=args.salt)
+    dictionary = generate_dictionary(
+                    parse_dictionary_file('resources/john.txt'), salt=args.salt)
+    dictionary_leet = generate_dictionary(
+                    parse_dictionary_file('resources/leet.txt'), salt=args.salt)
 
     # Mark start time
     start = time.time()
@@ -69,6 +71,22 @@ def main():
         for sha256 in found:
             del passwords[sha256]
         print('[-] Dictionary attack completed.')
+
+        ### LEET DICTIONARY OPERATION ###
+        print('[+] Beginning 1337 dictionary heuristic attack...')
+        found = []
+        for sha256 in passwords:
+            if sha256 in dictionary_leet:
+                print('[*] Leet dictionary found: {}'
+                      .format(dictionary_leet[sha256]))
+                found.append(sha256)
+                for uid in passwords[sha256]:
+                    write_result(args.results_file, dictionary[sha256], uid,
+                                 sha256)
+        # Remove found entries from unknown passwords
+        for sha256 in found:
+            del passwords[sha256]
+        print('[-] 1337 dictionary heuristic attack completed.')
 
         ### DIGIT HEURISTIC OPERATION ###
         print('[+] Beginning digit heuristic attack...')
@@ -97,15 +115,9 @@ def main():
                                                  repeat=n)
                            for n in range(1, 7)}
         for n, gen in brute_perm_gens.items():
-            if n < 4:
-                chunksize = 10000
-            elif n == 4:
-                chunksize = 100000
-            else:
-                chunksize = 1000000
             bruteforcer = Bruteforcer(passwords, args.results_file, args.salt)
             results_all.append(executor.imap_unordered(bruteforcer.bruteforce,
-                                gen, chunksize))
+                                gen, 100000))
 
         for results in results_all:
             for result in results:
