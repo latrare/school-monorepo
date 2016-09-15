@@ -1,11 +1,12 @@
 import argparse
+from datetime import datetime
 import itertools
 import multiprocessing
 import os
 import string
 import threading
 import time
-from datetime import datetime
+import sys
 
 from cracker.workers import *
 from cracker.files import *
@@ -45,7 +46,7 @@ def main():
         pass
 
     # Load in dictionary
-    dictionary = parse_dictionary_file('john.txt')
+    dictionary = parse_dictionary_file('resources/john.txt')
     dictionary = dictionary_generate_sha256(dictionary)
 
     # Mark start time
@@ -76,8 +77,7 @@ def main():
                           for n in range(1, 7))
         for gen in digit_gens:
             digits = Digits(passwords, args.results_file, args.salt)
-            results = executor.imap_unordered(digits.heuristic, gen, 100000)
-
+            results = executor.imap_unordered(digits.heuristic, gen, 10000)
             for result in results:
                 if result:
                     found.append(result[0][-1])
