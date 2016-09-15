@@ -64,26 +64,45 @@ def main():
                 found.append(sha256)
                 for uid in passwords[sha256]:
                     write_result(args.results_file, dictionary[sha256], uid, sha256)
-
-        # Delete entries found from password search dictionary
+        # Remove found entries from unknown passwords
         for sha256 in found:
             del passwords[sha256]
         print('[-] Dictionary attack completed.')
 
+        ### DIGIT HEURISTIC OPERATION ###
+        print('[+] Beginning digit heuristic attack...')
+        found = []
+        digit_gens = list(itertools.product(list(string.digits), repeat=n)
+                          for n in range(1, 7))
+        for gen in digit_gens:
+            digits = Digits(passwords, args.results_file, args.salt)
+            results = executor.imap_unordered(digits.heuristic, gen, 100000)
+
+            for result in results:
+                if result:
+                    found.append(result[0][-1])
+                    print('[*] Digit heuristic found: {}'.format(result[0][0]))
+        # Remove found entries from unknown passwords
+        for sha256 in found:
+            del passwords[sha256]
+        print('[-] Digit heuristic attack completed.')
+
         ### BRUTEFORCE OPERATION ###
         print('[+] Beginning bruteforce attack...')
         # Bruteforce ASCII character cross product generators
-        brute_perm_gens = {n : itertools.product(tuple(string.printable), repeat=n)
+        brute_perm_gens = {n : itertools.product(tuple(string.printable),
+                                                 repeat=n)
                            for n in range(1, 7)}
 
         for n, gen in brute_perm_gens.items():
             print('[*] Bruteforcing passwords of length {}'.format(n))
-            bruteforcer = Bruteforcer(passwords, args.results_file, salt=args.salt)
-            results = executor.imap_unordered(bruteforcer.bruteforce, gen, 100000)
+            bruteforcer = Bruteforcer(passwords, args.results_file, args.salt)
+            results = executor.imap_unordered(bruteforcer.bruteforce, gen,
+                                              100000)
 
             for result in results:
                 if result:
-                    print('[*] Bruteforced: {}'.format(result))
+                    print('[*] Bruteforced: {}'.format(result[0][0]))
         print('[-] Bruteforce attack completed.')
 
 
