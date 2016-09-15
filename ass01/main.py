@@ -77,7 +77,7 @@ def main():
         with open('resources/leet.txt') as dictionary_leet:
             leet = Leet(passwords, args.results_file, args.salt)
             results = executor.imap_unordered(leet.heuristic,
-                                              iter(dictionary_leet), 100000)
+                                              iter(dictionary_leet), 10000)
             for result in results:
                 if result:
                     print('[*] Leet dictionary found: {}'.format(result[0][0]))
