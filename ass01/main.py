@@ -72,7 +72,7 @@ def main():
         print('[-] Dictionary attack completed.')
 
         ### LEET DICTIONARY OPERATION ###
-        print('[+] Beginning 1337 dictionary heuristic attack...')
+        print('[+] Beginning leet dictionary heuristic attack...')
         found = []
         with open('resources/leet.txt') as dictionary_leet:
             leet = Leet(passwords, args.results_file, args.salt)
@@ -85,7 +85,7 @@ def main():
         # Remove found entries from unknown passwords
         for sha256 in found:
             del passwords[sha256]
-        print('[-] 1337 dictionary heuristic attack completed.')
+        print('[-] Leet dictionary heuristic attack completed.')
 
         ### DIGIT HEURISTIC OPERATION ###
         print('[+] Beginning digit heuristic attack...')
