@@ -106,6 +106,27 @@ def main():
             del passwords[sha256]
         print('[-] Digit heuristic attack completed.')
 
+        ### DICTIONARY + DIGIT HEURISTIC ###
+        print('[+] Beginning dictionary+digits heuristic attack...')
+        found = []
+        for _, word in dictionary.items():
+            onecombos = itertools.product(list(''.join(t) for t in itertools.product(tuple(string.digits))), [word])
+            twocombos = itertools.product(list(''.join(t) for t in itertools.product(tuple(string.digits), repeat=2)), [word])
+            for first, second in itertools.chain(onecombos, twocombos):
+                prepend = first + second
+                append = second + first
+                for combo in (prepend, append):
+                    sha256 = hashlib.sha256(combo.encode('utf-8'))
+                    if sha256 in passwords:
+                        found.append(sha256)
+                        print('[*] Dictionary+digit heuristic found: {}'.format(combo))
+                        for uid in passwords[sha256]:
+                            write_result(args.results_file, combo, uid, sha256)
+        # Remove found entries from unknown passwords
+        for sha256 in found:
+            del passwords[sha256]
+        print('[-] Dictionary+digits heuristic attack completed.')
+
         ### BRUTEFORCE OPERATION ###
         print('[+] Beginning bruteforce attack...')
         # Bruteforce ASCII character cross product generators
