@@ -16,7 +16,7 @@ class Bruteforcer:
     def bruteforce(self, trial):
         cracked = []
         # Necessary concatenation due to itertools.product() return tuples
-        trial = ''.join(trial) if not self.salt else ''.join(trial) + self.salt
+        trial = ''.join(trial) + self.salt if self.salt else ''.join(trial)
         sha256 = hashlib.sha256(trial.encode('utf-8')).hexdigest()
         if sha256 in self.passwords:
             for uid in self.passwords[sha256]:

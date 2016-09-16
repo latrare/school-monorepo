@@ -17,6 +17,7 @@ def generate_dictionary(dictionary, salt=None):
 def dictionary(trials, dictionary, resfile, salt=None):
     cracked = []
     for trial in trials:
+        trial = trial + salt if salt else trial
         sha256 = hashlib.sha256(trial.encode('utf-8'))
         if sha256 in dictionary:
             cracked.append((trial, uid, sha256))
