@@ -18,23 +18,20 @@ public class Exercise {
 		ApparatusType at = ApparatusType.getRandom();
 		
 		// Determine the duration
-		// (between 0 and 50ms because we have 10,000 clients to get through)
-		int duration = ThreadLocalRandom.current().nextInt(100);
+		// (between 0 and 10ms because we have 10,000 clients to get through)
+		int duration = ThreadLocalRandom.current().nextInt(11);
 		
 		// Now pick random numbers from each weight class below the limits of the gym
-		int small = ThreadLocalRandom.current().nextInt(
-				weight.get(WeightPlateSize.SMALL_3KG) + 1);
-		int medium = ThreadLocalRandom.current().nextInt(
-				weight.get(WeightPlateSize.MEDIUM_5KG) + 1);
-		int large = ThreadLocalRandom.current().nextInt(
-				weight.get(WeightPlateSize.MEDIUM_5KG) + 1);
-		
+		int small = ThreadLocalRandom.current().nextInt(weight.get(WeightPlateSize.SMALL_3KG) + 1);
+		int medium = ThreadLocalRandom.current().nextInt(weight.get(WeightPlateSize.MEDIUM_5KG) + 1);
+		int large = ThreadLocalRandom.current().nextInt(weight.get(WeightPlateSize.LARGE_10KG) + 1);
+				
 		if (small == 0 && medium == 0 && large == 0)
 			return generateRandom(weight);
 		else {
 			// Load up them weights
 			HashMap<WeightPlateSize, Integer> weights = 
-					new HashMap<WeightPlateSize, Integer>();
+				new HashMap<WeightPlateSize, Integer>();
 			weights.put(WeightPlateSize.SMALL_3KG, small);
 			weights.put(WeightPlateSize.MEDIUM_5KG, medium);
 			weights.put(WeightPlateSize.LARGE_10KG, large);

@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Client {
 	private int id;
-	private List<Exercise> routine;
+	private ArrayList<Exercise> routine;
 	
 	public Client(int id) {
 		this.id = id;
@@ -16,8 +15,7 @@ public class Client {
 		routine.add(e);
 	}
 	
-	public static Client generateRandom(int id,
-			Map<WeightPlateSize, Integer> weight) {
+	public static Client generateRandom(int id, Map<WeightPlateSize, Integer> weight) {
 		
 		int exercises = ThreadLocalRandom.current().nextInt(15, 21);
 		Client client = new Client(id);
@@ -31,7 +29,7 @@ public class Client {
 		return id;
 	}
 
-	public List<Exercise> getRoutine() {
+	public ArrayList<Exercise> getRoutine() {
 		return routine;
 	}
 }
