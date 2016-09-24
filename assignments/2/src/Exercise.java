@@ -18,7 +18,7 @@ public class Exercise {
 		ApparatusType at = ApparatusType.getRandom();
 		
 		// Determine the duration
-		// (between 0 and 100ms because we have 10,000 clients to get through)
+		// (between 0 and 50ms because we have 10,000 clients to get through)
 		int duration = ThreadLocalRandom.current().nextInt(100);
 		
 		// Now pick random numbers from each weight class below the limits of the gym

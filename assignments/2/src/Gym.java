@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -47,23 +48,33 @@ public class Gym implements Runnable {
 		// Generate and populate all of the clients
 		clients = new ArrayList<Client>();
 		for (int i = 0; i < GYM_REGISTERED_CLIENTS; i++)
-			clients.add(Client.generateRandom(i, noOfWeightPlates,
-					atSemaphores, weightSemaphores));
+			clients.add(Client.generateRandom(i, noOfWeightPlates));
 	}
 	
 	public void run() {
-		System.out.println("Starting Gym.");
+		System.out.println("Change the sign on the front door to 'OPEN'.");
 		// Setup executor pool
-		System.out.println("Creating executor pool.");
-		BlockingQueue<Runnable> tasks = new SynchronousQueue<Runnable>();
-		executor = new ThreadPoolExecutor(GYM_SIZE, GYM_SIZE, 0,
-				TimeUnit.NANOSECONDS, tasks);
+		executor = Executors.newFixedThreadPool(GYM_SIZE);
 		
 		// Delegate clients to executor pool
-		for (Client c : clients)
-			executor.execute(c);
+		System.out.println("Setting up all the clients to get busy...");
+		for (Client c : clients) {
+			executor.execute(new Runnable() {
+				public void run() {
+				}
+			});
+		}
 		
 		// Wait for everyone to finish before closing down
+		System.out.println("Waiting for clients to finish...");
 		executor.shutdown();
+		
+		try {
+			executor.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Gym is now closed."); 
 	}
 }
