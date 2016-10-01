@@ -13,3 +13,6 @@ tramp
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Ignore results file from assignment 1
+ass01/resources/results.txt
