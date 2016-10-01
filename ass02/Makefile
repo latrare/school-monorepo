@@ -1,10 +1,14 @@
 SHELL:=/bin/bash
 
+clean:
+	find . -type f -name '*.o' | xargs rm -vf
+	rm -vf bin/*
+
 stack:
-	gcc -m64 -z execstack -fno-stack-protector stack/stack_overflow.c
+	gcc -m64 -z execstack -fno-stack-protector stack/stack_overflow.c -o bin/stack_overflow
 
 heap:
-	gcc -m64 -z execstack -fno-stack-protector heap/heap_overflow.c
+	gcc -m64 -z execstack -fno-stack-protector heap/heap_overflow.c -o bin/stack_overflow
 
 hello:
 	gcc -c shellcode/helloworld.s -o bin/helloworld.o
