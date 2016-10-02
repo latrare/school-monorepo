@@ -1,0 +1,108 @@
+Trevor Miranda
+
+I pledge my honor that I have abided by the Stevens Honor System.
+
+
+Doing things
+---
+
+	Basic pre-setup
+
+		1. Edit the exploit/create_exploit.c and uncomment the "ADDRESS"
+		   definition for the program that you're trying to exploit
+		   (stack/heap). Leave only one of the definitions uncommented, of course.
+
+		2. Go back to the base assignment directory
+
+   		3. make all
+
+		To actually generate the exploits and other executables for assigment
+
+   		bin/create_exploit [buffer_size] [file_with_shellcode] [output_file]
+
+   		Buffer size is the size of the buffer that is required to overwrite
+		EIP/RIP. For stack this was 264, for heap this was 262.
+
+   		The shellcode files are the files in bin/ that end in ".sc"
+
+   		The output file will be the file filled with the binary data that is
+		the exploit that is to be piped into the stack_overflow and
+		heap_overflow executables (depending on what ADDRESS you compiled with).
+
+
+Investigation
+---
+
+		The investigation bit was pretty easy as we'd gone over how these
+	overflows work during class and it was obvious where each program was
+	vulnerable. For the stack it was obvious because there was really only one
+	function that operated directly on the overflowed buffer and for the heap it
+	was even more obvious because there was a comment that told us exactly where
+	the program was vulnerable.
+
+		From there, the investigation began with testing to see how many
+	characters needed to be inserted into the buffer to result in a change to
+	RDI/RIP. I found that it took 264 characters to overflow the stack-based
+	buffer and 262 to overflow the heap-based buffer. I specifically used
+	metasploit's pattern_create.rb to create large buffers of unique, random
+	characters so that I could just search for the value that overwrote RIP/EIP
+	in the generated string to see the size of the buffer needed to accomplish
+	the exploit more easily. This program only generated a random string, I did
+	the GDB analysis to get the offsets myself.
+
+		The final and most important part of the examination was determining the
+	base addresses for the buffer that we were writing into for the stack and
+	the heap. That was relatively easy as well. I simply opened the program in
+	gdb with the relevant test.txt file, set breakpoints for the functions that
+	were vulnerable and stepped through the programs in "layout asm" mode until
+	the vulnerable calls were set to execute. At that point I would check the
+	registers being setup to be passed to the functions to see which one held the
+	address for the buffer I needed and recorded the address. Later on I would
+	add some offsets to those addresses to avoid jumping into e.g. "echo: ", and
+	instead into my NOP sled.
+
+
+Creating the shellcode
+---
+
+		The shellcode took quite a bit of time. I didn't realize immediately
+	that getting compiled shellcode without NULLs can be a bit of a challenge,
+	mostly because I forgot that alignment was so important when compiling asm.
+	These concerns are usually not in my mind when writing something like C.
+
+		As I am personally interested in reverse engineering, I knew most of
+	what to do once I identified the syscalls I needed to perform to print the
+	string and to pop the shell. Xor's took care of zero-ing out registers
+	without nulls, subtractions of large numbers that filled the operand space
+	fully to get specific values into registers without the nulls that come with
+	certain arrangements of push's. I felt it was just easier to do these math
+	operations because as I discovered during the shellcode development process,
+	it's incredibly finicky and using push's was causing me issues.
+
+		My biggest challenge was getting the string into memory without NULLs.
+	It took quite a few hours of research to figure out that a specific
+	arrangement of jmp and call would generate a jmp short, no NULLs
+	(unlike simply calling _start at the start which created a callq which has
+	NULLs) and that as a result of how the AT&T ".ascii" operator worked, the
+	strings I needed to print and for execve were on the stack so a simple pop
+	of the stack register gave me my necessary string arguments with no NULLs.
+
+	   I figured out what numbers were required for each syscall by using
+	various tables online that had the integer I needed to pass to get the
+	function I needed and which registers were used for arguments, which made
+	things much easier to get through.
+
+
+Tools created
+---
+
+		Luckily, as a result of my prior CTF and reversing experience, I didn't
+	have to create too many new tools. The only new tool that I had to create,
+	because it would be against the assignment to just use a pre-made tool, was
+	a tool that was create a buffer with a NOP sled, add the shellcode into it,
+	and append the address that would later overwrite RIP/EIP.
+
+	I did that personally, and it can be found in bin/create_exploit.c
+
+	Instructions for use are found using the -h flag or at the top of this
+	file.
