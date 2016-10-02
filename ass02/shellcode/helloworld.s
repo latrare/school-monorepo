@@ -13,13 +13,13 @@ code:
 	sub $0x11111111, %rdi	# write(1, ...
 	mov $0x1111111F, %rdx
 	sub $0x11111111, %rdx
-	syscall				# interrupt 80 -> syscall
+	syscall			# interrupt 80 -> syscall
 	# write(1, $rsi, 14) -> man 2 write
 
 	mov $0x1111114D, %rax
-	sub $0x11111111, %rax			# subtract to get 60 -> exit()
-	xor %rdi, %rdi				# zero out rdi for exit(0)
-	syscall					# interrupt 80 -> syscall
+	sub $0x11111111, %rax	# subtract to get 60 -> exit()
+	xor %rdi, %rdi		# zero out rdi for exit(0)
+	syscall			# interrupt 80 -> syscall
 	# exit(0) -> man 2 exit
 
 string:
