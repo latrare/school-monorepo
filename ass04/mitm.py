@@ -62,11 +62,11 @@ def handle_client_initiation(connection, address):
                             pass
 
                     if clbuff:
-                        log.write('From {}:\n---\n{}\n\n'.format(clsslcon.getsockname(), str(clbuff)))
+                        log.write('From {}:\n---\n{}\n\n'.format(clsslcon.getsockname(), clbuff))
                         log.flush()
 
                     if svbuff:
-                        log.write('From {}:\n---\n{}\n\n'.format(svsslcon.getsockname(), str(svbuff)))
+                        log.write('From {}:\n---\n{}\n\n'.format(svsslcon.getsockname(), svbuff))
                         log.flush()
 
                     for writer in writers:
