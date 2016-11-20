@@ -1,0 +1,11 @@
+An attacker would require a certificate signed with the same private key as the key used to sign the target server's certificate. Specifically, the CA (Certificate Authority) that issued the certificate to the target server must have signed the proxy certificate.
+
+If it has not and the certificate is self-signed by the proxy operator, a user that is properly validating the certificate and checking the CA for the validity of the certificate would be told that the certificate is invalid. At which point, the client would become aware that they were being targeted by a MitM server and could choose to abort the intended connection.
+
+The design choices were rather straightforward. First, a plaintext socket needed to be created so that the client could send the initial CONNECT request. After that had been done, the proxy re-negotiated the connection so that the connection between the proxy and client was through SSL. However, because the client was unable to verify the authenticity of the certificate, it was unable to detect that the certificate it encrypted its connection with was not in fact the certificate that the server properly had.
+
+Once the client-proxy connection was established, the connection to the server was made in a proxy-server SSL connection.
+
+From this point, the proxy simply ferried client requests to the server and server requests to the client, simultaneously writing those captured requests and responses to a file.
+
+A multiprocessing and select() approach was used to accept multiple clients and be able to simultaneously receive and respond to the server and the client without a restriction on order.
