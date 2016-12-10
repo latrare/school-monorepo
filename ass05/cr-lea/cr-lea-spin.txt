@@ -1,0 +1,43 @@
+$ spin -s cr-lea.pml
+---
+				MSC : 5
+                       MSC : 3
+ 45:	proc  4 (nnode:1) cr-lea.pml:19 Send one,3	-> queue 5 (out)
+                           MSC : 2
+ 47:	proc  2 (nnode:1) cr-lea.pml:19 Send one,5	-> queue 3 (out)
+           MSC : 4
+ 49:	proc  1 (nnode:1) cr-lea.pml:19 Send one,4	-> queue 2 (out)
+ 50:	proc  5 (nnode:1) cr-lea.pml:19 Send one,2	-> queue 1 (out)
+                   MSC : 1
+ 61:	proc  5 (nnode:1) cr-lea.pml:27 Send two,3	-> queue 1 (out)
+ 65:	proc  3 (nnode:1) cr-lea.pml:19 Send one,1	-> queue 4 (out)
+ 72:	proc  1 (nnode:1) cr-lea.pml:27 Send two,2	-> queue 2 (out)
+ 77:	proc  2 (nnode:1) cr-lea.pml:27 Send two,4	-> queue 3 (out)
+ 79:	proc  4 (nnode:1) cr-lea.pml:27 Send two,1	-> queue 5 (out)
+ 91:	proc  3 (nnode:1) cr-lea.pml:27 Send two,5	-> queue 4 (out)
+121:	proc  3 (nnode:1) cr-lea.pml:42 Send one,5	-> queue 4 (out)
+125:	proc  5 (nnode:1) cr-lea.pml:42 Send one,3	-> queue 1 (out)
+128:	proc  4 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 5 (out)
+139:	proc  1 (nnode:1) cr-lea.pml:34 Send one,3	-> queue 2 (out)
+148:	proc  2 (nnode:1) cr-lea.pml:34 Send one,3	-> queue 3 (out)
+155:	proc  5 (nnode:1) cr-lea.pml:27 Send two,5	-> queue 1 (out)
+162:	proc  3 (nnode:1) cr-lea.pml:27 Send two,3	-> queue 4 (out)
+165:	proc  1 (nnode:1) cr-lea.pml:47 Send two,5	-> queue 2 (out)
+167:	proc  4 (nnode:1) cr-lea.pml:47 Send two,3	-> queue 5 (out)
+175:	proc  2 (nnode:1) cr-lea.pml:47 Send two,5	-> queue 3 (out)
+186:	proc  5 (nnode:1) cr-lea.pml:42 Send one,5	-> queue 1 (out)
+193:	proc  1 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 2 (out)
+203:	proc  2 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 3 (out)
+208:	proc  3 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 4 (out)
+213:	proc  4 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 5 (out)
+220:	proc  5 (nnode:1) cr-lea.pml:31 Send winner,5	-> queue 1 (out)
+          MSC: LOST
+227:	proc  1 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 2 (out)
+              MSC: LEADER
+237:	proc  2 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 3 (out)
+                  MSC: LOST
+245:	proc  3 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 4 (out)
+                      MSC: LOST
+253:	proc  4 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 5 (out)
+                          MSC: LOST
+6 processes created
