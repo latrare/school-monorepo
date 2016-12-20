@@ -1,0 +1,399 @@
+2013-08-15T20:16:51.233-04:00| vthread-3| I120: Log for VMware Workstation pid=6280 version=8.0.1 build=build-528992 option=Release
+2013-08-15T20:16:51.233-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-15T20:16:51.233-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-15T20:16:51.233-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-15T20:16:51.218-04:00| vthread-3| I120: Msg_Reset:
+2013-08-15T20:16:51.218-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-15T20:16:51.218-04:00| vthread-3| I120: ----------------------------------------
+2013-08-15T20:16:51.218-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-15T20:16:51.220-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-15T20:16:51.235-04:00| vthread-3| I120: Started, process id = 6280
+2013-08-15T20:16:51.235-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.6260.41.0
+2013-08-15T20:16:51.235-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.6260.18467.1
+2013-08-15T20:16:51.235-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-15T20:16:51.289-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-15T20:16:51.289-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-15T20:16:51.289-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-15T20:16:52.742-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.6260.18467.1" ...
+2013-08-15T20:18:56.663-04:00| vthread-3| I120: Mutex signalled
+2013-08-15T20:18:56.663-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-15T20:18:57.298-04:00| vthread-3| I120: Cleaned up OK
+2013-08-15T20:18:57.298-04:00| vthread-3| I120: Exit
+2013-08-15T21:13:30.957-04:00| vthread-3| I120: Log for VMware Workstation pid=2300 version=8.0.1 build=build-528992 option=Release
+2013-08-15T21:13:30.957-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-15T21:13:30.957-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-15T21:13:30.957-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-15T21:13:30.948-04:00| vthread-3| I120: Msg_Reset:
+2013-08-15T21:13:30.948-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-15T21:13:30.948-04:00| vthread-3| I120: ----------------------------------------
+2013-08-15T21:13:30.948-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-15T21:13:30.949-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-15T21:13:30.957-04:00| vthread-3| I120: Started, process id = 2300
+2013-08-15T21:13:30.957-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.4940.41.0
+2013-08-15T21:13:30.957-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.4940.18467.1
+2013-08-15T21:13:30.957-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-15T21:13:30.959-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-15T21:13:30.959-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-15T21:13:30.959-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-15T21:13:31.052-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.4940.18467.1" ...
+2013-08-15T22:07:51.313-04:00| vthread-3| I120: Mutex signalled
+2013-08-15T22:07:51.328-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-15T22:07:51.852-04:00| vthread-3| I120: Cleaned up OK
+2013-08-15T22:07:51.852-04:00| vthread-3| I120: Exit
+2013-08-15T22:13:35.773-04:00| vthread-3| I120: Log for VMware Workstation pid=8060 version=8.0.1 build=build-528992 option=Release
+2013-08-15T22:13:35.773-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-15T22:13:35.773-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-15T22:13:35.773-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-15T22:13:35.764-04:00| vthread-3| I120: Msg_Reset:
+2013-08-15T22:13:35.764-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-15T22:13:35.764-04:00| vthread-3| I120: ----------------------------------------
+2013-08-15T22:13:35.764-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-15T22:13:35.766-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-15T22:13:35.774-04:00| vthread-3| I120: Started, process id = 8060
+2013-08-15T22:13:35.774-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.8048.41.0
+2013-08-15T22:13:35.774-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.8048.18467.1
+2013-08-15T22:13:35.774-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-15T22:13:35.775-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-15T22:13:35.775-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-15T22:13:35.775-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-15T22:13:35.858-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.8048.18467.1" ...
+2013-08-15T23:06:12.373-04:00| vthread-3| I120: Mutex signalled
+2013-08-15T23:06:12.373-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-15T23:06:12.912-04:00| vthread-3| I120: Cleaned up OK
+2013-08-15T23:06:12.912-04:00| vthread-3| I120: Exit
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: Log for VMware Workstation pid=3868 version=8.0.1 build=build-528992 option=Release
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-20T18:17:22.748-04:00| vthread-3| I120: Msg_Reset:
+2013-08-20T18:17:22.748-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-20T18:17:22.748-04:00| vthread-3| I120: ----------------------------------------
+2013-08-20T18:17:22.748-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: Started, process id = 3868
+2013-08-20T18:17:22.758-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.6020.41.0
+2013-08-20T18:17:22.758-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.6020.18467.1
+2013-08-20T18:17:22.758-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-20T18:17:22.788-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-20T18:17:22.788-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-20T18:17:22.788-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-20T18:17:23.560-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.6020.18467.1" ...
+2013-08-20T18:24:08.269-04:00| vthread-3| I120: Mutex signalled
+2013-08-20T18:24:08.269-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-20T18:24:08.779-04:00| vthread-3| I120: Cleaned up OK
+2013-08-20T18:24:08.779-04:00| vthread-3| I120: Exit
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Log for VMware Workstation pid=644 version=8.0.1 build=build-528992 option=Release
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-20T18:30:47.383-04:00| vthread-3| I120: Msg_Reset:
+2013-08-20T18:30:47.383-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-20T18:30:47.383-04:00| vthread-3| I120: ----------------------------------------
+2013-08-20T18:30:47.383-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-20T18:30:47.383-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Started, process id = 644
+2013-08-20T18:30:47.399-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.4828.41.0
+2013-08-20T18:30:47.399-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.4828.18467.1
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-20T18:30:47.399-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-20T18:30:47.492-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.4828.18467.1" ...
+2013-08-20T18:32:19.302-04:00| vthread-3| I120: Mutex signalled
+2013-08-20T18:32:19.302-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-20T18:32:19.812-04:00| vthread-3| I120: Cleaned up OK
+2013-08-20T18:32:19.812-04:00| vthread-3| I120: Exit
+2013-08-21T20:33:07.668-04:00| vthread-3| I120: Log for VMware Workstation pid=3428 version=8.0.1 build=build-528992 option=Release
+2013-08-21T20:33:07.668-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-21T20:33:07.668-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-21T20:33:07.668-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-21T20:33:07.637-04:00| vthread-3| I120: Msg_Reset:
+2013-08-21T20:33:07.637-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-21T20:33:07.637-04:00| vthread-3| I120: ----------------------------------------
+2013-08-21T20:33:07.637-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-21T20:33:07.637-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-21T20:33:07.668-04:00| vthread-3| I120: Started, process id = 3428
+2013-08-21T20:33:07.668-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.3876.41.0
+2013-08-21T20:33:07.668-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.3876.18467.1
+2013-08-21T20:33:07.668-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-21T20:33:07.684-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-21T20:33:07.684-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-21T20:33:07.684-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-21T20:33:08.448-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.3876.18467.1" ...
+2013-08-21T20:50:48.315-04:00| vthread-3| I120: Mutex signalled
+2013-08-21T20:50:48.315-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-21T20:50:48.965-04:00| vthread-3| I120: Cleaned up OK
+2013-08-21T20:50:48.965-04:00| vthread-3| I120: Exit
+2013-08-25T11:32:07.630-04:00| vthread-3| I120: Log for VMware Workstation pid=6076 version=8.0.1 build=build-528992 option=Release
+2013-08-25T11:32:07.630-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-25T11:32:07.630-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-25T11:32:07.630-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-25T11:32:07.612-04:00| vthread-3| I120: Msg_Reset:
+2013-08-25T11:32:07.612-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-25T11:32:07.612-04:00| vthread-3| I120: ----------------------------------------
+2013-08-25T11:32:07.612-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-25T11:32:07.613-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-25T11:32:07.630-04:00| vthread-3| I120: Started, process id = 6076
+2013-08-25T11:32:07.630-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.176.41.0
+2013-08-25T11:32:07.630-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.176.18467.1
+2013-08-25T11:32:07.630-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-25T11:32:07.665-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-25T11:32:07.665-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-25T11:32:07.665-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-25T11:32:08.050-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.176.18467.1" ...
+2013-08-25T14:51:56.028-04:00| vthread-3| I120: Mutex signalled
+2013-08-25T14:51:56.043-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-25T14:51:56.917-04:00| vthread-3| I120: Cleaned up OK
+2013-08-25T14:51:56.917-04:00| vthread-3| I120: Exit
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Log for VMware Workstation pid=4604 version=8.0.1 build=build-528992 option=Release
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-25T15:09:31.147-04:00| vthread-3| I120: Msg_Reset:
+2013-08-25T15:09:31.147-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-25T15:09:31.147-04:00| vthread-3| I120: ----------------------------------------
+2013-08-25T15:09:31.147-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-25T15:09:31.147-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Started, process id = 4604
+2013-08-25T15:09:31.162-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.7092.41.0
+2013-08-25T15:09:31.162-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.7092.18467.1
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-25T15:09:31.162-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-25T15:09:31.256-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.7092.18467.1" ...
+2013-08-25T15:44:04.772-04:00| vthread-3| I120: Mutex signalled
+2013-08-25T15:44:04.772-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-25T15:44:05.307-04:00| vthread-3| I120: Cleaned up OK
+2013-08-25T15:44:05.307-04:00| vthread-3| I120: Exit
+2013-08-25T18:53:38.633-04:00| vthread-3| I120: Log for VMware Workstation pid=4500 version=8.0.1 build=build-528992 option=Release
+2013-08-25T18:53:38.633-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-25T18:53:38.633-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-25T18:53:38.633-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-25T18:53:38.625-04:00| vthread-3| I120: Msg_Reset:
+2013-08-25T18:53:38.625-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-25T18:53:38.625-04:00| vthread-3| I120: ----------------------------------------
+2013-08-25T18:53:38.625-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-25T18:53:38.627-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-25T18:53:38.634-04:00| vthread-3| I120: Started, process id = 4500
+2013-08-25T18:53:38.634-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.4404.41.0
+2013-08-25T18:53:38.634-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.4404.18467.1
+2013-08-25T18:53:38.634-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-25T18:53:38.635-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-25T18:53:38.635-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-25T18:53:38.635-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-25T18:53:38.716-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.4404.18467.1" ...
+2013-08-25T18:56:05.394-04:00| vthread-3| I120: Mutex signalled
+2013-08-25T18:56:05.394-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-25T18:56:05.945-04:00| vthread-3| I120: Cleaned up OK
+2013-08-25T18:56:05.945-04:00| vthread-3| I120: Exit
+2013-08-26T22:42:41.387-04:00| vthread-3| I120: Log for VMware Workstation pid=5256 version=8.0.1 build=build-528992 option=Release
+2013-08-26T22:42:41.387-04:00| vthread-3| I120: The process is 32-bit.
+2013-08-26T22:42:41.387-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-08-26T22:42:41.387-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-08-26T22:42:41.364-04:00| vthread-3| I120: Msg_Reset:
+2013-08-26T22:42:41.364-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-08-26T22:42:41.364-04:00| vthread-3| I120: ----------------------------------------
+2013-08-26T22:42:41.364-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-08-26T22:42:41.367-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-08-26T22:42:41.387-04:00| vthread-3| I120: Started, process id = 5256
+2013-08-26T22:42:41.387-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.5768.41.0
+2013-08-26T22:42:41.387-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.5768.18467.1
+2013-08-26T22:42:41.387-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-08-26T22:42:41.389-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-08-26T22:42:41.389-04:00| vthread-3| I120: Got entry/stop functions
+2013-08-26T22:42:41.389-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-08-26T22:42:41.508-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.5768.18467.1" ...
+2013-08-26T22:52:55.771-04:00| vthread-3| I120: Mutex signalled
+2013-08-26T22:52:55.771-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-08-26T22:52:56.285-04:00| vthread-3| I120: Cleaned up OK
+2013-08-26T22:52:56.285-04:00| vthread-3| I120: Exit
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Log for VMware Workstation pid=5464 version=8.0.1 build=build-528992 option=Release
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-15T20:20:02.408-04:00| vthread-3| I120: Msg_Reset:
+2013-09-15T20:20:02.408-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-15T20:20:02.408-04:00| vthread-3| I120: ----------------------------------------
+2013-09-15T20:20:02.408-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-15T20:20:02.418-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Started, process id = 5464
+2013-09-15T20:20:02.518-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.5668.41.0
+2013-09-15T20:20:02.518-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.5668.18467.1
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-15T20:20:02.518-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-15T20:20:02.666-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.5668.18467.1" ...
+2013-09-15T23:52:24.228-04:00| vthread-3| I120: Mutex signalled
+2013-09-15T23:52:24.265-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-15T23:52:25.696-04:00| vthread-3| I120: Cleaned up OK
+2013-09-15T23:52:25.696-04:00| vthread-3| I120: Exit
+2013-09-16T11:33:52.460-04:00| vthread-3| I120: Log for VMware Workstation pid=3848 version=8.0.1 build=build-528992 option=Release
+2013-09-16T11:33:52.460-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-16T11:33:52.460-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-16T11:33:52.460-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-16T11:33:52.431-04:00| vthread-3| I120: Msg_Reset:
+2013-09-16T11:33:52.431-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-16T11:33:52.431-04:00| vthread-3| I120: ----------------------------------------
+2013-09-16T11:33:52.431-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-16T11:33:52.433-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-16T11:33:52.460-04:00| vthread-3| I120: Started, process id = 3848
+2013-09-16T11:33:52.460-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.916.41.0
+2013-09-16T11:33:52.461-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.916.18467.1
+2013-09-16T11:33:52.461-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-16T11:33:52.504-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-16T11:33:52.504-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-16T11:33:52.504-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-16T11:33:53.412-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.916.18467.1" ...
+2013-09-16T15:02:21.380-04:00| vthread-3| I120: Mutex signalled
+2013-09-16T15:02:21.407-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-16T15:02:22.408-04:00| vthread-3| I120: Cleaned up OK
+2013-09-16T15:02:22.408-04:00| vthread-3| I120: Exit
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Log for VMware Workstation pid=6932 version=8.0.1 build=build-528992 option=Release
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-16T15:14:09.301-04:00| vthread-3| I120: Msg_Reset:
+2013-09-16T15:14:09.301-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-16T15:14:09.301-04:00| vthread-3| I120: ----------------------------------------
+2013-09-16T15:14:09.301-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-16T15:14:09.301-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Started, process id = 6932
+2013-09-16T15:14:09.316-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.6352.41.0
+2013-09-16T15:14:09.316-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.6352.18467.1
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-16T15:14:09.316-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-16T15:14:09.488-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.6352.18467.1" ...
+2013-09-16T16:13:08.308-04:00| vthread-3| I120: Mutex signalled
+2013-09-16T16:13:08.308-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-16T16:13:08.821-04:00| vthread-3| I120: Cleaned up OK
+2013-09-16T16:13:08.821-04:00| vthread-3| I120: Exit
+2013-09-21T11:41:39.865-04:00| vthread-3| I120: Log for VMware Workstation pid=3608 version=8.0.1 build=build-528992 option=Release
+2013-09-21T11:41:39.865-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-21T11:41:39.865-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-21T11:41:39.865-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-21T11:41:39.845-04:00| vthread-3| I120: Msg_Reset:
+2013-09-21T11:41:39.845-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-21T11:41:39.845-04:00| vthread-3| I120: ----------------------------------------
+2013-09-21T11:41:39.845-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-21T11:41:39.845-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-21T11:41:39.865-04:00| vthread-3| I120: Started, process id = 3608
+2013-09-21T11:41:39.865-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.6132.41.0
+2013-09-21T11:41:39.865-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.6132.18467.1
+2013-09-21T11:41:39.865-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-21T11:41:39.885-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-21T11:41:39.885-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-21T11:41:39.885-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-21T11:41:40.375-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.6132.18467.1" ...
+2013-09-21T11:44:33.627-04:00| vthread-3| I120: Mutex signalled
+2013-09-21T11:44:33.627-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-21T11:44:34.139-04:00| vthread-3| I120: Cleaned up OK
+2013-09-21T11:44:34.139-04:00| vthread-3| I120: Exit
+2013-09-21T13:53:39.324-04:00| vthread-3| I120: Log for VMware Workstation pid=6092 version=8.0.1 build=build-528992 option=Release
+2013-09-21T13:53:39.324-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-21T13:53:39.324-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-21T13:53:39.324-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-21T13:53:39.315-04:00| vthread-3| I120: Msg_Reset:
+2013-09-21T13:53:39.315-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-21T13:53:39.315-04:00| vthread-3| I120: ----------------------------------------
+2013-09-21T13:53:39.315-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-21T13:53:39.317-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-21T13:53:39.324-04:00| vthread-3| I120: Started, process id = 6092
+2013-09-21T13:53:39.324-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.4132.41.0
+2013-09-21T13:53:39.324-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.4132.18467.1
+2013-09-21T13:53:39.325-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-21T13:53:39.326-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-21T13:53:39.326-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-21T13:53:39.326-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-21T13:53:39.409-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.4132.18467.1" ...
+2013-09-21T17:20:50.459-04:00| vthread-3| I120: Mutex signalled
+2013-09-21T17:20:50.494-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-21T17:20:51.212-04:00| vthread-3| I120: Cleaned up OK
+2013-09-21T17:20:51.212-04:00| vthread-3| I120: Exit
+2013-09-21T17:32:28.556-04:00| vthread-3| I120: Log for VMware Workstation pid=2940 version=8.0.1 build=build-528992 option=Release
+2013-09-21T17:32:28.556-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-21T17:32:28.556-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-21T17:32:28.556-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-21T17:32:28.546-04:00| vthread-3| I120: Msg_Reset:
+2013-09-21T17:32:28.546-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-21T17:32:28.546-04:00| vthread-3| I120: ----------------------------------------
+2013-09-21T17:32:28.546-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-21T17:32:28.546-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-21T17:32:28.556-04:00| vthread-3| I120: Started, process id = 2940
+2013-09-21T17:32:28.556-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.5688.41.0
+2013-09-21T17:32:28.556-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.5688.18467.1
+2013-09-21T17:32:28.556-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-21T17:32:28.566-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-21T17:32:28.566-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-21T17:32:28.566-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-21T17:32:28.866-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.5688.18467.1" ...
+2013-09-21T17:33:18.502-04:00| vthread-3| I120: Mutex signalled
+2013-09-21T17:33:18.502-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-21T17:33:19.037-04:00| vthread-3| I120: Cleaned up OK
+2013-09-21T17:33:19.037-04:00| vthread-3| I120: Exit
+2013-09-22T17:35:45.933-04:00| vthread-3| I120: Log for VMware Workstation pid=7380 version=8.0.1 build=build-528992 option=Release
+2013-09-22T17:35:45.933-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-22T17:35:45.933-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-22T17:35:45.933-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-22T17:35:45.903-04:00| vthread-3| I120: Msg_Reset:
+2013-09-22T17:35:45.903-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-22T17:35:45.903-04:00| vthread-3| I120: ----------------------------------------
+2013-09-22T17:35:45.903-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-22T17:35:45.905-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-22T17:35:45.933-04:00| vthread-3| I120: Started, process id = 7380
+2013-09-22T17:35:45.933-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.4596.41.0
+2013-09-22T17:35:45.933-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.4596.18467.1
+2013-09-22T17:35:45.933-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-22T17:35:45.951-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-22T17:35:45.951-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-22T17:35:45.951-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-22T17:35:46.472-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.4596.18467.1" ...
+2013-09-22T23:04:40.599-04:00| vthread-3| I120: Mutex signalled
+2013-09-22T23:04:40.612-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-22T23:04:41.645-04:00| vthread-3| I120: Cleaned up OK
+2013-09-22T23:04:41.645-04:00| vthread-3| I120: Exit
+2013-09-29T15:23:35.409-04:00| vthread-3| I120: Log for VMware Workstation pid=7844 version=8.0.1 build=build-528992 option=Release
+2013-09-29T15:23:35.409-04:00| vthread-3| I120: The process is 32-bit.
+2013-09-29T15:23:35.409-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-09-29T15:23:35.409-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-09-29T15:23:35.386-04:00| vthread-3| I120: Msg_Reset:
+2013-09-29T15:23:35.386-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-09-29T15:23:35.386-04:00| vthread-3| I120: ----------------------------------------
+2013-09-29T15:23:35.386-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-09-29T15:23:35.388-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-09-29T15:23:35.409-04:00| vthread-3| I120: Started, process id = 7844
+2013-09-29T15:23:35.409-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.2940.41.0
+2013-09-29T15:23:35.409-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.2940.18467.1
+2013-09-29T15:23:35.409-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-09-29T15:23:35.487-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-09-29T15:23:35.487-04:00| vthread-3| I120: Got entry/stop functions
+2013-09-29T15:23:35.487-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-09-29T15:23:35.798-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.2940.18467.1" ...
+2013-09-29T17:38:47.555-04:00| vthread-3| I120: Mutex signalled
+2013-09-29T17:38:47.563-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-09-29T17:38:48.235-04:00| vthread-3| I120: Cleaned up OK
+2013-09-29T17:38:48.235-04:00| vthread-3| I120: Exit
+2013-10-06T16:15:02.168-04:00| vthread-3| I120: Log for VMware Workstation pid=5744 version=8.0.1 build=build-528992 option=Release
+2013-10-06T16:15:02.168-04:00| vthread-3| I120: The process is 32-bit.
+2013-10-06T16:15:02.168-04:00| vthread-3| I120: Host codepage=windows-936 encoding=GBK
+2013-10-06T16:15:02.168-04:00| vthread-3| I120: Host is Windows 7 Professional, 64-bit Service Pack 1 (Build 7601)
+2013-10-06T16:15:02.146-04:00| vthread-3| I120: Msg_Reset:
+2013-10-06T16:15:02.146-04:00| vthread-3| I120: [msg.dictionary.load.openFailed] Cannot open file "C:\Users\Valen\AppData\Roaming\VMware\config.ini": The system cannot find the file specified.
+2013-10-06T16:15:02.146-04:00| vthread-3| I120: ----------------------------------------
+2013-10-06T16:15:02.146-04:00| vthread-3| I120: PREF Optional preferences file not found at C:\Users\Valen\AppData\Roaming\VMware\config.ini. Using default values.
+2013-10-06T16:15:02.147-04:00| vthread-3| I120: FILE: FileLockDynaLink: Further process validation tools are: available
+2013-10-06T16:15:02.168-04:00| vthread-3| I120: Started, process id = 5744
+2013-10-06T16:15:02.168-04:00| vthread-3| I120:          pipe = \\.\pipe\vmware.vprint.6964.41.0
+2013-10-06T16:15:02.168-04:00| vthread-3| I120:          mutex = Global\vmware.vprint-s.6964.18467.1
+2013-10-06T16:15:02.168-04:00| vthread-3| I120: Path for TPClnVM.dll = 'C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll'
+2013-10-06T16:15:02.171-04:00| vthread-3| I120: Loaded TPClnVM.dll as C:\Program Files (x86)\VMware\VMware Workstation\TPClnVM.dll
+2013-10-06T16:15:02.171-04:00| vthread-3| I120: Got entry/stop functions
+2013-10-06T16:15:02.171-04:00| vthread-3| I120: Calling TP 'entry' function
+2013-10-06T16:15:02.280-04:00| vthread-3| I120: Waiting for mutex "Global\vmware.vprint-s.6964.18467.1" ...
+2013-10-06T18:16:23.624-04:00| vthread-3| I120: Mutex signalled
+2013-10-06T18:16:23.624-04:00| vthread-3| I120: Calling TP 'stop' function
+2013-10-06T18:16:24.151-04:00| vthread-3| I120: Cleaned up OK
+2013-10-06T18:16:24.151-04:00| vthread-3| I120: Exit
