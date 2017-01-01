@@ -1,43 +1,217 @@
-$ spin -s cr-lea.pml
+canis@latrans:~/Documents/github/cs511/ass05/cr-lea$ cat cr-lea
+cat: cr-lea: No such file or directory
+canis@latrans:~/Documents/github/cs511/ass05/cr-lea$ cat cr-lea.pml 
+/* Edited by: Trevor Miranda */
+
+#define N    5    /* number of processes in the ring */
+#define L    10   /* size of buffer ( >= 2*N) */
+byte I;           /* will be used in init for assigning ids to nodes */
+
+mtype = { one, two, winner }; /* symb . Msg . Names */
+chan q[N] = [L] of { mtype, byte }; /* asynchronous channels */
+
+proctype nnode(chan inp, out; byte mynumber)
+{
+    bit Active = 1, know_winner = 0;
+        byte nr, maximum = mynumber;
+
+        xr inp;    /* channel assertion : exclusive recv access to channel in */
+    xs out;    /* channel assertion : exclusive send access to channel out */
+
+    printf("MSC: %d\n", mynumber);
+    out!one(mynumber);
+
+end:    do
+        :: inp?one(nr) ->
+            if
+            :: Active ->
+                            if
+                                :: nr == mynumber ->
+                                    know_winner = 1;
+                                    Active = 0;
+                                    out!winner,nr;
+                                    printf("MSC: LEADER\n");
+                                :: nr > mynumber ->
+                                    Active = 0;
+                                        out!one(nr);
+                                :: else ->
+                                   skip;
+                                fi
+                        :: else ->
+                            out!one(nr)
+                        fi
+                :: inp?winner,nr ->
+                    if
+                        :: nr == mynumber ->
+                            printf("MSC: LEADER\n");
+                        :: else ->
+                            printf("MSC: LOST\n");
+                        fi;
+                        if
+                        :: know_winner == 0 ->
+                            out!winner,num;
+                        fi;
+                        break;
+                od
+}
+
+init {
+    byte proc;
+        byte Ini[6];    /* N<=6 randomize the process numbers */
+        atomic {
+            I = 1;    /* pick a number to be assigned 1..N */
+                do
+                :: I <= N ->
+                    if    /* non-deterministic choice */
+                        :: Ini[0] == 0 && N >= 1 -> Ini[0] = I
+                        :: Ini[1] == 0 && N >= 2 -> Ini[1] = I
+                        :: Ini[2] == 0 && N >= 3 -> Ini[2] = I
+                        :: Ini[3] == 0 && N >= 4 -> Ini[3] = I
+                        :: Ini[4] == 0 && N >= 5 -> Ini[4] = I
+                        :: Ini[5] == 0 && N >= 6 -> Ini[5] = I /* works for up to N=6 */
+                        fi;
+                        I++
+                :: I > N ->
+                    break
+                od;
+
+                /* start all nodes in the ring */
+                proc = 1;
+                do
+                :: proc <= N ->
+                    run nnode (q[proc-1], q[proc%N], Ini[proc-1]);
+                        proc++
+                :: proc > N ->
+                    break
+                od
+        }
+}
+canis@latrans:~/Documents/github/cs511/ass05/cr-lea$ cat cr-lea.pml 
+/* Edited by: Trevor Miranda */
+
+#define N    5    /* number of processes in the ring */
+#define L    10   /* size of buffer ( >= 2*N) */
+byte I;           /* will be used in init for assigning ids to nodes */
+
+mtype = { one, two, winner }; /* symb . Msg . Names */
+chan q[N] = [L] of { mtype, byte }; /* asynchronous channels */
+
+proctype nnode(chan inp, out; byte mynumber)
+{
+    bit Active = 1, know_winner = 0;
+        byte nr, maximum = mynumber;
+
+        xr inp;    /* channel assertion : exclusive recv access to channel in */
+    xs out;    /* channel assertion : exclusive send access to channel out */
+
+    printf("MSC: %d\n", mynumber);
+    out!one(mynumber);
+
+end:    do
+        :: inp?one(nr) ->
+            if
+            :: Active ->
+                            if
+                                :: nr == mynumber ->
+                                    know_winner = 1;
+                                    Active = 0;
+                                    out!winner,nr;
+                                    printf("MSC: LEADER\n");
+                                :: nr > mynumber ->
+                                    Active = 0;
+                                        out!one(nr);
+                                :: else ->
+                                   skip;
+                                fi
+                        :: else ->
+                            out!one(nr)
+                        fi
+                :: inp?winner,nr ->
+                    if
+                        :: nr == mynumber ->
+                            printf("MSC: LEADER\n");
+                        :: else ->
+                            printf("MSC: LOST\n");
+                        fi;
+                        if
+                        :: know_winner ->
+                            out!winner,num;
+                        fi;
+                        break;
+                od
+}
+
+init {
+    byte proc;
+        byte Ini[6];    /* N<=6 randomize the process numbers */
+        atomic {
+            I = 1;    /* pick a number to be assigned 1..N */
+                do
+                :: I <= N ->
+                    if    /* non-deterministic choice */
+                        :: Ini[0] == 0 && N >= 1 -> Ini[0] = I
+                        :: Ini[1] == 0 && N >= 2 -> Ini[1] = I
+                        :: Ini[2] == 0 && N >= 3 -> Ini[2] = I
+                        :: Ini[3] == 0 && N >= 4 -> Ini[3] = I
+                        :: Ini[4] == 0 && N >= 5 -> Ini[4] = I
+                        :: Ini[5] == 0 && N >= 6 -> Ini[5] = I /* works for up to N=6 */
+                        fi;
+                        I++
+                :: I > N ->
+                    break
+                od;
+
+                /* start all nodes in the ring */
+                proc = 1;
+                do
+                :: proc <= N ->
+                    run nnode (q[proc-1], q[proc%N], Ini[proc-1]);
+                        proc++
+                :: proc > N ->
+                    break
+                od
+        }
+}
+canis@latrans:~/Documents/github/cs511/ass05/cr-lea$ spin -s cr-lea.pml 
+spin -s cr-lea.pml
 ---
-				MSC : 5
-                       MSC : 3
- 45:	proc  4 (nnode:1) cr-lea.pml:19 Send one,3	-> queue 5 (out)
-                           MSC : 2
- 47:	proc  2 (nnode:1) cr-lea.pml:19 Send one,5	-> queue 3 (out)
-           MSC : 4
- 49:	proc  1 (nnode:1) cr-lea.pml:19 Send one,4	-> queue 2 (out)
- 50:	proc  5 (nnode:1) cr-lea.pml:19 Send one,2	-> queue 1 (out)
-                   MSC : 1
- 61:	proc  5 (nnode:1) cr-lea.pml:27 Send two,3	-> queue 1 (out)
- 65:	proc  3 (nnode:1) cr-lea.pml:19 Send one,1	-> queue 4 (out)
- 72:	proc  1 (nnode:1) cr-lea.pml:27 Send two,2	-> queue 2 (out)
- 77:	proc  2 (nnode:1) cr-lea.pml:27 Send two,4	-> queue 3 (out)
- 79:	proc  4 (nnode:1) cr-lea.pml:27 Send two,1	-> queue 5 (out)
- 91:	proc  3 (nnode:1) cr-lea.pml:27 Send two,5	-> queue 4 (out)
-121:	proc  3 (nnode:1) cr-lea.pml:42 Send one,5	-> queue 4 (out)
-125:	proc  5 (nnode:1) cr-lea.pml:42 Send one,3	-> queue 1 (out)
-128:	proc  4 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 5 (out)
-139:	proc  1 (nnode:1) cr-lea.pml:34 Send one,3	-> queue 2 (out)
-148:	proc  2 (nnode:1) cr-lea.pml:34 Send one,3	-> queue 3 (out)
-155:	proc  5 (nnode:1) cr-lea.pml:27 Send two,5	-> queue 1 (out)
-162:	proc  3 (nnode:1) cr-lea.pml:27 Send two,3	-> queue 4 (out)
-165:	proc  1 (nnode:1) cr-lea.pml:47 Send two,5	-> queue 2 (out)
-167:	proc  4 (nnode:1) cr-lea.pml:47 Send two,3	-> queue 5 (out)
-175:	proc  2 (nnode:1) cr-lea.pml:47 Send two,5	-> queue 3 (out)
-186:	proc  5 (nnode:1) cr-lea.pml:42 Send one,5	-> queue 1 (out)
-193:	proc  1 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 2 (out)
-203:	proc  2 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 3 (out)
-208:	proc  3 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 4 (out)
-213:	proc  4 (nnode:1) cr-lea.pml:34 Send one,5	-> queue 5 (out)
-220:	proc  5 (nnode:1) cr-lea.pml:31 Send winner,5	-> queue 1 (out)
-          MSC: LOST
-227:	proc  1 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 2 (out)
-              MSC: LEADER
-237:	proc  2 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 3 (out)
+          MSC: 1
+ 44:    proc  1 (nnode:1) cr-lea.pml:19 Send one,1      -> queue 2 (out)
+                      MSC: 2
+ 46:    proc  4 (nnode:1) cr-lea.pml:19 Send one,2      -> queue 5 (out)
+                          MSC: 3
+                  MSC: 4
+ 49:    proc  3 (nnode:1) cr-lea.pml:19 Send one,4      -> queue 4 (out)
+              MSC: 5
+ 52:    proc  2 (nnode:1) cr-lea.pml:19 Send one,5      -> queue 3 (out)
+ 65:    proc  5 (nnode:1) cr-lea.pml:19 Send one,3      -> queue 1 (out)
+ 67:    proc  4 (nnode:1) cr-lea.pml:33 Send one,4      -> queue 5 (out)
+ 78:    proc  1 (nnode:1) cr-lea.pml:33 Send one,3      -> queue 2 (out)
+ 81:    proc  3 (nnode:1) cr-lea.pml:33 Send one,5      -> queue 4 (out)
+ 99:    proc  4 (nnode:1) cr-lea.pml:38 Send one,5      -> queue 5 (out)
+112:    proc  5 (nnode:1) cr-lea.pml:33 Send one,4      -> queue 1 (out)
+115:    proc  1 (nnode:1) cr-lea.pml:38 Send one,4      -> queue 2 (out)
+130:    proc  5 (nnode:1) cr-lea.pml:38 Send one,5      -> queue 1 (out)
+135:    proc  1 (nnode:1) cr-lea.pml:38 Send one,5      -> queue 2 (out)
+143:    proc  2 (nnode:1) cr-lea.pml:29 Send winner,5   -> queue 3 (out)
                   MSC: LOST
-245:	proc  3 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 4 (out)
+              MSC: LEADER
+152:    proc  3 (nnode:1) cr-lea.pml:49 Send winner,5   -> queue 4 (out)
                       MSC: LOST
-253:	proc  4 (nnode:1) cr-lea.pml:58 Send winner,5	-> queue 5 (out)
+161:    proc  4 (nnode:1) cr-lea.pml:49 Send winner,5   -> queue 5 (out)
                           MSC: LOST
-6 processes created
+169:    proc  5 (nnode:1) cr-lea.pml:49 Send winner,5   -> queue 1 (out)
+          MSC: LOST
+177:    proc  1 (nnode:1) cr-lea.pml:49 Send winner,5   -> queue 2 (out)
+              MSC: LEADER
+      timeout
+#processes: 3
+                I = 6
+                queue 1 (q[0]):
+                queue 2 (q[1]):
+                queue 3 (q[2]):
+                queue 4 (q[3]):
+                queue 5 (q[4]):
+183:    proc  2 (nnode:1) cr-lea.pml:47 (state 30)
+183:    proc  1 (nnode:1) cr-lea.pml:53 (state 36) <valid end state>
+-- INSERT --                                                                                                                             1,19          Top

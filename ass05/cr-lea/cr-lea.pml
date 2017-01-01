@@ -10,7 +10,7 @@ chan q[N] = [L] of { mtype, byte }; /* asynchronous channels */
 proctype nnode(chan inp, out; byte mynumber)
 {
     bit Active = 1, know_winner = 0;
-	byte nr, maximum = mynumber, neighbourR;
+	byte nr, maximum = mynumber;
 
 	xr inp;    /* channel assertion : exclusive recv access to channel in */
     xs out;    /* channel assertion : exclusive send access to channel out */
@@ -23,41 +23,32 @@ end:    do
             if
             :: Active ->
 			    if
-				:: nr != maximum ->
-				    out!two(nr);
-					neighbourR = nr;
-				:: else ->
+				:: nr == mynumber ->
+				    Active = 0;
 				    know_winner = 1;
-					out!winner,nr;
+				    out!winner,nr;
+				    printf("MSC: LEADER\n");
+				:: nr > mynumber ->
+				    Active = 0;
+					out!one(nr);
+				:: else ->
+				   skip;
 				fi
 			:: else ->
 			    out!one(nr)
 			fi
-		:: inp?two(nr) ->
-		    if
-			:: Active ->
-			    if
-				:: neighbourR > nr && neighbourR > maximum ->
-				    maximum = neighbourR;
-					out!one(neighbourR)
-				:: else ->
-				    Active = 0;
-				fi
-			:: else ->
-			    out!two(nr)
-			fi
 		:: inp?winner,nr ->
 		    if
-			:: nr != mynumber ->
-			    printf("MSC: LOST\n");
-			:: else ->
+			:: nr == mynumber ->
 			    printf("MSC: LEADER\n");
+			:: else ->
+			    printf("MSC: LOST\n");
 			fi;
 			if
-			:: know_winner
-			:: else -> out!winner,nr
+			:: !know_winner
+			    out!winner,nr
 			fi;
-			break
+			break;
 		od
 }
 
