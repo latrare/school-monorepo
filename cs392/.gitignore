@@ -1,0 +1,15 @@
+## Ignored file types
+*.o
+*.a
+
+## Ignored executables
+src/mypipes/pipes
+src/myminishell/minishell
+src/myselect/myselect
+src/mysignals/client
+src/mysignals/server
+src/mysockets/client
+src/mysockets/server
+
+## Ignored directories
+lib/

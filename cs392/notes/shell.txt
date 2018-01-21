@@ -1,0 +1,52 @@
+Folder in src: minishell or myminishell
+
+Create new function /my/src/my_str2vect.c
+char **my_str2vect(char *str);
+
+Clean:
+str argument is to be considered IMMUTABLE.
+Create vector with pointer to new strings
+
+"ls          -l" => {"ls", " ", "-l"} (ignore extra spaces)
+
+Tabs should also be treated same as whitespaces
+
+Can be done in 3 parses total (of input string).
+
+Free the vector given:
+my_freevect(char **);
+
+Freeing of vectors will be checked.
+
+
+minishell
+---
+Runner of stuff.
+At first, display prompt. PROMPT #>
+Show output of command below prompt, then display prompt again.
+DO NOT HANDLE REDIRECTIONS, AMPERSANDS, PIPES, OR WILDCARDS
+
+Have to handle:
+---
+* cd blah
+* ls
+* pwd
+* exit - should print a goodbye message
+* everything else is a program you have to exec
+bad commands, if it doesn't exist, print error message and command used
+
+Necessary functions (allowed):
+---
+getcwd() - current dir program is in
+chdir() - change dir program is in (don't do before fork, do in parent after)
+fork()
+execvp()
+read()
+wait*()
+
+Structure:
+---
+main process
+while(1) in process until exit is typed
+parent will handle cd and exit commands
+read, str2vect, check command, fork, execvp in child (if it doesn't work, print command that failed, then error)

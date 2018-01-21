@@ -1,0 +1,99 @@
+Going to create two programs in the same folder
+
+/src/mysignals OR /src/signals
+
+make should make both the client and server
+make client should make the client specifically
+make server should make the server specifically
+make all should just make both
+
+2 files (1 for client, 1 for server)
+1 file for header
+
+create new function for my: my_atoi(char *) /* takes string and converts into signed int */
+
+Whitespace or decimal signify end of integer.
+
+Crazy example +---+---++---+-+--128 => 128
+
+Whitespace after something that indicates a number (sign) should return 0
+
+Methods allowed:
+---
+getpid
+pause
+kill
+alarm
+usleep
+signal
+---^For methods
+
+Signals allowed
+---
+SIGUSR1
+SIGUSR2
+SIGINT
+SIGALRM
+
+
+Server
+---
+* Show pid
+* Pause
+
+
+Client (./client serverpid <<any message>>)
+---
+* getpid
+* pause
+
+Client sends pid to server, server acknowledges.
+Client then sends string (in form of vector)
+Client exits after sending string and after acknowledgement
+Server prints string with two newlines
+
+Ctrl-C goodbye message must be implemented.
+
+The server can send a "noack" or no acknowledgement to the client, which translates to a timeout and error message.
+
+Important things:
+---
+Use '\0' to terminate strings. Then just use read to receive characters 1 by 1, printing them one by one
+
+kill(pid, SIG-);
+kill(getpid(), SIGSEGV);
+
+pause();
+alarm(2); /* After two seconds, send current process SIGALRM */
+alarm(0); /* Shut off alarm */
+
+pause()
+
+signal(SIGINT, bye);
+bye is callback function of form void bye(); or void bye(int signal);
+
+
+server
+---
+int main()
+{
+	my_int(getpid());
+	signal(SIGINT, bye);
+	while(1) {
+		//init stuff
+		signal(SIGUSR1, getclientpid);
+		signal(SIGUSR2, getclientpid);
+		for (i = 0; i < (8 * sizeof(int)); i++)
+			pause();
+		signal(SIGUSR1, getmessage);
+		signal(SIGUSR2, getmessage);
+		kill(clientpid, SIGUSR2);
+		while (!client_done)
+			pause();
+		my_str("\n\n");
+	}
+	
+	return 0;
+}
+	}
+}
