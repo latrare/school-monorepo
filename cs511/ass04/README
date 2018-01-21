@@ -1,0 +1,3 @@
+How to run:
+
+> sim:launch_sim(<NUM_OF_SENSORS>).

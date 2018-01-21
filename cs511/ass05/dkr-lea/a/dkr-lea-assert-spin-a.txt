@@ -1,0 +1,43 @@
+$ spin -s assert.pml
+---
+                   MSC: 5
+               MSC: 2
+           MSC: 3
+                       MSC: 1
+ 47:	proc  2 (nnode:1) assert.pml:17 Send one,2	-> queue 3 (out)
+ 48:	proc  1 (nnode:1) assert.pml:17 Send one,3	-> queue 2 (out)
+ 50:	proc  4 (nnode:1) assert.pml:17 Send one,1	-> queue 5 (out)
+                           MSC: 4
+ 53:	proc  3 (nnode:1) assert.pml:17 Send one,5	-> queue 4 (out)
+ 61:	proc  5 (nnode:1) assert.pml:17 Send one,4	-> queue 1 (out)
+ 65:	proc  2 (nnode:1) assert.pml:25 Send two,3	-> queue 3 (out)
+ 71:	proc  4 (nnode:1) assert.pml:25 Send two,5	-> queue 5 (out)
+ 75:	proc  3 (nnode:1) assert.pml:25 Send two,2	-> queue 4 (out)
+ 77:	proc  1 (nnode:1) assert.pml:25 Send two,4	-> queue 2 (out)
+ 94:	proc  5 (nnode:1) assert.pml:25 Send two,1	-> queue 1 (out)
+109:	proc  1 (nnode:1) assert.pml:40 Send one,4	-> queue 2 (out)
+115:	proc  4 (nnode:1) assert.pml:40 Send one,5	-> queue 5 (out)
+136:	proc  2 (nnode:1) assert.pml:32 Send one,4	-> queue 3 (out)
+142:	proc  5 (nnode:1) assert.pml:32 Send one,5	-> queue 1 (out)
+145:	proc  3 (nnode:1) assert.pml:32 Send one,4	-> queue 4 (out)
+156:	proc  1 (nnode:1) assert.pml:25 Send two,5	-> queue 2 (out)
+159:	proc  4 (nnode:1) assert.pml:25 Send two,4	-> queue 5 (out)
+162:	proc  2 (nnode:1) assert.pml:45 Send two,5	-> queue 3 (out)
+167:	proc  3 (nnode:1) assert.pml:45 Send two,5	-> queue 4 (out)
+179:	proc  5 (nnode:1) assert.pml:45 Send two,4	-> queue 1 (out)
+190:	proc  1 (nnode:1) assert.pml:40 Send one,5	-> queue 2 (out)
+198:	proc  2 (nnode:1) assert.pml:32 Send one,5	-> queue 3 (out)
+202:	proc  3 (nnode:1) assert.pml:32 Send one,5	-> queue 4 (out)
+207:	proc  4 (nnode:1) assert.pml:32 Send one,5	-> queue 5 (out)
+212:	proc  5 (nnode:1) assert.pml:32 Send one,5	-> queue 1 (out)
+219:	proc  1 (nnode:1) assert.pml:29 Send winner,5	-> queue 2 (out)
+              MSC: LOST
+229:	proc  2 (nnode:1) assert.pml:57 Send winner,5	-> queue 3 (out)
+                  MSC: LEADER
+238:	proc  3 (nnode:1) assert.pml:57 Send winner,5	-> queue 4 (out)
+                      MSC: LOST
+246:	proc  4 (nnode:1) assert.pml:57 Send winner,5	-> queue 5 (out)
+                          MSC: LOST
+254:	proc  5 (nnode:1) assert.pml:57 Send winner,5	-> queue 1 (out)
+          MSC: LOST
+6 processes created

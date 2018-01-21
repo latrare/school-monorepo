@@ -1,0 +1,17 @@
+digraph pq {
+		start[style=invis]
+		node[shape=ellipse, fixedsize=true, width=1.5, height=1]
+		start -> "(P4, Q4, 0)"
+		# P moves first
+		"(P4, Q4, 0)" -> "(P5, Q4, 0)"
+		"(P5, Q4, 0)" -> "(P4, Q4, 0)"
+		"(P5, Q4, 0)" -> "(P5, Q5, 1)"
+		"(P5, Q5, 1)" -> "(P4, Q5, 1)"
+		"(P5, Q5, 1)" -> "(P5, -, 2)"
+		"(P5, -, 2)" -> "(P4, -, 2)"
+		"(P4, -, 2)" -> "(-, -, 2)"
+		# Q moves first
+		"(P4, Q4, 0)" -> "(P4, Q5, 1)"
+		"(P4, Q5, 1)" -> "(P5, Q5, 1)"
+		"(P4, Q5, 1)" -> "(P4, -, 2)"
+}

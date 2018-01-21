@@ -1,0 +1,44 @@
+$ spin -s ltl.pml
+---
+ltl leader: [] (((numLeader==1)) || ((numLeader==0)))
+                          MSC: 1
+              MSC: 4
+                      MSC: 5
+ 46:	proc  4 (nnode:1) ltl.pml:19 Send one,5	-> queue 5 (out)
+                  MSC: 2
+ 49:	proc  3 (nnode:1) ltl.pml:19 Send one,2	-> queue 4 (out)
+          MSC: 3
+ 54:	proc  1 (nnode:1) ltl.pml:19 Send one,3	-> queue 2 (out)
+ 55:	proc  2 (nnode:1) ltl.pml:19 Send one,4	-> queue 3 (out)
+ 60:	proc  5 (nnode:1) ltl.pml:19 Send one,1	-> queue 1 (out)
+ 69:	proc  4 (nnode:1) ltl.pml:27 Send two,2	-> queue 5 (out)
+ 75:	proc  1 (nnode:1) ltl.pml:27 Send two,1	-> queue 2 (out)
+ 76:	proc  2 (nnode:1) ltl.pml:27 Send two,3	-> queue 3 (out)
+ 79:	proc  3 (nnode:1) ltl.pml:27 Send two,4	-> queue 4 (out)
+100:	proc  5 (nnode:1) ltl.pml:27 Send two,5	-> queue 1 (out)
+120:	proc  3 (nnode:1) ltl.pml:42 Send one,4	-> queue 4 (out)
+125:	proc  4 (nnode:1) ltl.pml:34 Send one,4	-> queue 5 (out)
+133:	proc  5 (nnode:1) ltl.pml:42 Send one,5	-> queue 1 (out)
+141:	proc  1 (nnode:1) ltl.pml:34 Send one,5	-> queue 2 (out)
+144:	proc  2 (nnode:1) ltl.pml:34 Send one,5	-> queue 3 (out)
+153:	proc  3 (nnode:1) ltl.pml:27 Send two,5	-> queue 4 (out)
+157:	proc  4 (nnode:1) ltl.pml:47 Send two,5	-> queue 5 (out)
+165:	proc  5 (nnode:1) ltl.pml:27 Send two,4	-> queue 1 (out)
+177:	proc  1 (nnode:1) ltl.pml:47 Send two,4	-> queue 2 (out)
+185:	proc  2 (nnode:1) ltl.pml:47 Send two,4	-> queue 3 (out)
+192:	proc  3 (nnode:1) ltl.pml:42 Send one,5	-> queue 4 (out)
+196:	proc  4 (nnode:1) ltl.pml:34 Send one,5	-> queue 5 (out)
+203:	proc  5 (nnode:1) ltl.pml:34 Send one,5	-> queue 1 (out)
+207:	proc  1 (nnode:1) ltl.pml:34 Send one,5	-> queue 2 (out)
+213:	proc  2 (nnode:1) ltl.pml:34 Send one,5	-> queue 3 (out)
+220:	proc  3 (nnode:1) ltl.pml:31 Send winner,5	-> queue 4 (out)
+                      MSC: LEADER
+230:	proc  4 (nnode:1) ltl.pml:59 Send winner,5	-> queue 5 (out)
+                          MSC: LOST
+238:	proc  5 (nnode:1) ltl.pml:59 Send winner,5	-> queue 1 (out)
+          MSC: LOST
+246:	proc  1 (nnode:1) ltl.pml:59 Send winner,5	-> queue 2 (out)
+              MSC: LOST
+254:	proc  2 (nnode:1) ltl.pml:59 Send winner,5	-> queue 3 (out)
+                  MSC: LOST
+6 processes created
