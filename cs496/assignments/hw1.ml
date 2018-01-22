@@ -10,41 +10,43 @@ let seven x = 7
 
 (* 02. sign: int -> int *)
 let sign x =
-if x > 0 then 1
-else if x < 0 then -1
-     else 0
+  if x > 0 then 1
+  else if x < 0 then -1
+  else 0
 
 (* 03. absolute: int -> int *)
-let absolute x = if x < 0 then x * (-1) else x
+let absolute x =
+  if x < 0 then x * (-1) else x
 
 (* 04. andp, orp, notp, xorp *)
 (* --- andp: bool -> bool -> bool *)
-let andp x y = if x then x = y else false
+let andp x y =
+  if x then x = y else false
 
 (* --- orp: bool -> bool -> bool *)
 let orp x y =
-if x then x
-else if y then y
-     else false
+  if x then x
+  else if y then y
+  else false
 
 (* --- notp: bool -> bool *)
-let notp x = if x then false else true
+let notp x =
+  if x then false else true
 
 (* --- xorp: bool -> bool -> bool *)
 let xorp x y =
-if x then x != y
-else if y then y != x
-     else false
+  if x then x != y
+  else if y then y != x
+  else false
 
 (* 05. dividesBy: int -> int -> bool *)
 let dividesBy x y = (x mod y) = 0
 
 (* 06. is_singleton: 'a list -> bool *)
 let is_singleton l =
-match l with
-| [] -> false
-| [x] -> true
-| (x::xs) -> false
+  match l with
+  | [x] -> true
+  | _ -> false
 
 (* 07. swap: 'a * 'b -> 'b * 'a *)
 let swap (x, y) = (y, x)
@@ -65,9 +67,9 @@ let compose x y z = (app x (app y z))
 
 (* 1a. belongsTo_ext:  *)
 let rec belongsTo_ext testx xs =
-match xs with
-| [] -> false
-| (x::xs) ->
+  match xs with
+  | [] -> false
+  | (x::xs) ->
     if testx = x then true else belongsTo_ext testx xs
 
 (* 1b. belongsTo_char:  *)
@@ -89,9 +91,7 @@ let rec intersection_ext fxs gxs =
 (* 2. remAdjDups:  *)
 
 (* 3. sublists:  *)
-let rec sublists xs =
-match xs with
-| (x::xs) -> x::(sublists xs)
+
 
 
 (* //////////////// *)
@@ -102,40 +102,45 @@ match xs with
 type calcExp =
   | Const of int
   | Add of (calcExp * calcExp)
-  | Sub of (calcExp * calcExp)
-  | Mult of (calcExp * calcExp)
   | Div of (calcExp * calcExp)
+  | Mult of (calcExp * calcExp)
+  | Sub of (calcExp * calcExp)
 
 let e1 = Const(2)
 let e2 = Add(Sub(Const(2), Const(3)), Const(4))
 
 (* 01. mapC:  *)
 let rec mapC f e =
-match e with
-| Const(x) -> Const(f x)
-| Add(x, y) -> Add(mapC f x, mapC f y)
-| Sub(x, y) -> Sub(mapC f x, mapC f y)
-| Mult(x, y) -> Mult(mapC f x, mapC f y)
-| Div(x, y) -> Div(mapC f x, mapC f y)
+  match e with
+  | Const(x) -> Const(f x)
+  | Add(x, y) -> Add(mapC f x, mapC f y)
+  | Div(x, y) -> Div(mapC f x, mapC f y)
+  | Mult(x, y) -> Mult(mapC f x, mapC f y)
+  | Sub(x, y) -> Sub(mapC f x, mapC f y)
 
 (* 02. foldC:  *)
-(* let rec foldC f e a =
- * match e with
- * | Add(x, y) | Sub(x, y) | Mult(x, y) | Div(x, y) -> foldC f x (foldC f y a)
- * | Const(x) -> f x a *)
+let rec foldC f a e =
+  match e with
+  | Const(x) ->  a
+  | Add(x, y) -> foldC f (foldC f a x) y
+  | Div(x, y) -> foldC f (foldC f a x) y
+  | Mult(x, y) -> foldC f (foldC f a x) y
+  | Sub(x, y) -> foldC f (foldC f a x) y
 
 (* 03. numAdd: *)
-
+let numAdd e =
+  let f r e = match e with Add _ -> (+) r 1 | _ -> r
+  in foldC f 0 e
 (* 04. replaceAddWithMult: *)
 
 (* 05. evalC: *)
 let rec evalC e =
-match e with
-| Add(x, y) -> (evalC x) + (evalC y)
-| Sub(x, y) -> (evalC x) - (evalC y)
-| Mult(x, y) -> (evalC x) * (evalC y)
-| Div(x, y) -> (evalC x) / (evalC y)
-| Const(x) -> x
+  match e with
+  | Const(x) -> x
+  | Add(x, y) -> (evalC x) + (evalC y)
+  | Div(x, y) -> (evalC x) / (evalC y)
+  | Mult(x, y) -> (evalC x) * (evalC y)
+  | Sub(x, y) -> (evalC x) - (evalC y)
 
 (* 06. evalCf: *)
 
