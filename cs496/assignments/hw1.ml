@@ -66,32 +66,35 @@ let compose x y z = (app x (app y z))
 (* \\\\\\\\\\\\\\\\ *)
 
 (* 1a. belongsTo_ext:  *)
-let rec belongsTo_ext testx xs =
+let rec belongsTo_ext y xs =
   match xs with
   | [] -> false
   | (x::xs) ->
-    if testx = x then true else belongsTo_ext testx xs
+    if y = x then true else belongsTo_ext y xs
 
 (* 1b. belongsTo_char:  *)
 
 (* 1c. union_ext: 'a list -> 'a list -> 'a list *)
-let rec union_ext fxs gxs =
-  let f x r = if not (belongsTo_ext x gxs) then x::r else r
-  in List.fold_right f fxs gxs
+let rec union_ext xs ys =
+  let f x r = if not (belongsTo_ext x ys) then x::r else r
+  in List.fold_right f xs ys
 
 (* 1d. union_char:  *)
+let union_char (a: bool) (b: bool) =
+  fun n -> (a n) || (b n)
 
 (* 1e. intersection_ext: 'a list -> 'a list -> 'a list *)
-let rec intersection_ext fxs gxs =
-  let f x r = if belongsTo_ext x gxs then x::r else r
-  in List.fold_right f fxs []
+let rec intersection_ext xs ys =
+  let f x r = if belongsTo_ext x ys then x::r else r
+  in List.fold_right f xs []
 
 (* 1f. intersection_char:  *)
+let intersection_char (a: bool) (b: bool) =
+  fun n -> (a n) && (b n)
 
 (* 2. remAdjDups:  *)
 
 (* 3. sublists:  *)
-
 
 
 (* //////////////// *)
@@ -119,6 +122,19 @@ let rec mapC f e =
   | Sub(x, y) -> Sub(mapC f x, mapC f y)
 
 (* 02. foldC:  *)
+(*
+ * Notes from class:
+
+  let rec fold_tree a f = function
+    | Empty -> a
+    | Node(i, lt, rt) -> f i (fold_tree a f lt) (fold_tree a f rt)
+
+ * Printing the pre-order traversal with this fold
+   fold_tree [] (fun i yz zs -> i::(ys@zs))
+
+  * Map with fold
+  let map2 f t = fold_tree Empty (fun i xs ys -> )
+*)
 let rec foldC f a e =
   match e with
   | Const(x) ->  a
@@ -131,6 +147,7 @@ let rec foldC f a e =
 let numAdd e =
   let f r e = match e with Add _ -> (+) r 1 | _ -> r
   in foldC f 0 e
+
 (* 04. replaceAddWithMult: *)
 
 (* 05. evalC: *)
