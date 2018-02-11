@@ -14,10 +14,13 @@ let rec dTree_size (t: dTree): int =
   | Leaf n -> 1
   | Node(c, x, y) -> 1 + (dTree_size x) + (dTree_size y)
 
+open List
 (* 3.3c *)
 let rec dTree_paths (t: dTree) =
   match t with
-  | Leaf n ->
+  | Leaf n -> []
+  | Node(c, x, y) -> (0::(dTree_paths x))::[[]]
+
 
 (* 3.3d *)
 let dTree_is_perfect (t: dTree): bool = false
