@@ -65,22 +65,23 @@ let compose x y z = (app x (app y z))
 (* || Exercise 2 || *)
 (* \\\\\\\\\\\\\\\\ *)
 
-(* 1a. belongsTo_ext:  *)
+(* 1a. belongsTo_ext: 'a -> 'a list -> bool *)
 let rec belongsTo_ext y xs =
   match xs with
   | [] -> false
   | (x::xs) ->
     if y = x then true else belongsTo_ext y xs
 
-(* 1b. belongsTo_char:  *)
+(* 1b. belongsTo_char: ('a -> 'b) -> 'a -> 'b *)
+let belongsTo_char a x = (a x)
 
 (* 1c. union_ext: 'a list -> 'a list -> 'a list *)
 let rec union_ext xs ys =
   let f x r = if not (belongsTo_ext x ys) then x::r else r
   in List.fold_right f xs ys
 
-(* 1d. union_char:  *)
-let union_char (a: bool) (b: bool) =
+(* 1d. union_char: ('a -> bool) -> ('a -> bool) -> 'a -> bool *)
+let union_char a b =
   fun n -> (a n) || (b n)
 
 (* 1e. intersection_ext: 'a list -> 'a list -> 'a list *)
@@ -88,11 +89,15 @@ let rec intersection_ext xs ys =
   let f x r = if belongsTo_ext x ys then x::r else r
   in List.fold_right f xs []
 
-(* 1f. intersection_char:  *)
-let intersection_char (a: bool) (b: bool) =
+(* 1f. intersection_char: ('a -> bool) -> ('a -> bool) -> 'a -> bool *)
+let intersection_char a b =
   fun n -> (a n) && (b n)
 
-(* 2. remAdjDups:  *)
+(* 2. remAdjDups: 'a list -> 'a list *)
+let rec remAdjDups xs =
+  match xs with
+  | x::y::xs -> (if x = y then [] else [x]) @ (remAdjDups (y::xs))
+  | x -> x
 
 (* 3. sublists:  *)
 
@@ -112,7 +117,7 @@ type calcExp =
 let e1 = Const(2)
 let e2 = Add(Sub(Const(2), Const(3)), Const(4))
 
-(* 01. mapC:  *)
+(* 01. mapC:  (int -> int) -> calcExp -> calcExp *)
 let rec mapC f e =
   match e with
   | Const(x) -> Const(f x)
@@ -135,22 +140,31 @@ let rec mapC f e =
   * Map with fold
   let map2 f t = fold_tree Empty (fun i xs ys -> )
 *)
-let rec foldC f a e =
-  match e with
-  | Const(x) ->  a
-  | Add(x, y) -> foldC f (foldC f a x) y
-  | Div(x, y) -> foldC f (foldC f a x) y
-  | Mult(x, y) -> foldC f (foldC f a x) y
-  | Sub(x, y) -> foldC f (foldC f a x) y
+(**********************************************************************
+ * let rec foldC f e =                                                *
+ *   match e with                                                     *
+ *   | Add(x, y) -> f (Add(foldC f x, foldC f y)) e                   *
+ *   | Div(x, y) -> f (Div(foldC f x, foldC f y)) e                   *
+ *   | Mult(x, y) -> f (Mult(foldC f x, foldC f y)) e                 *
+ *   | Sub(x, y) -> f (Sub(foldC f x, foldC f y)) e                   *
+ *   | Const(x) ->  f (Const(x)) e                                    *
+ *                                                                    *
+ * (\* 03. numAdd: *\)                                                *
+ * let numAdd e =                                                     *
+ *   let f x r = match x with Add(x, y) -> (+) r 1 | _ -> r           *
+ *   in foldC f e 0                                                   *
+ *                                                                    *
+ * (\* 04. replaceAddWithMult: *\)                                    *
+ * let rec replaceAddWithMult e =                                     *
+ *   match e with                                                     *
+ *   | Const(x) -> Const(x)                                           *
+ *   | Add(x, y) -> Mult(replaceAddWithMult x, replaceAddWithMult y)  *
+ *   | Div(x, y) -> Div(replaceAddWithMult x, replaceAddWithMult y)   *
+ *   | Mult(x, y) -> Mult(replaceAddWithMult x, replaceAddWithMult y) *
+ *   | Sub(x, y) -> Sub(replaceAddWithMult x, replaceAddWithMult y)   *
+ **********************************************************************)
 
-(* 03. numAdd: *)
-let numAdd e =
-  let f r e = match e with Add _ -> (+) r 1 | _ -> r
-  in foldC f 0 e
-
-(* 04. replaceAddWithMult: *)
-
-(* 05. evalC: *)
+(* 05. evalC: calcExp -> int *)
 let rec evalC e =
   match e with
   | Const(x) -> x
