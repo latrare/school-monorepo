@@ -31,6 +31,9 @@ let rec dTree_size (t: dTree): int =
   | Node(c, x, y) -> 1 + (dTree_size x) + (dTree_size y)
 
 
+(* 3c *)
+
+
 (* 3d *)
 let dTree_is_perfect (t: dTree): bool =
   match t with
@@ -60,3 +63,21 @@ let rec list_to_tree (xs: char list): dTree =
       Node(y, list_to_tree xs, list_to_tree xs))
   | x::xs -> Node(x, list_to_tree xs, list_to_tree xs)
   | x -> Leaf 0
+
+
+(* 5 *)
+let rec replace_leaf_at (t: dTree) (gs: int list * int): dTree =
+  match t with
+  | Leaf n ->
+    (match gs with
+    | (x::xs, y) ->
+      Leaf y
+    | _ -> Leaf 0)
+  | Node(c, nx, ny) ->
+    (match gs with
+    | (x::xs, y) ->
+      if x = 0 then
+        replace_leaf_at nx (xs, y)
+      else
+        replace_leaf_at ny (xs, y)
+    | _ -> Leaf 0)
