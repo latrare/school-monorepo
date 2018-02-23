@@ -30,19 +30,16 @@ let rec dTree_size (t: dTree): int =
   | Leaf n -> 1
   | Node(c, x, y) -> 1 + (dTree_size x) + (dTree_size y)
 
-
-(* 3d *)
-let dTree_is_perfect (t: dTree): bool =
+open List
+(* 3.3c *)
+let rec dTree_paths (t: dTree) =
   match t with
-  | Leaf n -> true
-  | Node(c, x, y) ->
-    let x_height = dTree_height x in
-    let y_height = dTree_height y in
-    if x_height = y_height then
-      true
-    else
-      false
+  | Leaf n -> []
+  | Node(c, x, y) -> (0::(dTree_paths x))::[[]]
 
+
+(* 3.3d *)
+let dTree_is_perfect (t: dTree): bool = false
 
 (* 3e *)
 let rec dTree_map (f: char -> char) (g: int -> int) (t: dTree): dTree =

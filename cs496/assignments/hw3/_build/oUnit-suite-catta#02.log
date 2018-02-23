@@ -1,0 +1,15 @@
+2018-02-21T16:30:41+00:00 catta#02 I: Start test suite:1:add.
+2018-02-21T16:30:41+00:00 catta#02 E: Test suite:1:add exited with an error.
+2018-02-21T16:30:41+00:00 catta#02 E: Failure("Implement me!") in test suite:1:add.
+2018-02-21T16:30:41+00:00 catta#02 E: (Program not linked with -g, cannot print stack backtrace)
+2018-02-21T16:30:41+00:00 catta#02 E: 
+2018-02-21T16:30:41+00:00 catta#02 I: End test suite:1:add.
+2018-02-21T16:30:41+00:00 catta#02 I: Start test suite:2:adds.
+2018-02-21T16:30:41+00:00 catta#02 E: Test suite:2:adds exited with an error.
+2018-02-21T16:30:41+00:00 catta#02 E: Failure("Implement me!") in test suite:2:adds.
+2018-02-21T16:30:41+00:00 catta#02 E: (Program not linked with -g, cannot print stack backtrace)
+2018-02-21T16:30:41+00:00 catta#02 E: 
+2018-02-21T16:30:41+00:00 catta#02 I: End test suite:2:adds.
+2018-02-21T16:30:41+00:00 catta#02 I: Start test suite:4:lets.
+2018-02-21T16:30:41+00:00 catta#02 I: Test suite:4:lets is successful.
+2018-02-21T16:30:41+00:00 catta#02 I: End test suite:4:lets.

@@ -1,0 +1,21 @@
+8.)
+
+Var 'a', NumVal 1 # These don't need to be here, looking for result, not translation
+  Var 'b', NumVal 2 # See above
+  ProvVal 'x'
+          (
+            has environment of:
+               - Var 'a', NumVal 1
+               - Var 'b', NumVal 2
+           )
+
+10.)
+ProcVal, 'x',
+         Proc 'y', # NOT ProcVal, do NOT evaluate function body before function is called
+                 Sub( Var 'x', Var 'y' )
+
+10'.)
+Var 'a', NumVal 1
+    ProcVal 'x',
+            Proc 'y',
+                    
