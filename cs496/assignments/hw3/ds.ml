@@ -39,7 +39,7 @@ let listVal_to_list =  function
   | _ -> failwith "Expected a list!"
 
 let rec string_of_expval = function
-  |  NumVal n -> "NumVal " ^ string_of_int n
+  | NumVal n -> "NumVal " ^ string_of_int n
   | BoolVal b -> "BoolVal " ^ string_of_bool b
   | ListVal l -> "ListVal " ^ string_of_listval l
 and

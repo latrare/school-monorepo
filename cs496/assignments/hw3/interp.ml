@@ -58,26 +58,16 @@ let rec eval (en:env) (e:expr):exp_val =
     let v1 = eval en e1 in
     let actual_list = listVal_to_list v1 in
     (match actual_list with
-     | x::xs -> (
-         match x with
-         | NumVal x -> NumVal x
-         | BoolVal x -> BoolVal x
-         | ListVal x -> ListVal x)
+     | x::xs -> x
      | [] -> ListVal [])
 
   | Tl(e1)          ->
     let v1 = eval en e1 in
     let actual_list = listVal_to_list v1 in
-    let rec tail_actual_list xs =
-      (match xs with
-       | x::xs -> tail_actual_list xs
-       | [x] -> (
-           match x with
-           | NumVal x -> NumVal x
-           | BoolVal x -> BoolVal x
-           | ListVal x -> ListVal x)
-       | [] -> NumVal 3) in
-    tail_actual_list actual_list
+    (match actual_list with
+     | [] -> ListVal []
+     | x::y::[] -> y
+     | _ -> ListVal [])
 
   | Null(e1)        ->
     let v1 = eval en e1 in
