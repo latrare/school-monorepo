@@ -5,9 +5,6 @@ OCB = ocamlbuild $(OCB_FLAGS)
 
 all: byte
 
-main:
-	$(OCB) main.byte
-
 clean:
 	$(OCB) -clean
 
