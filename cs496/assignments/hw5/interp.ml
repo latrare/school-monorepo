@@ -1,3 +1,6 @@
+(* Trevor Miranda *)
+(* I pledge my honor and so forth and so on. *)
+
 open Ast
 open Ds
 
@@ -15,7 +18,15 @@ let init_env =
 
 let rec apply_proc f l =
   match f with
-  | ProcVal (xs, b, env) -> failwith "implement me!"
+  | ProcVal (xs, b, env) ->
+    let proc_env = ref EmptyEnv in
+    for i = 0 to ((List.length xs) - 1) do
+      proc_env := ExtendEnv(
+          List.nth xs i,
+          eval_expr env (List.nth l i),
+          !proc_env)
+    done;
+    eval_expr !proc_env b
   | _ -> failwith "apply_proc: Not a procVal"
 and
   eval_expr (en:env) (e:expr):exp_val =
@@ -45,10 +56,19 @@ and
   | IsZero(e) ->
     let v1 = eval_expr en e  in
     BoolVal (numVal_to_num v1=0)
+  | For(x, e1, e2, e3) ->
+    let v1 = eval_expr en e1 in
+    let v2 = eval_expr en e2 in
+    let for_i = numVal_to_num v1 in
+    let for_to = numVal_to_num v2 in
+    for i = for_i to for_to do
+      eval_expr (extend_env en x (NumVal i)) e3
+    done;
+    UnitVal
   | Let(x, e1, e2) ->
     let v1 = eval_expr en e1
     in eval_expr (extend_env en x v1) e2
-  | Proc(x,e)      -> ProcVal (x,e,en)
+  | Proc(xs,e)      -> ProcVal (xs,e,en)
   | App(e1,e2)     ->
     let v1 = eval_expr en e1 in
     apply_proc v1 e2
