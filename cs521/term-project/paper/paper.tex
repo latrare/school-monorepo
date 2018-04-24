@@ -1,0 +1,52 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage{array}
+\usepackage[nocompress]{cite}
+\usepackage[caption=false,font=footnotesize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{hyperref}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+
+\title{State of the Quantum Internet}
+
+\author{
+  Trevor~Miranda,~\IEEEmembership{Cybersecurity~Undergraduate,~Stevens~Institute~of~Technology}%
+  \IEEEcompsocitemizethanks{
+    \IEEEcompsocthanksitem
+    E-mail: \href{mailto:tmiranda@stevens.edu}{tmiranda@stevens.edu}
+  }
+}
+
+\markboth{CS 521 --- TCP/IP Networking}{}
+
+\IEEEtitleabstractindextext{
+  \input{abstract.tex}
+  \input{keywords.tex}
+}
+
+\maketitle
+
+\IEEEdisplaynontitleabstractindextext
+
+% Introduction
+\input{introduction.tex}
+
+% Quantum Computing Foundations
+% \input{foundations.tex}
+
+% Quantum Connections
+% \input{connections.tex}
+
+% Quantum Routing
+% \input{routing.tex}
+
+% Quantum Security
+% \input{security.tex}
+
+% Bibliography
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,references}
+
+\end{document}
