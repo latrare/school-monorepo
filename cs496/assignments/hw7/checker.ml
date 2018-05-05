@@ -1,3 +1,5 @@
+(* Trevor Miranda *)
+
 open Ast
 
 let from_some = function
@@ -21,7 +23,6 @@ let rec apply_tenv (tenv:tenv) (id:string):texpr option =
     if id=key
     then Some value
     else apply_tenv tenv1 id
-
 
 let init_tenv () =
      extend_tenv "x"  IntType
@@ -101,9 +102,48 @@ and
     in (match t1 with
     | RefType tval when tval=t2 -> UnitType
     | _ -> failwith "SetRef: type of LHS and RHS do not match")
-  | TypeDecl(id,cs) -> failwith "Implement me!"
-  | Variant(tag,args) -> failwith "Implement me!"
-  | Case(cond,branches) -> failwith "Implement me!"
+  | TypeDecl(id,cs) ->
+    (* First add the new type to the tenv. *)
+    let _ = extend_tenv id (UserType(id)) en in
+    (* Create new tdecl entry for each constructor *)
+    let _ = List.iter (fun c -> Hashtbl.add tdecls id c) cs in
+    UnitType
+  | Variant(tag,args) ->
+    (* Need to store the cdec types we find in the tdecls *)
+    let cdec_types = ref None
+    in Hashtbl.iter
+      (fun k v ->
+         (match v with
+          | CDec(id, es) when id=tag -> cdec_types := Some es
+          | _ -> failwith "Encountered an invalid constructor."))
+      tdecls;
+    (* Check that the expression types match *)
+    List.iter
+      (fun e ->
+         let t = type_of_expr tdecls en e in
+         if not (List.exists (fun tc -> t == tc) (from_some !cdec_types))
+         then failwith "Invalid type in Variant." else ())
+      args;
+    UnitType
+  | Case(cond,branches) ->
+    (* Get the type of the conditional expression *)
+    let cond_tag = begin
+      match cond with
+      | Variant(tag, args) -> tag
+      | _ -> failwith "Invalid condition for case."
+    end in
+    let cond_type = ref None in
+    (* Make sure the branch types exist and match conditional type *)
+    (* Sigma-1(C) check here *)
+    Hashtbl.iter (fun k v -> if k=cond_tag then cond_type := Some k) tdecls;
+    (* Sigma(t) check here *)
+    let type_decs = List.map (fun c -> match c with CDec(id, cs) -> id) (Hashtbl.find_all tdecls (from_some !cond_type)) in
+    let branch_types = List.map (fun b -> match b with Branch(id, es, tgt) -> id) branches in
+    for i = 0 to (List.length branch_types) - 1 do
+      if not (List.exists (fun t -> t == (List.nth branch_types i)) type_decs) then
+        failwith "Invalid type specified for case branch."
+    done;
+    UnitType
   | Debug ->
     print_string "Environment:\n";
     print_string @@ string_of_tenv en;

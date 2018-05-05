@@ -18,7 +18,6 @@ type treeInt =
    | Nil
    | Node<int,treeInt,treeInt>"));
 
-
             "test3"  >:: (fun _ -> assert_equal (Ds.NumVal 1)
                                   (interp "
 let getRoot =
@@ -51,15 +50,15 @@ begin
   Ds.TaggedVariantVal ("Nil", [])]))
                                   (interp "
 begin
-   type treeInt = 
+   type treeInt =
      | Nil
      | Node<int,treeInt,treeInt>;
-   letrec ((int -> int) -> treeInt) mapT(t:treeInt) = 
+   letrec ((int -> int) -> treeInt) mapT(t:treeInt) =
         proc (f:(int -> int)) {
           case t of {
             Nil -> Nil
-            Node<x,y,z> -> 
-                 Node<(f x), ((mapT y) f), ((mapT z) f)>      
+            Node<x,y,z> ->
+                 Node<(f x), ((mapT y) f), ((mapT z) f)>
  } }
     in ((mapT (Node<2,Nil,Nil>)) (proc(x:int) {x+1}))
 end
@@ -70,11 +69,11 @@ end
 
 
 (*   "typecheck body inclusion 3"    >:: (fun _ -> assert_raises (Checker.Subtype_failure("m1"))
- *                                 (fun () -> chk " 
+ *                                 (fun () -> chk "
  *     module m1 interface
- * [u : bool] 
+ * [u : bool]
  * body
- * [u = 33] 
+ * [u = 33]
  * 4")); *)
 
    ]

@@ -1,3 +1,5 @@
+(* Trevor Miranda *)
+
 open Ast
 open Ds
 
@@ -73,9 +75,46 @@ and
     in let v2=eval_expr en e2
     in Store.set_ref g_store (refVal_to_int v1) v2;
     UnitVal
-  | TypeDecl(id,cs) -> failwith "implement me!"
-  | Variant(tag,args) -> failwith "implement me!"
-  | Case(cond,branches) -> failwith "implement me!"
+  | TypeDecl(id,cs) ->
+    UnitVal
+  | Variant(tag,args) ->
+    let rec eval_args = begin
+      function
+      | x::xs -> (eval_expr en x)::(eval_args xs)
+      | [] -> []
+    end in
+    TaggedVariantVal(tag, (eval_args args))
+  | Case(cond,branches) ->
+    let v1 = eval_expr en cond in
+    let variant_tag = ref None in
+    let variant_es = ref None in
+    begin
+      match v1 with
+      | TaggedVariantVal(tag, es) -> begin
+          variant_tag := Some tag;
+          variant_es := Some es
+        end;
+      | _ -> failwith "Non-Variant provided to Case."
+    end;
+    let branch_id = ref None in
+    let branch_es = ref None in
+    let branch_tgt = ref None in
+    for i = 0 to (List.length branches) - 1 do
+      match (List.nth branches i) with
+      | Branch(id, es, tgt) -> begin
+          if id=(from_some !variant_tag) then begin
+            branch_id := Some id;
+            branch_es := Some es;
+            branch_tgt := Some tgt;
+          end
+        end
+    done;
+    if (!branch_id)=None then
+      failwith "None of the branches match."
+    else begin
+      let branch_env = extend_env_list en (from_some !branch_es) (from_some !variant_es) in
+      eval_expr branch_env (from_some !branch_tgt)
+    end
   | Debug ->
     print_string "Environment:\n";
     print_string @@ string_of_env en;
