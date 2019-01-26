@@ -16,7 +16,7 @@ start: top_stmt*
       | chil_stmt
 
 indi_stmt: _level indi_id "INDI" stmt+
-?indi_id: "I" INT+
+?indi_id: "I" /\d+/
 
 note_stmt: _level "NOTE" /[^(\r?\n)]+/
 
@@ -32,7 +32,7 @@ deat_stmt: _level "DEAT" date_stmt
 fam_stmt: _level fam_id "FAM" stmt+
 famc_stmt: _level "FAMC" fam_id
 fams_stmt: _level "FAMS" fam_id
-?fam_id: "F" INT+
+?fam_id: "F" /\d+/
 
 marr_stmt: _level "MARR" date_stmt
 husb_stmt: _level "HUSB" indi_id
@@ -45,12 +45,11 @@ _date: day month year
 ?year: /\d{4}/
 ?month: /(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)/
 
-_level: INT
+_level: /\d+/
 
 _NEWLINE: /\r?\n/
 
 %import common.WORD -> WORD
-%import common.INT -> INT
 %import common.WS -> WS
 
 %ignore WS
