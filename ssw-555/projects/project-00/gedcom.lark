@@ -14,11 +14,12 @@ start: top_stmt*
       | husb_stmt
       | wife_stmt
       | chil_stmt
+      | div_stmt
 
 indi_stmt: _level indi_id "INDI" stmt+
 ?indi_id: "I" /\d+/
 
-note_stmt: _level "NOTE" /[^(\r?\n)]+/
+note_stmt: _level "NOTE" /[^\n]+/
 
 name_stmt: _level "NAME" _name
 _name: WORD ("/" WORD)* "/"
@@ -28,6 +29,7 @@ sex_stmt: _level "SEX" sex
 
 birt_stmt: _level "BIRT" date_stmt
 deat_stmt: _level "DEAT" date_stmt
+div_stmt: _level "DIV" date_stmt
 
 fam_stmt: _level fam_id "FAM" stmt+
 famc_stmt: _level "FAMC" fam_id
