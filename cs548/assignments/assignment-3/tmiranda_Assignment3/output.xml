@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patient>
+   <patient-id>1</patient-id>
+   <name>Mary Sue</name>
+   <treatment>
+      <drug>Some Cancer Drug</drug>
+      <provider>
+         <npi>123456</npi>
+         <name>Martha Susan</name>
+      </provider>
+   </treatment>
+</patient>
+<patient>
+   <patient-id>2</patient-id>
+   <name>John Smith</name>
+   <treatment>
+      <drug>Diuretic</drug>
+      <provider>
+         <npi>123456</npi>
+         <name>Martha Susan</name>
+      </provider>
+   </treatment>
+</patient>
+<patient>
+   <patient-id>1</patient-id>
+   <name>Mary Sue</name>
+   <treatment>
+      <drug>Anti-inflammatory</drug>
+      <provider>
+         <npi>789101</npi>
+         <name>James Richards</name>
+      </provider>
+   </treatment>
+</patient>
+<patient>
+   <patient-id>2</patient-id>
+   <name>John Smith</name>
+   <treatment>
+      <drug>Some Cancer Drug</drug>
+      <provider>
+         <npi>789101</npi>
+         <name>James Richards</name>
+      </provider>
+   </treatment>
+</patient>
+<patient>
+   <patient-id>3</patient-id>
+   <name>Gregory Barnes</name>
+   <treatment>
+      <drug>Some Cancer Drug</drug>
+      <provider>
+         <npi>789101</npi>
+         <name>James Richards</name>
+      </provider>
+   </treatment>
+</patient>
+

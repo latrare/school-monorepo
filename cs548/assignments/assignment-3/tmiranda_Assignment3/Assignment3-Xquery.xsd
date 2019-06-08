@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://cs548.stevens.edu/clinic/db" elementFormDefault="unqualified"
+    xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://cs548.stevens.edu/clinic/db"
+    attributeFormDefault="unqualified">
+    
+    <element name="clinic">
+        <complexType>
+        <sequence>
+            <element name="patient" type="tns:patient-type" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence></complexType>
+    </element>
+    
+    <complexType name="patient-type">
+        <sequence>
+            <element name="patient-id" type="long"/>
+            <element name="name" type="string"/>
+            <element name="treatment" type="tns:drug-treatment-type" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="provider-type">
+        <sequence>
+            <element name="npi" type="string"/>
+            <element name="name" type="string"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="drug-treatment-type">
+        <sequence>
+            <element name="id" type="long"/>
+            <element name="diagnosis" type="string"/>
+            <element name="drug" type="string"/>
+            <element name="provider" type="tns:provider-type"/>
+        </sequence>
+    </complexType>
+
+</schema>
